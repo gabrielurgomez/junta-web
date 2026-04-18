@@ -44,3 +44,8 @@ Cuando generes o modifiques componentes de UI, asegúrate siempre de que el cód
 ## Componentes
 
 - Verifica que nunca se use `<main>` en los componentes de las paginas ya que de eso se encarga el layout el cual está en `src/app/layout.tsx`
+
+## React y la Transformación JSX
+
+- **No importes React innecesariamente:** Con la nueva transformación JSX (desde React 17) y usada por Next.js, **ya no es necesario** usar `import React from "react";` simplemente para poder escribir JSX.
+- **Cuándo sí importar:** Solo importa desde `"react"` cuando vayas a utilizar hooks específicos (ej. `useState`, `useEffect`, `useRef`, etc.) o funciones particulares de la librería (ej. `Suspense`, `forwardRef`, etc.). Aún así, debes importar esas piezas específicas (ej. `import { useState } from "react";`) en lugar del objeto global `React`.
