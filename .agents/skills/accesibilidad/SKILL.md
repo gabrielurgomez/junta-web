@@ -15,6 +15,10 @@ Durante tu análisis de código o cuando se te requiera crear nuevos componentes
 - **Estructura Significativa:** Obliga el uso de etiquetas nativas HTML5 (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`) para definir las diferentes regiones o "landmarks" del sitio web.
 - **Jerarquía de Encabezados:** Valida que el orden de los encabezados (`<h1>` a `<h6>`) no contenga saltos (por ejemplo, evitar pasar de `<h2>` directamente a `<h4>` sin un `<h3>` en el medio).
 - **Controles Nativos:** Abstente de usar `<div onClick={...}>` o `<span onClick={...}>` para ejecutar interacciones. Usa siempre elementos nativos operables, como `<button>` y `<a>`.
+- **Semántica de Formularios e Inputs:**
+  - Todo campo `<input>`, `<textarea>` o `<select>` debe tener una etiqueta descriptiva visible mediante `<label>` vinculada por `id`. Si por diseño no puede ser visible, debe tener un atributo `aria-label` descriptivo.
+  - Los formularios interactivos (como búsquedas o captación de información) deben utilizar el contendor semántico `<form>` con atributos nativos apropiados como `action` o manejadores `onSubmit`, evitando envoltorios `<div>` sin semántica.
+  - El botón primario de un `<form>` debe siempre tener `type="submit"` (en lugar de `type="button"`) para garantizar que el comportamiento por defecto de "presionar la tecla Enter para enviar" funcione mediante los estándares nativos del navegador.
 
 ### 2. Pautas sobre Atributos ARIA
 
