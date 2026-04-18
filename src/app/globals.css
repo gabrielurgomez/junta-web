@@ -244,9 +244,10 @@ body {
 }
 
 .navbar-hamburger:focus-visible {
-  outline: 2px solid var(--color-border-focus);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-border-focus) 20%, transparent);
+  outline: 2px solid var(--color-primary-400);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 2px var(--color-surface);
+  background-color: var(--color-surface-secondary);
 }
 
 @media (min-width: 950px) {
@@ -295,7 +296,7 @@ body {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
-  z-index: 40;
+  z-index: 90;
   animation: overlayFadeIn 0.3s ease;
 }
 
@@ -317,7 +318,7 @@ body {
   width: 300px;
   max-width: 85vw;
   background: var(--color-surface);
-  z-index: 50;
+  z-index: 100;
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
@@ -374,9 +375,10 @@ body {
 }
 
 .navbar-drawer-close:focus-visible {
-  outline: 2px solid var(--color-border-focus);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-border-focus) 20%, transparent);
+  outline: 2px solid var(--color-primary-400);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 2px var(--color-surface);
+  background-color: var(--color-surface-secondary);
 }
 
 .navbar-drawer-links {

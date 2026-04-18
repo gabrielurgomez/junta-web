@@ -32,10 +32,11 @@ Cuando generes o modifiques componentes de UI, asegúrate siempre de que el cód
 6. **Uso de colores y variables del sistema de diseño:**
    - **NUNCA** incrustes colores "hardcodeados" (como por ejemplo valores hexadecimales `#1a4f8f` o colores utilitarios puros de Tailwind como `bg-blue-600` o `text-gray-500` si no se mapean a los tokens del proyecto).
    - En su lugar, debes seguir con estricto rigor las variables de color creadas en `src/app/globals.css` mediante la configuración de Tailwind inline (v4).
-   - Usa los prefijos y las clases del tema del proyecto, tales como:
-     - `primary` (ej: `text-color-primary-500`, `bg-color-primary`, `var(--color-primary-600)`)
-     - `accent` (ej: `text-color-accent`, `bg-color-accent-light`)
-     - Semánticas: `color-success`, `color-warning`, `color-error`, `color-info`
-     - Texto: `color-text-primary`, `color-text-secondary`, `color-text-tertiary`
-     - Superficies: `color-surface`, `color-surface-secondary`, `background`, `foreground`
+   - Usa los prefijos y las clases reales del tema del proyecto, tales como:
+     - `primary` (ej: `bg-primary`, `text-primary`, `border-primary`, `var(--color-primary-600)`)
+     - `accent` (ej: `bg-accent`, `text-accent`)
+     - Semánticas: `bg-success`, `text-warning`, `border-error`, `text-info`
+     - Texto: `text-text-primary`, `text-text-secondary`, `text-text-tertiary`
+     - Superficies: `bg-surface`, `bg-surface-secondary`, `bg-background`, `text-foreground`
+   - Si necesitas un ejemplo real del código, sigue el patrón ya usado en el proyecto: `text-text-primary`.
    - Aplicar estos tokens garantiza que el color fluya bajo el System Design de la Junta, manteniendo siempre coherencia en la UI.
