@@ -6,6 +6,7 @@ export interface Hero2Props {
   imageSrc: string;
   imageAlt?: string;
   badgeText?: string;
+  priority?: boolean;
 }
 
 export const Hero2 = ({
@@ -14,6 +15,7 @@ export const Hero2 = ({
   imageSrc,
   imageAlt = "Imagen de encabezado",
   badgeText,
+  priority = false,
 }: Hero2Props) => {
   return (
     <section className="relative flex flex-col items-center justify-center overflow-hidden py-24 text-center text-sm md:py-32 md:px-2">
@@ -23,7 +25,8 @@ export const Hero2 = ({
           src={imageSrc}
           alt={imageAlt}
           fill
-          priority
+          priority={priority}
+          sizes="100vw"
           className="object-cover object-center"
         />
         {/* Overlay gradient para asegurar la legibilidad del texto */}
