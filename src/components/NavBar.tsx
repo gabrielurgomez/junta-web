@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const NAV_LINKS = [
   { href: "/", label: "Inicio" },
@@ -17,21 +17,66 @@ const NAV_LINKS = [
 function NavBar() {
   const pathname = usePathname();
   const [menuMovilAbierto, setMenuMovilAbierto] = useState(false);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   // Close mobile menu on route change
   useEffect(() => {
     setMenuMovilAbierto(false);
   }, [pathname]);
 
-  // Prevent body scroll when mobile menu is open
+  // Prevent body scroll and manage keyboard accessibility when mobile menu is open
   useEffect(() => {
-    if (menuMovilAbierto) {
-      document.body.style.overflow = "hidden";
-    } else {
+    if (!menuMovilAbierto) {
       document.body.style.overflow = "";
+      return;
     }
+
+    document.body.style.overflow = "hidden";
+
+    let focusableElements: HTMLElement[] = [];
+    if (drawerRef.current) {
+      focusableElements = Array.from(
+        drawerRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
+        )
+      );
+      if (focusableElements.length > 0) {
+        // Enviar foco al primer elemento interactivo luego de un corto retardo para permitir pintado visual
+        setTimeout(() => focusableElements[0].focus(), 50);
+      }
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMenuMovilAbierto(false);
+        triggerRef.current?.focus();
+        return;
+      }
+
+      if (e.key === "Tab" && focusableElements.length > 0) {
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            lastElement.focus();
+            e.preventDefault();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            firstElement.focus();
+            e.preventDefault();
+          }
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
     return () => {
       document.body.style.overflow = "";
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [menuMovilAbierto]);
 
@@ -53,7 +98,7 @@ function NavBar() {
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
           >
-            <rect width="40" height="40" rx="8" fill="#348ceb" />
+            <rect width="40" height="40" rx="8" fill="var(--color-primary-400, #348ceb)" />
             <path
               d="M20 8L10 13V19C10 25.05 14.26 30.68 20 32C25.74 30.68 30 25.05 30 19V13L20 8Z"
               fill="white"
@@ -61,7 +106,7 @@ function NavBar() {
             />
             <path
               d="M20 10.5L12 14.5V19C12 24.05 15.58 28.78 20 30C24.42 28.78 28 24.05 28 19V14.5L20 10.5Z"
-              fill="#348ceb"
+              fill="var(--color-primary-400, #348ceb)"
             />
             <path
               d="M18 22.5L15.5 20L14.5 21L18 24.5L26 16.5L25 15.5L18 22.5Z"
@@ -91,12 +136,16 @@ function NavBar() {
 
         {/* Mobile Hamburger Button */}
         <button
+          ref={triggerRef}
           type="button"
           className="navbar-hamburger"
           aria-label={menuMovilAbierto ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={menuMovilAbierto}
           aria-controls="navbar-menu-movil"
-          onClick={() => setMenuMovilAbierto((prev) => !prev)}
+          onClick={() => {
+            if (menuMovilAbierto) triggerRef.current?.focus();
+            setMenuMovilAbierto((prev) => !prev);
+          }}
         >
           <div
             className={`hamburger-icon ${menuMovilAbierto ? "hamburger-icon-open" : ""}`}
@@ -112,7 +161,10 @@ function NavBar() {
       {menuMovilAbierto && (
         <div
           className="navbar-overlay"
-          onClick={() => setMenuMovilAbierto(false)}
+          onClick={() => {
+            setMenuMovilAbierto(false);
+            triggerRef.current?.focus();
+          }}
           aria-hidden="true"
         />
       )}
@@ -120,6 +172,7 @@ function NavBar() {
       {/* Mobile Drawer Menu */}
       <div
         id="navbar-menu-movil"
+        ref={drawerRef}
         className={`navbar-drawer ${menuMovilAbierto ? "navbar-drawer-open" : ""}`}
         role="dialog"
         aria-modal="true"
@@ -131,7 +184,10 @@ function NavBar() {
             type="button"
             className="navbar-drawer-close"
             aria-label="Cerrar menú"
-            onClick={() => setMenuMovilAbierto(false)}
+            onClick={() => {
+              setMenuMovilAbierto(false);
+              triggerRef.current?.focus();
+            }}
           >
             <svg
               width="24"
