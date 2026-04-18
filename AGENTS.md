@@ -10,15 +10,15 @@ Su función principal es la calificación de pacientes con presuntas discapacida
 
 ## Stack Tecnológico
 
-| Tecnología          | Versión | Notas                                   |
-| ------------------- | ------- | --------------------------------------- |
-| **Next.js**         | 16.2.4  | App Router, Server Components           |
-| **React**           | 19.2.4  |                                         |
-| **React DOM**       | 19.2.4  |                                         |
-| **TypeScript**      | ^5      |                                         |
-| **Tailwind CSS**    | ^4      | Con `@tailwindcss/postcss`              |
-| **ESLint**          | ^9      | Con `eslint-config-next`                |
-| **Package Manager** | pnpm    |                                         |
+| Tecnología          | Versión | Notas                         |
+| ------------------- | ------- | ----------------------------- |
+| **Next.js**         | 16.2.4  | App Router, Server Components |
+| **React**           | 19.2.4  |                               |
+| **React DOM**       | 19.2.4  |                               |
+| **TypeScript**      | ^5      |                               |
+| **Tailwind CSS**    | ^4      | Con `@tailwindcss/postcss`    |
+| **ESLint**          | ^9      | Con `eslint-config-next`      |
+| **Package Manager** | pnpm    |                               |
 
 ---
 

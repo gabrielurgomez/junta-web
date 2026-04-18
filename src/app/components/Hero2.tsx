@@ -18,7 +18,7 @@ export const Hero2 = ({
   priority = false,
 }: Hero2Props) => {
   return (
-    <section className="relative flex flex-col items-center justify-center overflow-hidden py-24 text-center text-sm md:py-32 md:px-2">
+    <section className="relative flex flex-col items-center justify-center overflow-hidden py-24 text-center text-sm md:px-2 md:py-32">
       {/* Background Image Setup */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -30,7 +30,7 @@ export const Hero2 = ({
           className="object-cover object-center"
         />
         {/* Overlay gradient para asegurar la legibilidad del texto */}
-        <div className="absolute inset-0 bg-primary-900/70 mix-blend-multiply" />
+        <div className="bg-primary-900/70 absolute inset-0 mix-blend-multiply" />
       </div>
 
       {/* Hero Content */}
@@ -43,7 +43,7 @@ export const Hero2 = ({
           </div>
         )}
 
-        <h1 className="max-w-4xl text-balance text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+        <h1 className="max-w-4xl text-4xl leading-tight font-bold text-balance text-white md:text-5xl lg:text-6xl">
           {title}
         </h1>
 

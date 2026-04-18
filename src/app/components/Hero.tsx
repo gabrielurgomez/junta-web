@@ -13,7 +13,7 @@ export const Hero = () => {
           sizes="100vw"
         />
         {/* Overlay gradient para asegurar la legibilidad del texto */}
-        <div className="absolute inset-0 bg-primary-900/80 mix-blend-multiply" />
+        <div className="bg-primary-900/80 absolute inset-0 mix-blend-multiply" />
       </div>
 
       {/* Hero Content */}
@@ -24,7 +24,7 @@ export const Hero = () => {
           </span>
         </div>
 
-        <h1 className="mt-6 max-w-4xl text-balance text-4xl font-bold leading-tight text-white md:text-5xl lg:text-[4rem]">
+        <h1 className="mt-6 max-w-4xl text-4xl leading-tight font-bold text-balance text-white md:text-5xl lg:text-[4rem]">
           Calificando con Ética, Equidad y{" "}
           <span className="text-accent">Transparencia</span>
         </h1>
@@ -39,17 +39,20 @@ export const Hero = () => {
           evaluación de origen y pérdida de capacidad laboral u ocupacional.
         </p>
 
-        <form action="/consultar" className="mt-10 flex h-14 w-full max-w-lg items-center rounded-full border border-white/30 bg-white/10 shadow-lg backdrop-blur-md transition-all focus-within:border-white/50 focus-within:bg-white/20 md:mt-12 md:h-16">
+        <form
+          action="/consultar"
+          className="mt-10 flex h-14 w-full max-w-lg items-center rounded-full border border-white/30 bg-white/10 shadow-lg backdrop-blur-md transition-all focus-within:border-white/50 focus-within:bg-white/20 md:mt-12 md:h-16"
+        >
           <input
             type="text"
             name="q"
             aria-label="Número de documento o radicado a consultar"
             placeholder="Ingrese No. de documento o radicado"
-            className="h-full w-full rounded-full bg-transparent pl-6 pr-2 text-white placeholder:text-white/70 outline-none"
+            className="h-full w-full rounded-full bg-transparent pr-2 pl-6 text-white outline-none placeholder:text-white/70"
           />
           <button
             type="submit"
-            className="mr-1.5 h-10 whitespace-nowrap rounded-full bg-primary-400 px-6 font-semibold text-white shadow-md transition hover:bg-primary-500 hover:shadow-lg focus:ring-4 focus:ring-primary-400/30 md:mr-2 md:h-12 md:px-8"
+            className="bg-primary-400 hover:bg-primary-500 focus:ring-primary-400/30 mr-1.5 h-10 rounded-full px-6 font-semibold whitespace-nowrap text-white shadow-md transition hover:shadow-lg focus:ring-4 md:mr-2 md:h-12 md:px-8"
           >
             Consultar
           </button>

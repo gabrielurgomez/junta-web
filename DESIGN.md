@@ -23,18 +23,18 @@ El sistema de diseño utiliza un token system basado en variables CSS (`--color-
 
 ### Primary (Azul Institucional)
 
-| Token              | Hex       | Uso                                                |
-| ------------------ | --------- | -------------------------------------------------- |
-| `--color-primary-50`  | `#e8f4fd` | Fondos sutiles, estados hover sobre blanco          |
-| `--color-primary-100` | `#c5e3f9` | Fondos de badges, chips, alertas informativas       |
-| `--color-primary-200` | `#9dd0f5` | Bordes activos, indicadores secundarios             |
-| `--color-primary-300` | `#6db9ef` | Iconos secundarios, links hover                     |
-| `--color-primary-400` | `#348ceb` | **🎯 Color principal de marca — Primary**           |
-| `--color-primary-500` | `#2b7ad4` | CTAs hover, botones presionados                     |
-| `--color-primary-600` | `#2366b5` | Encabezados sobre fondo claro, énfasis              |
-| `--color-primary-700` | `#1a4f8f` | Texto sobre fondo claro con alto contraste          |
-| `--color-primary-800` | `#133a6a` | Fondos oscuros de navbar/footer                     |
-| `--color-primary-900` | `#0d2847` | Fondos muy oscuros, overlays                        |
+| Token                 | Hex       | Uso                                           |
+| --------------------- | --------- | --------------------------------------------- |
+| `--color-primary-50`  | `#e8f4fd` | Fondos sutiles, estados hover sobre blanco    |
+| `--color-primary-100` | `#c5e3f9` | Fondos de badges, chips, alertas informativas |
+| `--color-primary-200` | `#9dd0f5` | Bordes activos, indicadores secundarios       |
+| `--color-primary-300` | `#6db9ef` | Iconos secundarios, links hover               |
+| `--color-primary-400` | `#348ceb` | **🎯 Color principal de marca — Primary**     |
+| `--color-primary-500` | `#2b7ad4` | CTAs hover, botones presionados               |
+| `--color-primary-600` | `#2366b5` | Encabezados sobre fondo claro, énfasis        |
+| `--color-primary-700` | `#1a4f8f` | Texto sobre fondo claro con alto contraste    |
+| `--color-primary-800` | `#133a6a` | Fondos oscuros de navbar/footer               |
+| `--color-primary-900` | `#0d2847` | Fondos muy oscuros, overlays                  |
 
 ### Accent (Gold)
 
@@ -80,19 +80,19 @@ El sistema de diseño utiliza un token system basado en variables CSS (`--color-
 
 ### Hierarchy
 
-| Role            | Font  | Size           | Weight | Line Height  | Letter Spacing | Notes                    |
-| --------------- | ----- | -------------- | ------ | ------------ | -------------- | ------------------------ |
-| Page Title      | Inter | 32px (2.00rem) | 700    | 1.25         | -0.5px         | Títulos de página        |
-| Section Heading | Inter | 24px (1.50rem) | 700    | 1.33         | -0.3px         | Encabezados de sección   |
-| Card Heading    | Inter | 20px (1.25rem) | 600    | 1.30         | -0.2px         | Títulos de tarjeta       |
-| Sub-heading     | Inter | 18px (1.13rem) | 600    | 1.40         | normal         | Sub-encabezados          |
-| UI Medium       | Inter | 16px (1.00rem) | 500    | 1.50         | normal         | Nav, texto enfatizado    |
-| Button          | Inter | 15px (0.94rem) | 600    | 1.25         | 0.2px          | Labels de botones        |
-| Body            | Inter | 16px (1.00rem) | 400    | 1.625        | normal         | Texto de cuerpo          |
-| Body Small      | Inter | 14px (0.88rem) | 400    | 1.50         | normal         | Texto secundario         |
-| Caption         | Inter | 13px (0.81rem) | 500    | 1.38         | normal         | Captions, metadata       |
-| Tag             | Inter | 12px (0.75rem) | 500    | 1.33         | 0.3px          | Tags, etiquetas          |
-| Badge           | Inter | 11px (0.69rem) | 600    | 1.18         | 0.5px          | Badges de estado         |
+| Role            | Font  | Size           | Weight | Line Height | Letter Spacing | Notes                  |
+| --------------- | ----- | -------------- | ------ | ----------- | -------------- | ---------------------- |
+| Page Title      | Inter | 32px (2.00rem) | 700    | 1.25        | -0.5px         | Títulos de página      |
+| Section Heading | Inter | 24px (1.50rem) | 700    | 1.33        | -0.3px         | Encabezados de sección |
+| Card Heading    | Inter | 20px (1.25rem) | 600    | 1.30        | -0.2px         | Títulos de tarjeta     |
+| Sub-heading     | Inter | 18px (1.13rem) | 600    | 1.40        | normal         | Sub-encabezados        |
+| UI Medium       | Inter | 16px (1.00rem) | 500    | 1.50        | normal         | Nav, texto enfatizado  |
+| Button          | Inter | 15px (0.94rem) | 600    | 1.25        | 0.2px          | Labels de botones      |
+| Body            | Inter | 16px (1.00rem) | 400    | 1.625       | normal         | Texto de cuerpo        |
+| Body Small      | Inter | 14px (0.88rem) | 400    | 1.50        | normal         | Texto secundario       |
+| Caption         | Inter | 13px (0.81rem) | 500    | 1.38        | normal         | Captions, metadata     |
+| Tag             | Inter | 12px (0.75rem) | 500    | 1.33        | 0.3px          | Tags, etiquetas        |
+| Badge           | Inter | 11px (0.69rem) | 600    | 1.18        | 0.5px          | Badges de estado       |
 
 ### Principles
 
@@ -154,7 +154,7 @@ El sistema de diseño utiliza un token system basado en variables CSS (`--color-
 El sitio web utiliza un componente NavBar para la navegación principal (`src/components/NavBar.tsx`). Se encuentra fijado en la parte superior de la interfaz en resoluciones de escritorio y es completamente responsive:
 
 - **Escritorio (Desktop):**
-  - Posición *sticky* en la parte superior con una sombra inferior sutil `0 1px 3px rgba(0,0,0,0.08)`.
+  - Posición _sticky_ en la parte superior con una sombra inferior sutil `0 1px 3px rgba(0,0,0,0.08)`.
   - Fondo: `#ffffff` (`var(--color-surface)`).
   - A la izquierda: Logo SVG institucional (escudo azul) y nombre de la entidad.
   - A la derecha/centro: Enlaces de navegación en línea (`Inicio`, `Entidad`, `Normatividad`, `Dictámenes`, `Atención al usuario`, `Pagos`, `Contratación`).
@@ -163,7 +163,7 @@ El sitio web utiliza un componente NavBar para la navegación principal (`src/co
 
 - **Móvil (Mobile):**
   - Botón menú hamburguesa animado en la esquina superior derecha (se transforma en "X" al abrir).
-  - Drawer lateral derecho: panel desplegable que aparece sobre un *overlay* oscurecido (`rgba(0, 0, 0, 0.4)`).
+  - Drawer lateral derecho: panel desplegable que aparece sobre un _overlay_ oscurecido (`rgba(0, 0, 0, 0.4)`).
   - Interacciones: al abrir el drawer, se bloquea el scroll de la página principal para centrar la navegación dentro del panel. Incluye encabezado con título "Navegación", los enlaces listados verticalmente y un mensaje de footer.
 
 ### Footer
@@ -203,13 +203,13 @@ El sitio web utiliza un componente NavBar para la navegación principal (`src/co
 
 ## 6. Depth & Elevation
 
-| Level                  | Treatment                                                                                           | Uso                                |
-| ---------------------- | --------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| Flat (Level 0)         | No shadow                                                                                           | Fondo de página, bloques de texto  |
-| Subtle (Level 1)       | `rgba(0,0,0,0.03) 0px 0px 0px 1px, rgba(0,0,0,0.05) 0px 2px 8px`                                   | Tarjetas en reposo, navbar         |
-| Card (Level 2)         | `rgba(0,0,0,0.03) 0px 0px 0px 1px, rgba(0,0,0,0.05) 0px 2px 8px, rgba(0,0,0,0.08) 0px 4px 12px`    | Tarjetas hover, dropdowns          |
-| Elevated (Level 3)     | `rgba(0,0,0,0.1) 0px 8px 24px`                                                                      | Modales, popovers                  |
-| Focus (Level 4)        | `0 0 0 3px rgba(52, 140, 235, 0.3)`                                                                 | Elementos enfocados (accesibilidad)|
+| Level              | Treatment                                                                                       | Uso                                 |
+| ------------------ | ----------------------------------------------------------------------------------------------- | ----------------------------------- |
+| Flat (Level 0)     | No shadow                                                                                       | Fondo de página, bloques de texto   |
+| Subtle (Level 1)   | `rgba(0,0,0,0.03) 0px 0px 0px 1px, rgba(0,0,0,0.05) 0px 2px 8px`                                | Tarjetas en reposo, navbar          |
+| Card (Level 2)     | `rgba(0,0,0,0.03) 0px 0px 0px 1px, rgba(0,0,0,0.05) 0px 2px 8px, rgba(0,0,0,0.08) 0px 4px 12px` | Tarjetas hover, dropdowns           |
+| Elevated (Level 3) | `rgba(0,0,0,0.1) 0px 8px 24px`                                                                  | Modales, popovers                   |
+| Focus (Level 4)    | `0 0 0 3px rgba(52, 140, 235, 0.3)`                                                             | Elementos enfocados (accesibilidad) |
 
 **Shadow Philosophy**: Las sombras son sobrias y profesionales. La capa base (`0px 0px 0px 1px`) proporciona un borde sutil. Las capas adicionales crean una elevación controlada que no distrae del contenido. El focus ring azul (`rgba(52, 140, 235, 0.3)`) refuerza la identidad de marca en las interacciones.
 
@@ -326,19 +326,19 @@ _Note: Airbnb has 61 detected breakpoints — one of the most granular responsiv
 
 ### Tokens disponibles como utilidades de Tailwind
 
-| Utilidad Tailwind         | Variable CSS                  | Valor     | Uso                              |
-| ------------------------- | ----------------------------- | --------- | -------------------------------- |
-| `text-text-primary`       | `var(--color-text-primary)`   | `#1a1a2e` | Texto principal                  |
-| `text-text-secondary`     | `var(--color-text-secondary)` | `#374151` | Texto secundario, descripciones  |
-| `text-text-tertiary`      | `var(--color-text-tertiary)`  | `#6b7280` | Labels, placeholders             |
-| `text-text-disabled`      | `var(--color-text-disabled)`  | `#9ca3af` | Estados deshabilitados           |
-| `bg-primary-400`          | `var(--color-primary-400)`    | `#348ceb` | Fondos con color de marca        |
-| `text-primary-400`        | `var(--color-primary-400)`    | `#348ceb` | Texto con color de marca         |
-| `bg-primary-50`           | `var(--color-primary-50)`     | `#e8f4fd` | Fondos hover sutiles             |
-| `bg-surface-secondary`    | `var(--color-surface-secondary)` | `#f9fafb` | Fondos alternos de sección    |
-| `border-border`           | `var(--color-border)`         | `#e5e7eb` | Bordes de tarjetas y divisores   |
-| `text-error`              | `var(--color-error)`          | `#dc2626` | Texto de error                   |
-| `text-success`            | `var(--color-success)`        | `#16a34a` | Texto de éxito                   |
+| Utilidad Tailwind      | Variable CSS                     | Valor     | Uso                             |
+| ---------------------- | -------------------------------- | --------- | ------------------------------- |
+| `text-text-primary`    | `var(--color-text-primary)`      | `#1a1a2e` | Texto principal                 |
+| `text-text-secondary`  | `var(--color-text-secondary)`    | `#374151` | Texto secundario, descripciones |
+| `text-text-tertiary`   | `var(--color-text-tertiary)`     | `#6b7280` | Labels, placeholders            |
+| `text-text-disabled`   | `var(--color-text-disabled)`     | `#9ca3af` | Estados deshabilitados          |
+| `bg-primary-400`       | `var(--color-primary-400)`       | `#348ceb` | Fondos con color de marca       |
+| `text-primary-400`     | `var(--color-primary-400)`       | `#348ceb` | Texto con color de marca        |
+| `bg-primary-50`        | `var(--color-primary-50)`        | `#e8f4fd` | Fondos hover sutiles            |
+| `bg-surface-secondary` | `var(--color-surface-secondary)` | `#f9fafb` | Fondos alternos de sección      |
+| `border-border`        | `var(--color-border)`            | `#e5e7eb` | Bordes de tarjetas y divisores  |
+| `text-error`           | `var(--color-error)`             | `#dc2626` | Texto de error                  |
+| `text-success`         | `var(--color-success)`           | `#16a34a` | Texto de éxito                  |
 
 ### Ejemplo correcto vs incorrecto
 

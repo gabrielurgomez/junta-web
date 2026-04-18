@@ -20,6 +20,6 @@ This document outlines the standard practices and guidelines for building UI com
 
 ## Accessibility (a11y) and WCAG Compliance
 
-- **Mandatory Requirement:** Every UI component *must* be built to comply with the **Web Content Accessibility Guidelines (WCAG)** set by the W3C (World Wide Web Consortium).
+- **Mandatory Requirement:** Every UI component _must_ be built to comply with the **Web Content Accessibility Guidelines (WCAG)** set by the W3C (World Wide Web Consortium).
 - This includes the use of `aria-label`, `aria-hidden`, `aria-describedby`, `role`, proper `alt` text for images, and semantic HTML (e.g., `<nav>`, `<main>`, `<section>`, `<article>`) to correctly serve screen readers and other assistive technologies.
 - As required by the WCAG, all interactive elements must be fully navigable and operative via keyboard, have a visible focus indicator, and maintain sufficient color contrast based on the design system.
