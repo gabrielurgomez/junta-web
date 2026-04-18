@@ -1,5 +1,5 @@
-import { Hero2 } from "@/components/Hero2";
-import { Card } from "@/components/Card";
+import { Hero2 } from "@/app/components/Hero2";
+import { Card } from "@/app/components/Card";
 
 export default function EntidadPage() {
   return (

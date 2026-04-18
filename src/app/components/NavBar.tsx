@@ -93,7 +93,7 @@ function NavBar() {
         <Link href="/" className="navbar-brand" aria-label="Ir al inicio">
           {/* Shield / institutional icon */}
           <Image
-            src="/logo.png"
+            src="/imagenes/logo.webp"
             alt="Logo Junta Regional"
             width={40}
             height={40}
