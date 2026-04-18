@@ -1,7 +1,7 @@
 import Image from "next/image";
 export const Hero = () => {
   return (
-    <section className="relative flex flex-1 flex-col items-center justify-center overflow-hidden text-center text-sm md:px-2">
+    <section className="relative flex min-h-[85vh] flex-col items-center justify-center overflow-hidden pb-32 pt-20 text-center text-sm md:px-2">
       {/* Background Image Setup */}
       <div className="absolute inset-0 z-0">
         <Image
