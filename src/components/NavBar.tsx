@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
@@ -91,28 +92,14 @@ function NavBar() {
         {/* Logo & Entity Name */}
         <Link href="/" className="navbar-brand" aria-label="Ir al inicio">
           {/* Shield / institutional icon */}
-          <svg
-            className="navbar-logo-icon"
-            viewBox="0 0 40 40"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <rect width="40" height="40" rx="8" fill="var(--color-primary-400, #348ceb)" />
-            <path
-              d="M20 8L10 13V19C10 25.05 14.26 30.68 20 32C25.74 30.68 30 25.05 30 19V13L20 8Z"
-              fill="white"
-              fillOpacity="0.9"
-            />
-            <path
-              d="M20 10.5L12 14.5V19C12 24.05 15.58 28.78 20 30C24.42 28.78 28 24.05 28 19V14.5L20 10.5Z"
-              fill="var(--color-primary-400, #348ceb)"
-            />
-            <path
-              d="M18 22.5L15.5 20L14.5 21L18 24.5L26 16.5L25 15.5L18 22.5Z"
-              fill="white"
-            />
-          </svg>
+          <Image
+            src="/LOGO.png"
+            alt="Logo Junta Regional"
+            width={40}
+            height={40}
+            className="navbar-logo-icon object-contain"
+            priority
+          />
           <div className="navbar-brand-text">
             <span className="navbar-brand-name">Junta Regional</span>
             <span className="navbar-brand-subtitle">
