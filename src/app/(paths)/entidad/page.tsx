@@ -10,6 +10,7 @@ export default function EntidadPage() {
         imageSrc="/doc-sergio.webp"
         imageAlt="Fachada Institucional"
         badgeText="Sobre Nosotros"
+        priority={true}
       />
       <div className="mx-auto max-w-300 w-full px-4 py-16 md:px-8 md:py-24">
         <div className="grid gap-8 md:grid-cols-2">
