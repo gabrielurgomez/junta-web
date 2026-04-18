@@ -151,13 +151,20 @@ El sistema de diseño utiliza un token system basado en variables CSS (`--color-
 
 ### Navigation (Navbar)
 
-- Fondo: `#ffffff` con sombra sutil inferior `0 1px 3px rgba(0,0,0,0.08)`
-- Sticky en scroll
-- Logo / nombre de la entidad a la izquierda
-- Links de navegación centrados o a la derecha
-- Link activo: texto Primary (`#348ceb`) con indicador inferior
-- Hover: texto `#2b7ad4`
-- Mobile: menú hamburguesa con drawer lateral
+El sitio web utiliza un componente NavBar para la navegación principal (`src/components/NavBar.tsx`). Se encuentra fijado en la parte superior de la interfaz en resoluciones de escritorio y es completamente responsive:
+
+- **Escritorio (Desktop):**
+  - Posición *sticky* en la parte superior con una sombra inferior sutil `0 1px 3px rgba(0,0,0,0.08)`.
+  - Fondo: `#ffffff` (`var(--color-surface)`).
+  - A la izquierda: Logo SVG institucional (escudo azul) y nombre de la entidad.
+  - A la derecha/centro: Enlaces de navegación en línea (`Inicio`, `Entidad`, `Normatividad`, `Dictámenes`, `Atención al usuario`, `Pagos`, `Contratación`).
+  - Link activo: texto Primary (`var(--color-primary-400)`) con indicador inferior y peso fuente `600`.
+  - Hover: texto `var(--color-primary-500)` y fondo tenue `var(--color-primary-50)`.
+
+- **Móvil (Mobile):**
+  - Botón menú hamburguesa animado en la esquina superior derecha (se transforma en "X" al abrir).
+  - Drawer lateral derecho: panel desplegable que aparece sobre un *overlay* oscurecido (`rgba(0, 0, 0, 0.4)`).
+  - Interacciones: al abrir el drawer, se bloquea el scroll de la página principal para centrar la navegación dentro del panel. Incluye encabezado con título "Navegación", los enlaces listados verticalmente y un mensaje de footer.
 
 ### Footer
 

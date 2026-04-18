@@ -185,7 +185,9 @@ body {
   text-decoration: none;
   padding: 8px 14px;
   border-radius: 6px;
-  transition: color 0.2s ease, background-color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
   white-space: nowrap;
 }
 
@@ -251,7 +253,9 @@ body {
   height: 2px;
   background: var(--color-text-primary);
   border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
   transform-origin: center;
 }
 
@@ -341,7 +345,9 @@ body {
   border-radius: 8px;
   cursor: pointer;
   color: var(--color-text-secondary);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .navbar-drawer-close:hover {
@@ -366,7 +372,9 @@ body {
   text-decoration: none;
   padding: 14px 16px;
   border-radius: 8px;
-  transition: color 0.2s ease, background-color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .navbar-drawer-link:hover {
