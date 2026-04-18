@@ -306,3 +306,49 @@ _Note: Airbnb has 61 detected breakpoints — one of the most granular responsiv
 6. Inter en 400–700 — legibilidad profesional
 7. Fondos alternos (blanco / #f9fafb) para ritmo visual entre secciones
 8. Gold (#d4a017) como accent sutil — nunca como color dominante
+
+## 10. Reglas de Uso de Tokens
+
+> **OBLIGATORIO**: Todos los colores en componentes y páginas deben usar las utilidades de Tailwind generadas desde los tokens (e.g. `text-text-primary`, `bg-primary-400`, `border-border`) o las variables CSS (e.g. `var(--color-text-primary)`, `var(--color-primary-400)`). **Nunca hardcodear valores hex** como `text-[#1a1a2e]` o `bg-[#348ceb]` en los componentes.
+
+### ¿Por qué?
+
+- **Mantenibilidad**: Si se actualiza la paleta, basta con cambiar el valor en `:root` de `globals.css`. Todos los componentes heredan el cambio automáticamente.
+- **Consistencia**: Evita variaciones accidentales de color (e.g. `#1a1a2e` vs `#1b1b2f`).
+- **Legibilidad**: `text-text-secondary` es más expresivo que `text-[#374151]`.
+
+### Tokens disponibles como utilidades de Tailwind
+
+| Utilidad Tailwind         | Variable CSS                  | Valor     | Uso                              |
+| ------------------------- | ----------------------------- | --------- | -------------------------------- |
+| `text-text-primary`       | `var(--color-text-primary)`   | `#1a1a2e` | Texto principal                  |
+| `text-text-secondary`     | `var(--color-text-secondary)` | `#374151` | Texto secundario, descripciones  |
+| `text-text-tertiary`      | `var(--color-text-tertiary)`  | `#6b7280` | Labels, placeholders             |
+| `text-text-disabled`      | `var(--color-text-disabled)`  | `#9ca3af` | Estados deshabilitados           |
+| `bg-primary-400`          | `var(--color-primary-400)`    | `#348ceb` | Fondos con color de marca        |
+| `text-primary-400`        | `var(--color-primary-400)`    | `#348ceb` | Texto con color de marca         |
+| `bg-primary-50`           | `var(--color-primary-50)`     | `#e8f4fd` | Fondos hover sutiles             |
+| `bg-surface-secondary`    | `var(--color-surface-secondary)` | `#f9fafb` | Fondos alternos de sección    |
+| `border-border`           | `var(--color-border)`         | `#e5e7eb` | Bordes de tarjetas y divisores   |
+| `text-error`              | `var(--color-error)`          | `#dc2626` | Texto de error                   |
+| `text-success`            | `var(--color-success)`        | `#16a34a` | Texto de éxito                   |
+
+### Ejemplo correcto vs incorrecto
+
+```tsx
+// ❌ INCORRECTO — hex hardcodeado
+<h1 className="text-[#1a1a2e]">Título</h1>
+<p className="text-[#374151]">Descripción</p>
+<button className="bg-[#348ceb]">Acción</button>
+
+// ✅ CORRECTO — tokens de Tailwind
+<h1 className="text-text-primary">Título</h1>
+<p className="text-text-secondary">Descripción</p>
+<button className="bg-primary-400">Acción</button>
+
+// ✅ CORRECTO — variables CSS (en archivos .css o estilos inline)
+.mi-componente {
+  color: var(--color-text-primary);
+  background: var(--color-primary-400);
+}
+```
