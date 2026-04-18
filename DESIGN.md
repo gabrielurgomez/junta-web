@@ -76,7 +76,7 @@ El sistema de diseño utiliza un token system basado en variables CSS (`--color-
 ### Font Family
 
 - **Primary**: `Inter`, fallbacks: `-apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif`
-- **Import**: `@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');`
+- **Import**: `import { Inter } from 'next/font/google'; const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });`
 
 ### Hierarchy
 
