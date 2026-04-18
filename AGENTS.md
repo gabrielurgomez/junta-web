@@ -1,13 +1,3 @@
-<!-- BEGIN:nextjs-agent-rules -->
-
-# This is NOT the Next.js you know
-
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-
-<!-- END:nextjs-agent-rules -->
-
----
-
 # Junta Regional de Calificación de Invalidez de Santander — Sitio Web
 
 ## Acerca de la Entidad
@@ -22,7 +12,7 @@ Su función principal es la calificación de pacientes con presuntas discapacida
 
 | Tecnología          | Versión | Notas                                   |
 | ------------------- | ------- | --------------------------------------- |
-| **Next.js**         | 16.2.4  | App Router, Server-Side Rendering (SSR) |
+| **Next.js**         | 16.2.4  | App Router, Server Components           |
 | **React**           | 19.2.4  |                                         |
 | **React DOM**       | 19.2.4  |                                         |
 | **TypeScript**      | ^5      |                                         |
@@ -32,15 +22,23 @@ Su función principal es la calificación de pacientes con presuntas discapacida
 
 ---
 
-## Renderizado (SSR)
+## Renderizado
 
-Todas las páginas soportan **Server-Side Rendering (SSR)**. Cuando un usuario visita una ruta, la página se renderiza desde el servidor antes de enviarse al navegador. Esto garantiza:
+En **Next.js App Router**, las páginas son **Server Components por defecto**. Esto significa que su renderizado se resuelve en el servidor, pero **no todas las rutas son SSR en cada visita**.
 
-- Mejor SEO (el contenido ya está en el HTML).
-- Tiempos de carga percibidos más rápidos.
-- Contenido siempre actualizado en cada visita.
+Dependiendo del uso de datos y de la configuración de la ruta, una página puede renderizarse de forma:
 
-Las páginas son **Server Components por defecto** (Next.js App Router). Solo se usa `"use client"` cuando es estrictamente necesario para interactividad del lado del cliente.
+- **Estática** por defecto, cuando Next.js puede prerenderizarla y servirla desde caché.
+- **Dinámica**, si la ruta o sus datos requieren renderizado por solicitud.
+- **Revalidada o cacheada**, según opciones como `revalidate`, `dynamic` y la estrategia de caché de `fetch`.
+
+Esto permite combinar:
+
+- Buen SEO (el contenido llega renderizado en el HTML).
+- Buen rendimiento y tiempos de carga percibidos más rápidos.
+- Flexibilidad para servir contenido estático o actualizado según las necesidades de cada ruta.
+
+Solo se usa `"use client"` cuando es estrictamente necesario para interactividad del lado del cliente.
 
 ---
 
