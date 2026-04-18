@@ -138,6 +138,12 @@ body {
   opacity: 0.85;
 }
 
+.navbar-brand:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
 .navbar-logo-icon {
   width: 36px;
   height: 36px;
@@ -196,6 +202,12 @@ body {
   background-color: var(--color-primary-50);
 }
 
+.navbar-link:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-border-focus) 20%, transparent);
+}
+
 .navbar-link-active {
   color: var(--color-primary-400);
   font-weight: 600;
@@ -229,6 +241,12 @@ body {
 
 .navbar-hamburger:hover {
   background-color: var(--color-surface-secondary);
+}
+
+.navbar-hamburger:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-border-focus) 20%, transparent);
 }
 
 @media (min-width: 950px) {
@@ -355,6 +373,12 @@ body {
   color: var(--color-text-primary);
 }
 
+.navbar-drawer-close:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-border-focus) 20%, transparent);
+}
+
 .navbar-drawer-links {
   flex: 1;
   overflow-y: auto;
@@ -380,6 +404,12 @@ body {
 .navbar-drawer-link:hover {
   color: var(--color-primary-500);
   background-color: var(--color-primary-50);
+}
+
+.navbar-drawer-link:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-border-focus) 20%, transparent);
 }
 
 .navbar-drawer-link-active {
