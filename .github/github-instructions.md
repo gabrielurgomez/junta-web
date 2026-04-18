@@ -43,4 +43,4 @@ Cuando generes o modifiques componentes de UI, asegúrate siempre de que el cód
 
 ## Componentes
 
-- Verifica que nunca se use <main> en los componentes de las paginas ya que de eso se encarga el layout el cual está en `src/app/layout.tsx`
+- Verifica que nunca se use `<main>` en los componentes de las paginas ya que de eso se encarga el layout el cual está en `src/app/layout.tsx`
