@@ -39,8 +39,8 @@ function NavBar() {
     if (drawerRef.current) {
       focusableElements = Array.from(
         drawerRef.current.querySelectorAll<HTMLElement>(
-          'a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
-        )
+          'a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])',
+        ),
       );
       if (focusableElements.length > 0) {
         // Enviar foco al primer elemento interactivo luego de un corto retardo para permitir pintado visual
@@ -103,7 +103,7 @@ function NavBar() {
           <div className="navbar-brand-text">
             <span className="navbar-brand-name">Junta Regional</span>
             <span className="navbar-brand-subtitle">
-              Calificación de Invalidez
+              Calificación de Invalidez de Santander
             </span>
           </div>
         </Link>
