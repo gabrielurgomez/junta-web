@@ -5,7 +5,7 @@ export const Hero = () => {
       {/* Background Image Setup */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/fachada_junta.webp"
+          src="/imagenes/fachada_junta.webp"
           alt="Fachada de la Junta Regional de Calificación de Invalidez de Santander"
           fill
           priority
