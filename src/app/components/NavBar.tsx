@@ -8,11 +8,11 @@ import { useEffect, useState, useRef } from "react";
 const NAV_LINKS = [
   { href: "/", label: "Inicio" },
   { href: "/entidad", label: "Entidad" },
-  { href: "/normatividad", label: "Normatividad" },
-  { href: "/dictamenes", label: "Dictámenes" },
-  { href: "/atencion-al-usuario", label: "Atención al usuario" },
-  { href: "/pagos", label: "Pagos" },
-  { href: "/contratacion", label: "Contratación" },
+  // { href: "/normatividad", label: "Normatividad" },
+  // { href: "/dictamenes", label: "Dictámenes" },
+  // { href: "/atencion-al-usuario", label: "Atención al usuario" },
+  // { href: "/pagos", label: "Pagos" },
+  // { href: "/contratacion", label: "Contratación" },
 ];
 
 function NavBar() {
@@ -22,9 +22,11 @@ function NavBar() {
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   // Close mobile menu on route change
-  useEffect(() => {
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
     setMenuMovilAbierto(false);
-  }, [pathname]);
+  }
 
   // Prevent body scroll and manage keyboard accessibility when mobile menu is open
   useEffect(() => {

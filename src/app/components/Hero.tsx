@@ -38,25 +38,6 @@ export const Hero = () => {
           Dictámenes periciales con autonomía técnica y científica sobre
           evaluación de origen y pérdida de capacidad laboral u ocupacional.
         </p>
-
-        <form
-          action="/consultar"
-          className="mt-10 flex h-14 w-full max-w-lg items-center rounded-full border border-white/30 bg-white/10 shadow-lg backdrop-blur-md transition-all focus-within:border-white/50 focus-within:bg-white/20 md:mt-12 md:h-16"
-        >
-          <input
-            type="text"
-            name="q"
-            aria-label="Número de documento o radicado a consultar"
-            placeholder="Ingrese No. de documento o radicado"
-            className="h-full w-full rounded-full bg-transparent pr-2 pl-6 text-white outline-none placeholder:text-white/70"
-          />
-          <button
-            type="submit"
-            className="bg-primary-400 hover:bg-primary-500 focus:ring-primary-400/30 mr-1.5 h-10 rounded-full px-6 font-semibold whitespace-nowrap text-white shadow-md transition hover:shadow-lg focus:ring-4 md:mr-2 md:h-12 md:px-8"
-          >
-            Consultar
-          </button>
-        </form>
       </div>
     </section>
   );
