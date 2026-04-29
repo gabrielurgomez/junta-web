@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
@@ -7,11 +8,11 @@ import { useEffect, useState, useRef } from "react";
 const NAV_LINKS = [
   { href: "/", label: "Inicio" },
   { href: "/entidad", label: "Entidad" },
-  { href: "/normatividad", label: "Normatividad" },
-  { href: "/dictamenes", label: "Dictámenes" },
-  { href: "/atencion-al-usuario", label: "Atención al usuario" },
-  { href: "/pagos", label: "Pagos" },
-  { href: "/contratacion", label: "Contratación" },
+  // { href: "/normatividad", label: "Normatividad" },
+  // { href: "/dictamenes", label: "Dictámenes" },
+  // { href: "/atencion-al-usuario", label: "Atención al usuario" },
+  // { href: "/pagos", label: "Pagos" },
+  // { href: "/contratacion", label: "Contratación" },
 ];
 
 function NavBar() {
@@ -21,9 +22,11 @@ function NavBar() {
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   // Close mobile menu on route change
-  useEffect(() => {
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
     setMenuMovilAbierto(false);
-  }, [pathname]);
+  }
 
   // Prevent body scroll and manage keyboard accessibility when mobile menu is open
   useEffect(() => {
@@ -38,8 +41,8 @@ function NavBar() {
     if (drawerRef.current) {
       focusableElements = Array.from(
         drawerRef.current.querySelectorAll<HTMLElement>(
-          'a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
-        )
+          'a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])',
+        ),
       );
       if (focusableElements.length > 0) {
         // Enviar foco al primer elemento interactivo luego de un corto retardo para permitir pintado visual
@@ -91,32 +94,18 @@ function NavBar() {
         {/* Logo & Entity Name */}
         <Link href="/" className="navbar-brand" aria-label="Ir al inicio">
           {/* Shield / institutional icon */}
-          <svg
-            className="navbar-logo-icon"
-            viewBox="0 0 40 40"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <rect width="40" height="40" rx="8" fill="var(--color-primary-400, #348ceb)" />
-            <path
-              d="M20 8L10 13V19C10 25.05 14.26 30.68 20 32C25.74 30.68 30 25.05 30 19V13L20 8Z"
-              fill="white"
-              fillOpacity="0.9"
-            />
-            <path
-              d="M20 10.5L12 14.5V19C12 24.05 15.58 28.78 20 30C24.42 28.78 28 24.05 28 19V14.5L20 10.5Z"
-              fill="var(--color-primary-400, #348ceb)"
-            />
-            <path
-              d="M18 22.5L15.5 20L14.5 21L18 24.5L26 16.5L25 15.5L18 22.5Z"
-              fill="white"
-            />
-          </svg>
+          <Image
+            src="/imagenes/logo.webp"
+            alt="Logo Junta Regional"
+            width={40}
+            height={40}
+            className="navbar-logo-icon object-contain"
+            priority
+          />
           <div className="navbar-brand-text">
             <span className="navbar-brand-name">Junta Regional</span>
             <span className="navbar-brand-subtitle">
-              Calificación de Invalidez
+              Calificación de Invalidez de Santander
             </span>
           </div>
         </Link>

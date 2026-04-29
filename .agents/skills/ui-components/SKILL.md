@@ -1,0 +1,25 @@
+---
+name: ui-components
+description: Describes the architecture, structure, and guidelines for creating UI components within the project.
+---
+
+# UI Components Guidelines
+
+This document outlines the standard practices and guidelines for building UI components in the Junta Regional de Calificación de Invalidez de Santander web project.
+
+## Component Modularization
+
+- **Dedicated Files:** UI components (such as `Hero`, `Cards`, `NavBar`, `Banners`, `Modals`, etc.) must be extracted into their own dedicated files inside the `src/components/` directory.
+- **Example:** The landing page `src/app/page.tsx` should not contain the full markup for a complex Hero section. Instead, this should be abstracted away into an independent `src/components/Hero.tsx` component that is later imported.
+
+## Reusability and Props
+
+- Components must be designed with reusability in mind.
+- They must accept and use the appropriate **Props** needed for their rendering and functionality (e.g., custom texts, states, event handlers, optional classes) rather than hardcoding business logic that narrows their usage.
+- **Accessibility Props:** Components must expose props to receive necessary accessibility attributes (such as `aria-label`, `aria-describedby`, specific IDs, or image `alt` texts) from their parent implementations, ensuring they can be appropriately customized for different contexts to meet accessibility standards.
+
+## Accessibility (a11y) and WCAG Compliance
+
+- **Mandatory Requirement:** Every UI component _must_ be built to comply with the **Web Content Accessibility Guidelines (WCAG)** set by the W3C (World Wide Web Consortium).
+- This includes the use of `aria-label`, `aria-hidden`, `aria-describedby`, `role`, proper `alt` text for images, and semantic HTML (e.g., `<nav>`, `<main>`, `<section>`, `<article>`) to correctly serve screen readers and other assistive technologies.
+- As required by the WCAG, all interactive elements must be fully navigable and operative via keyboard, have a visible focus indicator, and maintain sufficient color contrast based on the design system.

@@ -205,7 +205,8 @@ body {
 .navbar-link:focus-visible {
   outline: 2px solid var(--color-border-focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-border-focus) 20%, transparent);
+  box-shadow: 0 0 0 4px
+    color-mix(in srgb, var(--color-border-focus) 20%, transparent);
 }
 
 .navbar-link-active {
@@ -411,7 +412,8 @@ body {
 .navbar-drawer-link:focus-visible {
   outline: 2px solid var(--color-border-focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-border-focus) 20%, transparent);
+  box-shadow: 0 0 0 4px
+    color-mix(in srgb, var(--color-border-focus) 20%, transparent);
 }
 
 .navbar-drawer-link-active {
