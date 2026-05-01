@@ -13,6 +13,7 @@ const NAV_LINKS = [
   // { href: "/atencion-al-usuario", label: "Atención al usuario" },
   // { href: "/pagos", label: "Pagos" },
   // { href: "/contratacion", label: "Contratación" },
+  { href: "/contacto", label: "Contacto" },
 ];
 
 function NavBar() {
