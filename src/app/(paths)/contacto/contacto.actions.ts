@@ -6,13 +6,11 @@ export async function enviarFormularioContacto({
   nombre,
   correo,
   telefono,
-  asunto,
   mensaje,
 }: {
   nombre: string;
   correo: string;
   telefono: string;
-  asunto: string;
   mensaje: string;
 }): Promise<{ status: number; message: string }> {
   if (!nombre?.trim()) {
@@ -30,10 +28,6 @@ export async function enviarFormularioContacto({
     };
   }
 
-  if (!asunto?.trim()) {
-    return { status: 400, message: "El asunto es requerido." };
-  }
-
   if (!mensaje?.trim()) {
     return { status: 400, message: "El mensaje es requerido." };
   }
@@ -49,7 +43,6 @@ export async function enviarFormularioContacto({
     nombre: nombre.trim(),
     correo: correo.trim().toLowerCase(),
     telefono: telefono?.trim() || null,
-    asunto: asunto.trim(),
     mensaje: mensaje.trim(),
     fechaEnvio: new Date().toISOString(),
   };

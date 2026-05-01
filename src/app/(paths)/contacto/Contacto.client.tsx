@@ -3,22 +3,12 @@
 import { useState } from "react";
 import { enviarFormularioContacto } from "./contacto.actions";
 
-const ASUNTOS = [
-  "Solicitud de información general",
-  "Proceso de calificación de invalidez",
-  "Estado de dictamen",
-  "Solicitud de cita",
-  "Información sobre pagos",
-  "Otro",
-] as const;
-
 type EstadoEnvio = "enviando" | "exitoso" | "error" | null;
 
 interface FormState {
   nombre: string;
   correo: string;
   telefono: string;
-  asunto: string;
   mensaje: string;
 }
 
@@ -26,7 +16,6 @@ const FORM_INICIAL: FormState = {
   nombre: "",
   correo: "",
   telefono: "",
-  asunto: "",
   mensaje: "",
 };
 
@@ -59,7 +48,6 @@ const ContactoClient = () => {
     } else if (!emailRegex.test(form.correo.trim())) {
       errores.correo = "El correo electrónico no es válido.";
     }
-    if (!form.asunto) errores.asunto = "Seleccione un asunto.";
     if (!form.mensaje.trim()) {
       errores.mensaje = "El mensaje es requerido.";
     } else if (form.mensaje.trim().length < 20) {
@@ -78,7 +66,12 @@ const ContactoClient = () => {
     setEstadoEnvio("enviando");
     setMensajeRespuesta("");
 
-    const resultado = await enviarFormularioContacto(form);
+    const resultado = await enviarFormularioContacto({
+      nombre: form.nombre,
+      correo: form.correo,
+      telefono: form.telefono,
+      mensaje: form.mensaje,
+    });
 
     if (resultado.status === 200) {
       setEstadoEnvio("exitoso");
@@ -278,41 +271,6 @@ const ContactoClient = () => {
                       placeholder="Ej. 300 123 4567"
                       className={`${inputBaseClasses} border-border`}
                     />
-                  </div>
-
-                  {/* Asunto */}
-                  <div className="sm:col-span-2">
-                    <label htmlFor="asunto" className={labelClasses}>
-                      Asunto{" "}
-                      <span className="text-error" aria-hidden="true">
-                        *
-                      </span>
-                    </label>
-                    <select
-                      id="asunto"
-                      value={form.asunto}
-                      onChange={actualizarCampo("asunto")}
-                      className={`${inputBaseClasses} ${erroresCampo.asunto ? "border-error" : "border-border"} cursor-pointer`}
-                      aria-describedby={
-                        erroresCampo.asunto ? "asunto-error" : undefined
-                      }
-                      aria-invalid={!!erroresCampo.asunto}
-                    >
-                      <option value="" disabled>
-                        Seleccione un asunto
-                      </option>
-                      {ASUNTOS.map((opcion) => (
-                        <option key={opcion} value={opcion}>
-                          {opcion}
-                        </option>
-                      ))}
-                    </select>
-                    {erroresCampo.asunto && (
-                      <ErrorCampo
-                        id="asunto-error"
-                        mensaje={erroresCampo.asunto}
-                      />
-                    )}
                   </div>
 
                   {/* Mensaje */}
