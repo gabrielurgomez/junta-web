@@ -17,6 +17,7 @@ El proyecto distingue dos tipos de páginas según su naturaleza:
 Se usa cuando la página solo muestra contenido: texto, imágenes, tarjetas informativas. No hay formularios, no hay llamadas a servidor desde el cliente, no hay estados.
 
 **Cuándo usar este tipo:**
+
 - Páginas institucionales de solo lectura (quiénes somos, normatividad, etc.)
 - Contenido que no cambia en función de la interacción del usuario
 - No se necesitan Server Actions
@@ -39,7 +40,7 @@ export default function EntidadPage() {
         badgeText="Sobre Nosotros"
         priority={true}
       />
-      <div className="mx-auto w-full max-w-300 px-4 py-16 md:px-8 md:py-24">
+      <div className="max-w-300 mx-auto w-full px-4 py-16 md:px-8 md:py-24">
         <div className="grid gap-8 md:grid-cols-2">
           <Card id="card-creacion" title="Creación de las Juntas" text="..." />
           <Card id="card-importancia" title="Importancia" text="..." />
@@ -55,6 +56,7 @@ export default function EntidadPage() {
 ## Tipo 2 — Página interactiva (estructura de 3 archivos)
 
 Se usa cuando la página tiene alguna de estas características:
+
 - Un componente de UI interactivo (formularios, toggles, búsquedas, tablas con filtros, etc.)
 - Funciones que se ejecutan del lado del servidor (consultas a API, validaciones de servidor, envío de datos)
 - Lógica de negocio que no pertenece al cliente
@@ -127,7 +129,9 @@ const NombrePage = async () => {
     );
   }
 
-  return <NombreClient datos={resultado.datos} usuarioLogueado={usuarioLogueado} />;
+  return (
+    <NombreClient datos={resultado.datos} usuarioLogueado={usuarioLogueado} />
+  );
 };
 
 export default NombrePage;
@@ -160,7 +164,7 @@ const ContactoClient = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const resultado = await enviarFormularioContacto({ nombre, /* ... */ });
+    const resultado = await enviarFormularioContacto({ nombre /* ... */ });
     // manejar resultado
   };
 
@@ -208,7 +212,12 @@ export async function enviarFormularioContacto({
   }
   // ... más validaciones y lógica
 
-  console.log("[Contacto] Datos recibidos:", { nombre, correo, asunto, mensaje });
+  console.log("[Contacto] Datos recibidos:", {
+    nombre,
+    correo,
+    asunto,
+    mensaje,
+  });
 
   return { status: 200, message: "Mensaje recibido exitosamente." };
 }
@@ -224,11 +233,11 @@ Cuando una función de utilidad (validación, transformación, formateo, etc.) p
 
 Los archivos de utilidades siguen el patrón `nombreDominio.utils.ts`:
 
-| Archivo                          | Contenido                                          |
-| -------------------------------- | -------------------------------------------------- |
-| `strings.utils.ts`               | Utilidades de cadenas de texto (emails, formatos…) |
-| `fechas.utils.ts` *(ejemplo)*    | Formateo y validación de fechas                    |
-| `numeros.utils.ts` *(ejemplo)*   | Operaciones numéricas reutilizables                |
+| Archivo                        | Contenido                                          |
+| ------------------------------ | -------------------------------------------------- |
+| `strings.utils.ts`             | Utilidades de cadenas de texto (emails, formatos…) |
+| `fechas.utils.ts` _(ejemplo)_  | Formateo y validación de fechas                    |
+| `numeros.utils.ts` _(ejemplo)_ | Operaciones numéricas reutilizables                |
 
 ### Cuándo extraer a utils
 
@@ -266,11 +275,11 @@ export async function enviarFormularioContacto({ correo, ... }) {
 
 La página de Contacto (`src/app/(paths)/contacto/`) implementa la estructura de 3 archivos para una ruta pública con formulario interactivo:
 
-| Archivo                   | Tipo            | Responsabilidad                                              |
-| ------------------------- | --------------- | ------------------------------------------------------------ |
-| `page.tsx`                | Server Component | Punto de entrada, renderiza `ContactoClient`                 |
-| `Contacto.client.tsx`     | Client Component | Formulario con estados, validación cliente y feedback al usuario |
-| `contacto.actions.ts`     | Server Actions   | Valida y procesa los datos del formulario en el servidor      |
+| Archivo               | Tipo             | Responsabilidad                                                  |
+| --------------------- | ---------------- | ---------------------------------------------------------------- |
+| `page.tsx`            | Server Component | Punto de entrada, renderiza `ContactoClient`                     |
+| `Contacto.client.tsx` | Client Component | Formulario con estados, validación cliente y feedback al usuario |
+| `contacto.actions.ts` | Server Actions   | Valida y procesa los datos del formulario en el servidor         |
 
 Y la utilidad `emailEsValido` vive en `src/app/libs/utils/strings.utils.ts` porque es una función de validación genérica reutilizable.
 
@@ -278,23 +287,23 @@ Y la utilidad `emailEsValido` vive en `src/app/libs/utils/strings.utils.ts` porq
 
 ## Resumen — ¿cuándo usar cada estructura?
 
-| Situación                                                    | Estructura a usar                          |
-| ------------------------------------------------------------ | ------------------------------------------ |
-| Página solo de contenido (texto, imágenes, tarjetas)         | `page.tsx` únicamente                      |
-| Página con formulario o interacción del usuario              | `page.tsx` + `Nombre.client.tsx` + `nombre.actions.ts` |
-| Página privada que consulta datos del servidor al cargar     | `page.tsx` (async) + `Nombre.client.tsx` + `nombre.actions.ts` |
-| Función de validación/transformación reutilizable            | `src/app/libs/utils/nombreDominio.utils.ts` |
+| Situación                                                | Estructura a usar                                              |
+| -------------------------------------------------------- | -------------------------------------------------------------- |
+| Página solo de contenido (texto, imágenes, tarjetas)     | `page.tsx` únicamente                                          |
+| Página con formulario o interacción del usuario          | `page.tsx` + `Nombre.client.tsx` + `nombre.actions.ts`         |
+| Página privada que consulta datos del servidor al cargar | `page.tsx` (async) + `Nombre.client.tsx` + `nombre.actions.ts` |
+| Función de validación/transformación reutilizable        | `src/app/libs/utils/nombreDominio.utils.ts`                    |
 
 ---
 
 ## Convenciones de nomenclatura
 
-| Archivo          | Formato nombre               | Ejemplo                     |
-| ---------------- | ---------------------------- | --------------------------- |
-| Página           | `page.tsx`                   | `page.tsx` (siempre igual)  |
-| Client Component | `NombrePascalCase.client.tsx`| `Contacto.client.tsx`       |
-| Server Actions   | `nombre.actions.ts`          | `contacto.actions.ts`       |
-| Utilidades       | `dominio.utils.ts`           | `strings.utils.ts`          |
+| Archivo          | Formato nombre                | Ejemplo                    |
+| ---------------- | ----------------------------- | -------------------------- |
+| Página           | `page.tsx`                    | `page.tsx` (siempre igual) |
+| Client Component | `NombrePascalCase.client.tsx` | `Contacto.client.tsx`      |
+| Server Actions   | `nombre.actions.ts`           | `contacto.actions.ts`      |
+| Utilidades       | `dominio.utils.ts`            | `strings.utils.ts`         |
 
 ---
 
@@ -364,16 +373,32 @@ import Tab from "@mui/material/Tab";
 import { useRouter, usePathname } from "next/navigation";
 import type { UsuarioLogueado } from "@/lib/types/usuario.type";
 
-const TabsCajasClient = ({ usuarioLogueado }: { usuarioLogueado: UsuarioLogueado }) => {
+const TabsCajasClient = ({
+  usuarioLogueado,
+}: {
+  usuarioLogueado: UsuarioLogueado;
+}) => {
   const router = useRouter();
   const pathname = usePathname();
   // lógica de tab activo y navegación...
 
   return (
     <Tabs value={tabActivo} onChange={handleCambiarTab}>
-      <Tab value="entrada" label="Crear entrada" disabled={!usuarioLogueado.permisos?.insumosCrearEntrada} />
-      <Tab value="consultar" label="Consultar" disabled={!usuarioLogueado.permisos?.insumosConsultar} />
-      <Tab value="ajuste" label="Ajuste" disabled={!usuarioLogueado.permisos?.insumosRealizarAjustes} />
+      <Tab
+        value="entrada"
+        label="Crear entrada"
+        disabled={!usuarioLogueado.permisos?.insumosCrearEntrada}
+      />
+      <Tab
+        value="consultar"
+        label="Consultar"
+        disabled={!usuarioLogueado.permisos?.insumosConsultar}
+      />
+      <Tab
+        value="ajuste"
+        label="Ajuste"
+        disabled={!usuarioLogueado.permisos?.insumosRealizarAjustes}
+      />
     </Tabs>
   );
 };
