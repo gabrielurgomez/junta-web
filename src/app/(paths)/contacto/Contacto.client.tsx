@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { enviarFormularioContacto } from "./contacto.actions";
 import PoliticaTratamientoDatos from "@/app/components/PoliticaTratamientoDatos";
 
@@ -30,7 +31,9 @@ const ContactoClient = () => {
   const [aceptaPolitica, setAceptaPolitica] = useState(false);
   const [errorPolitica, setErrorPolitica] = useState("");
   const [modalPoliticaAbierto, setModalPoliticaAbierto] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const exitoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const turnstileRef = useRef<TurnstileInstance>(null);
 
   const limpiarTimerExito = () => {
     if (exitoTimerRef.current) {
@@ -109,6 +112,7 @@ const ContactoClient = () => {
       correo: form.correo,
       telefono: form.telefono,
       mensaje: form.mensaje,
+      turnstileToken: turnstileToken ?? "",
     });
 
     if (resultado.status === 200) {
@@ -117,10 +121,15 @@ const ContactoClient = () => {
       setErroresCampo({});
       setAceptaPolitica(false);
       setErrorPolitica("");
+      setTurnstileToken(null);
+      turnstileRef.current?.reset();
       setExitoTicket((t) => t + 1);
       setAlertaExito(resultado.message);
     } else {
       setEstadoEnvio("error");
+      // Resetear el widget para que el usuario pueda intentar de nuevo
+      turnstileRef.current?.reset();
+      setTurnstileToken(null);
     }
 
     setMensajeRespuesta(resultado.message);
@@ -463,6 +472,16 @@ const ContactoClient = () => {
                     </p>
                   )}
                 </div>
+
+                {/* Cloudflare Turnstile */}
+                <Turnstile
+                  ref={turnstileRef}
+                  siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+                  onSuccess={(token) => setTurnstileToken(token)}
+                  onExpire={() => setTurnstileToken(null)}
+                  onError={() => setTurnstileToken(null)}
+                  options={{ theme: "light", language: "es" }}
+                />
 
                 <div className="flex items-center justify-between pt-2">
                   <p className="text-text-tertiary text-xs">
