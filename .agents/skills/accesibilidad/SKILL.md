@@ -28,6 +28,7 @@ Durante tu análisis de código o cuando se te requiera crear nuevos componentes
 Añade comentarios de código de forma liberal que expliquen las implementaciones realizadas específicamente para accesibilidad. En ellos, explica en base a los requisitos WCAG 2.2 de cualquier nivel. Explica el flujo esperado del usuario si es relevante.
 
 **Ejemplo:**
+
 ```tsx
 {/* WCAG 2.1 — 1.3.1 Info and Relationships (Level A):
     Se usa <nav> como landmark para que los lectores de pantalla
@@ -101,13 +102,15 @@ Usa la clase utilitaria `sr-only` (o equivalente Tailwind `sr-only`) para propor
 - Indicadores de estado que se comunican solo con color o forma.
 
 ```tsx
-{/* WCAG 2.2 — 1.3.1 Info and Relationships (A):
+{
+  /* WCAG 2.2 — 1.3.1 Info and Relationships (A):
     El texto sr-only proporciona el nombre accesible del botón
-    ya que el ícono SVG por sí solo no tiene semántica. */}
+    ya que el ícono SVG por sí solo no tiene semántica. */
+}
 <button type="button" aria-label="Cerrar">
   <XIcon aria-hidden="true" />
   <span className="sr-only">Cerrar</span>
-</button>
+</button>;
 ```
 
 #### 6.3 Regiones ARIA Live (Contenido Dinámico)
@@ -119,15 +122,18 @@ Cualquier cambio de contenido que ocurra **sin recarga de página** debe ser anu
 - **`role="status"`** y **`role="alert"`** son atajos semánticos para `aria-live="polite"` y `aria-live="assertive"` respectivamente.
 
 ```tsx
-{/* WCAG 2.2 — 4.1.3 Status Messages (AA):
+{
+  /* WCAG 2.2 — 4.1.3 Status Messages (AA):
     El mensaje de éxito se anuncia automáticamente al lector
-    de pantalla sin requerir que el foco se mueva al elemento. */}
+    de pantalla sin requerir que el foco se mueva al elemento. */
+}
 <div role="status" aria-live="polite" aria-atomic="true">
   {mensaje && <p>{mensaje}</p>}
-</div>
+</div>;
 ```
 
 **Reglas para live regions:**
+
 - El contenedor `aria-live` debe existir en el DOM **antes** de que el contenido aparezca; no lo montes dinámicamente.
 - Usa `aria-atomic="true"` cuando el anuncio deba leerse completo (no en fragmentos).
 - Usa `aria-relevant="additions text"` si solo deben anunciarse adiciones de texto.
@@ -152,15 +158,15 @@ Cada elemento interactivo debe tener un nombre accesible claro. El orden de prec
 Verifica siempre que el nombre accesible sea descriptivo y único dentro de la página. Dos botones no deben tener el mismo nombre si realizan acciones diferentes.
 
 ```tsx
-{/* WCAG 2.2 — 4.1.2 Name, Role, Value (A):
+{
+  /* WCAG 2.2 — 4.1.2 Name, Role, Value (A):
     aria-labelledby referencia el texto visible del encabezado
-    de la sección, asociando la tabla a su contexto. */}
+    de la sección, asociando la tabla a su contexto. */
+}
 <section aria-labelledby="tabla-dictamenes-titulo">
   <h2 id="tabla-dictamenes-titulo">Dictámenes recientes</h2>
-  <table aria-labelledby="tabla-dictamenes-titulo">
-    ...
-  </table>
-</section>
+  <table aria-labelledby="tabla-dictamenes-titulo">...</table>
+</section>;
 ```
 
 #### 6.6 Pruebas con Lectores de Pantalla
@@ -248,9 +254,11 @@ El indicador de foco debe cumplir **todos** estos requisitos simultáneamente:
 - El indicador no debe ser reducido o eliminado por `outline: none`.
 
 ```tsx
-{/* WCAG 2.2 — 2.4.13 Focus Appearance (AA):
+{
+  /* WCAG 2.2 — 2.4.13 Focus Appearance (AA):
     Indicador de foco visible, con contraste suficiente (anillo
-    de 2px azul sobre fondo blanco = ratio ~4.5:1). */}
+    de 2px azul sobre fondo blanco = ratio ~4.5:1). */
+}
 // En Tailwind CSS v4:
 // focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600
 ```
@@ -336,13 +344,13 @@ Los siguientes son requisitos que deben verificarse y mantenerse en el proyecto:
 
 ## Referencias Normativas
 
-| Recurso | URL |
-|---|---|
-| WCAG 2.2 (oficial W3C) | https://www.w3.org/TR/WCAG22/ |
-| Understanding WCAG 2.2 | https://www.w3.org/WAI/WCAG22/Understanding/ |
-| ARIA Authoring Practices Guide | https://www.w3.org/WAI/ARIA/apg/ |
-| Accessible Name Computation | https://www.w3.org/TR/accname-1.2/ |
-| WebAIM Contrast Checker | https://webaim.org/resources/contrastchecker/ |
-| Forced Colors / High Contrast | https://developer.mozilla.org/en-US/docs/Web/CSS/@media/forced-colors |
+| Recurso                        | URL                                                                   |
+| ------------------------------ | --------------------------------------------------------------------- |
+| WCAG 2.2 (oficial W3C)         | https://www.w3.org/TR/WCAG22/                                         |
+| Understanding WCAG 2.2         | https://www.w3.org/WAI/WCAG22/Understanding/                          |
+| ARIA Authoring Practices Guide | https://www.w3.org/WAI/ARIA/apg/                                      |
+| Accessible Name Computation    | https://www.w3.org/TR/accname-1.2/                                    |
+| WebAIM Contrast Checker        | https://webaim.org/resources/contrastchecker/                         |
+| Forced Colors / High Contrast  | https://developer.mozilla.org/en-US/docs/Web/CSS/@media/forced-colors |
 
 > **Nota importante:** Este skill no constituye una conciencia plena de todo lo que es importante para desarrollar de forma accesible. Si tienes dudas, documéntalo siempre y consulta únicamente los recursos oficiales de W3C/WCAG listados arriba. No uses fuentes de terceros como fuente de verdad para requisitos WCAG.
