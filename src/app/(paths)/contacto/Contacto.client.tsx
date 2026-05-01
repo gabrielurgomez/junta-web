@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { enviarFormularioContacto } from "./contacto.actions";
 
-type EstadoEnvio = "enviando" | "exitoso" | "error" | null;
+type EstadoEnvio = "enviando" | "error" | null;
 
 interface FormState {
   nombre: string;
@@ -23,7 +23,32 @@ const ContactoClient = () => {
   const [form, setForm] = useState<FormState>(FORM_INICIAL);
   const [estadoEnvio, setEstadoEnvio] = useState<EstadoEnvio>(null);
   const [mensajeRespuesta, setMensajeRespuesta] = useState<string>("");
+  const [alertaExito, setAlertaExito] = useState<string | null>(null);
+  const [exitoTicket, setExitoTicket] = useState(0);
   const [erroresCampo, setErroresCampo] = useState<Partial<FormState>>({});
+  const exitoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const limpiarTimerExito = () => {
+    if (exitoTimerRef.current) {
+      clearTimeout(exitoTimerRef.current);
+      exitoTimerRef.current = null;
+    }
+  };
+
+  const cerrarAlertaExito = () => {
+    limpiarTimerExito();
+    setAlertaExito(null);
+  };
+
+  useEffect(() => {
+    if (!alertaExito) return;
+    limpiarTimerExito();
+    exitoTimerRef.current = setTimeout(() => {
+      setAlertaExito(null);
+      exitoTimerRef.current = null;
+    }, 5000);
+    return () => limpiarTimerExito();
+  }, [alertaExito, exitoTicket]);
 
   const actualizarCampo =
     (campo: keyof FormState) =>
@@ -65,6 +90,7 @@ const ContactoClient = () => {
 
     setEstadoEnvio("enviando");
     setMensajeRespuesta("");
+    setAlertaExito(null);
 
     const resultado = await enviarFormularioContacto({
       nombre: form.nombre,
@@ -74,9 +100,11 @@ const ContactoClient = () => {
     });
 
     if (resultado.status === 200) {
-      setEstadoEnvio("exitoso");
+      setEstadoEnvio(null);
       setForm(FORM_INICIAL);
       setErroresCampo({});
+      setExitoTicket((t) => t + 1);
+      setAlertaExito(resultado.message);
     } else {
       setEstadoEnvio("error");
     }
@@ -185,16 +213,47 @@ const ContactoClient = () => {
                 "rgba(0,0,0,0.03) 0px 0px 0px 1px, rgba(0,0,0,0.05) 0px 2px 8px, rgba(0,0,0,0.08) 0px 4px 12px",
             }}
           >
-            {estadoEnvio === "exitoso" ? (
-              <MensajeExitoso
-                mensaje={mensajeRespuesta}
-                onReset={() => {
-                  setEstadoEnvio(null);
-                  setMensajeRespuesta("");
-                }}
-              />
-            ) : (
-              <form onSubmit={handleSubmit} noValidate className="space-y-6">
+            {alertaExito && (
+              <div
+                role="alert"
+                className="border-success/25 bg-success/8 text-text-primary mb-6 flex items-start gap-3 rounded-lg border px-4 py-3"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="text-success mt-0.5 h-4 w-4 shrink-0"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <p className="min-w-0 flex-1 text-sm leading-relaxed">
+                  {alertaExito}
+                </p>
+                <button
+                  type="button"
+                  onClick={cerrarAlertaExito}
+                  className="text-text-secondary hover:text-text-primary focus-visible:ring-primary-400/30 -m-1 shrink-0 rounded-md p-1 transition-colors focus-visible:ring-3 focus-visible:outline-none"
+                  aria-label="Cerrar notificación"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    className="h-5 w-5"
+                    aria-hidden="true"
+                  >
+                    <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                  </svg>
+                </button>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} noValidate className="space-y-6">
                 <div className="grid gap-6 sm:grid-cols-2">
                   {/* Nombre */}
                   <div className="sm:col-span-2">
@@ -383,7 +442,6 @@ const ContactoClient = () => {
                   </button>
                 </div>
               </form>
-            )}
           </div>
         </div>
       </div>
@@ -434,42 +492,6 @@ const ErrorCampo = ({ id, mensaje }: { id: string; mensaje: string }) => (
     </svg>
     {mensaje}
   </p>
-);
-
-const MensajeExitoso = ({
-  mensaje,
-  onReset,
-}: {
-  mensaje: string;
-  onReset: () => void;
-}) => (
-  <div className="flex flex-col items-center py-8 text-center">
-    <div className="bg-success/10 mb-6 flex h-16 w-16 items-center justify-center rounded-full">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        className="text-success h-8 w-8"
-        aria-hidden="true"
-      >
-        <path
-          fillRule="evenodd"
-          d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
-          clipRule="evenodd"
-        />
-      </svg>
-    </div>
-    <h2 className="text-text-primary text-xl font-bold">¡Mensaje enviado!</h2>
-    <p className="text-text-secondary mt-3 max-w-sm text-sm leading-relaxed">
-      {mensaje}
-    </p>
-    <button
-      onClick={onReset}
-      className="border-border text-text-secondary hover:bg-surface-secondary focus:ring-primary-400/20 mt-8 inline-flex items-center gap-2 rounded-md border px-5 py-2.5 text-sm font-medium transition-all duration-200 focus:ring-3 focus:outline-none"
-    >
-      Enviar otro mensaje
-    </button>
-  </div>
 );
 
 export default ContactoClient;

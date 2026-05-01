@@ -1,5 +1,6 @@
 "use server";
 
+import { sendContactFormBrevoTemplateEmail } from "@/app/libs/utils/email.utils";
 import { emailEsValido } from "@/app/libs/utils/strings.utils";
 
 export async function enviarFormularioContacto({
@@ -47,7 +48,14 @@ export async function enviarFormularioContacto({
     fechaEnvio: new Date().toISOString(),
   };
 
-  console.log("[Contacto] Formulario recibido:", datos);
+  const envio = await sendContactFormBrevoTemplateEmail(datos);
+
+  if (!envio.ok) {
+    return {
+      status: 500,
+      message: envio.error,
+    };
+  }
 
   return {
     status: 200,
