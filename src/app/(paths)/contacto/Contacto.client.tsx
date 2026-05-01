@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { enviarFormularioContacto } from "./contacto.actions";
+import PoliticaTratamientoDatos from "@/app/components/PoliticaTratamientoDatos";
 
 type EstadoEnvio = "enviando" | "error" | null;
 
@@ -26,6 +27,9 @@ const ContactoClient = () => {
   const [alertaExito, setAlertaExito] = useState<string | null>(null);
   const [exitoTicket, setExitoTicket] = useState(0);
   const [erroresCampo, setErroresCampo] = useState<Partial<FormState>>({});
+  const [aceptaPolitica, setAceptaPolitica] = useState(false);
+  const [errorPolitica, setErrorPolitica] = useState("");
+  const [modalPoliticaAbierto, setModalPoliticaAbierto] = useState(false);
   const exitoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const limpiarTimerExito = () => {
@@ -79,8 +83,16 @@ const ContactoClient = () => {
       errores.mensaje = "El mensaje debe tener al menos 20 caracteres.";
     }
 
+    if (!aceptaPolitica) {
+      setErrorPolitica(
+        "Debe aceptar la política de tratamiento de datos personales.",
+      );
+    } else {
+      setErrorPolitica("");
+    }
+
     setErroresCampo(errores);
-    return Object.keys(errores).length === 0;
+    return Object.keys(errores).length === 0 && aceptaPolitica;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -103,6 +115,8 @@ const ContactoClient = () => {
       setEstadoEnvio(null);
       setForm(FORM_INICIAL);
       setErroresCampo({});
+      setAceptaPolitica(false);
+      setErrorPolitica("");
       setExitoTicket((t) => t + 1);
       setAlertaExito(resultado.message);
     } else {
@@ -118,142 +132,143 @@ const ContactoClient = () => {
   const labelClasses = "block text-sm font-medium text-text-secondary mb-1.5";
 
   return (
-    <section className="mx-auto w-full max-w-300 px-4 py-16 md:px-8 md:py-24">
-      <div className="grid gap-12 lg:grid-cols-5">
-        {/* Panel izquierdo — información de contacto */}
-        <aside className="lg:col-span-2">
-          <h1 className="text-text-primary text-3xl font-bold tracking-tight md:text-4xl">
-            Contáctenos
-          </h1>
-          <p className="text-text-secondary mt-4 text-base leading-relaxed">
-            Estamos disponibles para atender sus solicitudes, preguntas y
-            sugerencias. Complete el formulario y nos comunicaremos con usted a
-            la brevedad posible.
-          </p>
+    <>
+      <section className="mx-auto w-full max-w-300 px-4 py-16 md:px-8 md:py-24">
+        <div className="grid gap-12 lg:grid-cols-5">
+          {/* Panel izquierdo — información de contacto */}
+          <aside className="lg:col-span-2">
+            <h1 className="text-text-primary text-3xl font-bold tracking-tight md:text-4xl">
+              Contáctenos
+            </h1>
+            <p className="text-text-secondary mt-4 text-base leading-relaxed">
+              Estamos disponibles para atender sus solicitudes, preguntas y
+              sugerencias. Complete el formulario y nos comunicaremos con usted
+              a la brevedad posible.
+            </p>
 
-          <div className="mt-10 space-y-6">
-            <ContactInfoItem
-              icon={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="h-5 w-5"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              }
-              label="Dirección"
-              value="Calle 36 # 26-38 Of. 501, Bucaramanga, Santander"
-            />
-            <ContactInfoItem
-              icon={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="h-5 w-5"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              }
-              label="Teléfono"
-              value="(607) 630 8050"
-            />
-            <ContactInfoItem
-              icon={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="h-5 w-5"
-                >
-                  <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
-                  <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
-                </svg>
-              }
-              label="Correo electrónico"
-              value="juntasantander@gmail.com"
-            />
-            <ContactInfoItem
-              icon={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="h-5 w-5"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              }
-              label="Horario de atención"
-              value="Lunes a viernes, 8:00 a.m. – 12:00 m. y 2:00 p.m. – 6:00 p.m."
-            />
-          </div>
-        </aside>
+            <div className="mt-10 space-y-6">
+              <ContactInfoItem
+                icon={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="h-5 w-5"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                }
+                label="Dirección"
+                value="Carrera 37 # 44-74, Bucaramanga, Santander"
+              />
+              <ContactInfoItem
+                icon={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="h-5 w-5"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                }
+                label="Teléfono"
+                value="60-7-577195"
+              />
+              <ContactInfoItem
+                icon={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="h-5 w-5"
+                  >
+                    <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
+                    <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
+                  </svg>
+                }
+                label="Correo electrónico"
+                value="info@jrci.com.co"
+              />
+              <ContactInfoItem
+                icon={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="h-5 w-5"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                }
+                label="Horario de atención"
+                value="Lunes a viernes, 8:00 a.m. – 12:00 m. y 2:00 p.m. – 6:00 p.m."
+              />
+            </div>
+          </aside>
 
-        {/* Panel derecho — formulario */}
-        <div className="lg:col-span-3">
-          <div
-            className="rounded-2xl bg-white p-8 md:p-10"
-            style={{
-              boxShadow:
-                "rgba(0,0,0,0.03) 0px 0px 0px 1px, rgba(0,0,0,0.05) 0px 2px 8px, rgba(0,0,0,0.08) 0px 4px 12px",
-            }}
-          >
-            {alertaExito && (
-              <div
-                role="alert"
-                className="border-success/25 bg-success/8 text-text-primary mb-6 flex items-start gap-3 rounded-lg border px-4 py-3"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="text-success mt-0.5 h-4 w-4 shrink-0"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <p className="min-w-0 flex-1 text-sm leading-relaxed">
-                  {alertaExito}
-                </p>
-                <button
-                  type="button"
-                  onClick={cerrarAlertaExito}
-                  className="text-text-secondary hover:text-text-primary focus-visible:ring-primary-400/30 -m-1 shrink-0 rounded-md p-1 transition-colors focus-visible:ring-3 focus-visible:outline-none"
-                  aria-label="Cerrar notificación"
+          {/* Panel derecho — formulario */}
+          <div className="lg:col-span-3">
+            <div
+              className="rounded-2xl bg-white p-8 md:p-10"
+              style={{
+                boxShadow:
+                  "rgba(0,0,0,0.03) 0px 0px 0px 1px, rgba(0,0,0,0.05) 0px 2px 8px, rgba(0,0,0,0.08) 0px 4px 12px",
+              }}
+            >
+              {alertaExito && (
+                <div
+                  role="alert"
+                  className="border-success/25 bg-success/8 text-text-primary mb-6 flex items-start gap-3 rounded-lg border px-4 py-3"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    className="h-5 w-5"
+                    className="text-success mt-0.5 h-4 w-4 shrink-0"
                     aria-hidden="true"
                   >
-                    <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z"
+                      clipRule="evenodd"
+                    />
                   </svg>
-                </button>
-              </div>
-            )}
+                  <p className="min-w-0 flex-1 text-sm leading-relaxed">
+                    {alertaExito}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={cerrarAlertaExito}
+                    className="text-text-secondary hover:text-text-primary focus-visible:ring-primary-400/30 -m-1 shrink-0 rounded-md p-1 transition-colors focus-visible:ring-3 focus-visible:outline-none"
+                    aria-label="Cerrar notificación"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="h-5 w-5"
+                      aria-hidden="true"
+                    >
+                      <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                    </svg>
+                  </button>
+                </div>
+              )}
 
-            <form onSubmit={handleSubmit} noValidate className="space-y-6">
+              <form onSubmit={handleSubmit} noValidate className="space-y-6">
                 <div className="grid gap-6 sm:grid-cols-2">
                   {/* Nombre */}
                   <div className="sm:col-span-2">
@@ -391,6 +406,64 @@ const ContactoClient = () => {
                   </div>
                 )}
 
+                {/* Política de tratamiento de datos */}
+                <div>
+                  <div className="flex items-start gap-3">
+                    <input
+                      id="acepta-politica"
+                      type="checkbox"
+                      checked={aceptaPolitica}
+                      onChange={(e) => {
+                        setAceptaPolitica(e.target.checked);
+                        if (e.target.checked) setErrorPolitica("");
+                      }}
+                      aria-describedby={
+                        errorPolitica ? "politica-error" : undefined
+                      }
+                      aria-invalid={!!errorPolitica}
+                      className="border-border text-primary-400 focus:ring-primary-400/30 mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded accent-(--color-primary-400)"
+                    />
+                    <div className="flex flex-col gap-0.5">
+                      <label
+                        htmlFor="acepta-politica"
+                        className="text-text-secondary cursor-pointer text-sm leading-snug select-none"
+                      >
+                        Acepto la política de tratamiento de datos personales de
+                        la Junta Regional de Invalidez de Santander
+                      </label>
+                      <button
+                        type="button"
+                        onClick={() => setModalPoliticaAbierto(true)}
+                        className="text-primary-400 hover:text-primary-500 w-fit text-xs font-medium underline underline-offset-2 transition-colors"
+                      >
+                        Ver Política
+                      </button>
+                    </div>
+                  </div>
+                  {errorPolitica && (
+                    <p
+                      id="politica-error"
+                      role="alert"
+                      className="text-error mt-2 flex items-center gap-1 text-xs"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 16 16"
+                        fill="currentColor"
+                        className="h-3.5 w-3.5 shrink-0"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14Zm-.75-9.25a.75.75 0 0 1 1.5 0v3.5a.75.75 0 0 1-1.5 0v-3.5Zm.75 6.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      {errorPolitica}
+                    </p>
+                  )}
+                </div>
+
                 <div className="flex items-center justify-between pt-2">
                   <p className="text-text-tertiary text-xs">
                     <span className="text-error">*</span> Campos obligatorios
@@ -442,10 +515,16 @@ const ContactoClient = () => {
                   </button>
                 </div>
               </form>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <PoliticaTratamientoDatos
+        isOpen={modalPoliticaAbierto}
+        onClose={() => setModalPoliticaAbierto(false)}
+      />
+    </>
   );
 };
 

@@ -27,9 +27,8 @@ function buildTemplateParams(
   return {
     NOMBRE: input.nombre,
     CORREO: input.correo,
-    TELEFONO: input.telefono?.trim() ? input.telefono.trim() : "—",
+    CELULAR: input.telefono?.trim() ? input.telefono.trim() : "—",
     MENSAJE: input.mensaje,
-    FECHA_ENVIO: input.fechaEnvio,
   };
 }
 
