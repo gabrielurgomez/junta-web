@@ -84,6 +84,13 @@ export async function enviarFormularioContacto({
     };
   }
 
+  if (mensaje.trim().length > 1000) {
+    return {
+      status: 400,
+      message: "El mensaje no puede exceder 1000 caracteres.",
+    };
+  }
+
   const datos = {
     nombre: nombre.trim(),
     correo: correo.trim().toLowerCase(),

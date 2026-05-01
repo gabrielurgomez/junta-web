@@ -84,6 +84,8 @@ const ContactoClient = () => {
       errores.mensaje = "El mensaje es requerido.";
     } else if (form.mensaje.trim().length < 20) {
       errores.mensaje = "El mensaje debe tener al menos 20 caracteres.";
+    } else if (form.mensaje.trim().length > 1000) {
+      errores.mensaje = "El mensaje no puede exceder 1000 caracteres.";
     }
 
     if (!aceptaPolitica) {
@@ -367,6 +369,7 @@ const ContactoClient = () => {
                     <textarea
                       id="mensaje"
                       rows={5}
+                      maxLength={1000}
                       value={form.mensaje}
                       onChange={actualizarCampo("mensaje")}
                       placeholder="Describa con detalle su solicitud o consulta..."
