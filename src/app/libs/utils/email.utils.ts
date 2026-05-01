@@ -85,11 +85,7 @@ export async function sendContactFormBrevoTemplateEmail(
       body: JSON.stringify(body),
     });
 
-    console.log("res", res);
-
     const raw = await res.text();
-
-    console.log("raw", raw);
     type BrevoSmtpJson = { messageId?: string; message?: string };
     let parsed: BrevoSmtpJson | null = null;
     try {
