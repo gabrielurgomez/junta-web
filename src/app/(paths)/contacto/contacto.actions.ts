@@ -53,7 +53,8 @@ export async function enviarFormularioContacto({
   if (!esHumano) {
     return {
       status: 400,
-      message: "No se pudo verificar que usted es un humano. Por favor, intente nuevamente.",
+      message:
+        "No se pudo verificar que usted es un humano. Por favor, intente nuevamente.",
     };
   }
 
@@ -106,4 +107,3 @@ export async function enviarFormularioContacto({
       "Su mensaje ha sido recibido exitosamente. Nos comunicaremos con usted a la brevedad posible.",
   };
 }
-

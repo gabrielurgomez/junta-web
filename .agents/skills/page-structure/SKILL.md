@@ -40,7 +40,7 @@ export default function EntidadPage() {
         badgeText="Sobre Nosotros"
         priority={true}
       />
-      <div className="max-w-300 mx-auto w-full px-4 py-16 md:px-8 md:py-24">
+      <div className="mx-auto w-full max-w-300 px-4 py-16 md:px-8 md:py-24">
         <div className="grid gap-8 md:grid-cols-2">
           <Card id="card-creacion" title="Creación de las Juntas" text="..." />
           <Card id="card-importancia" title="Importancia" text="..." />
