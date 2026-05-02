@@ -241,46 +241,44 @@ const ContactoClient = () => {
                   "rgba(0,0,0,0.03) 0px 0px 0px 1px, rgba(0,0,0,0.05) 0px 2px 8px, rgba(0,0,0,0.08) 0px 4px 12px",
               }}
             >
-              {alertaExito && (
-                <div
-                  role="status"
-                  aria-live="polite"
-                  className="border-success/25 bg-success/8 text-text-primary mb-6 flex items-start gap-3 rounded-lg border px-4 py-3"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="text-success mt-0.5 h-4 w-4 shrink-0"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <p className="min-w-0 flex-1 text-sm leading-relaxed">
-                    {alertaExito}
-                  </p>
-                  <button
-                    type="button"
-                    onClick={cerrarAlertaExito}
-                    className="text-text-secondary hover:text-text-primary focus-visible:ring-primary-400/30 -m-1 shrink-0 rounded-md p-1 transition-colors focus-visible:ring-3 focus-visible:outline-none"
-                    aria-label="Cerrar notificación"
-                  >
+              <div role="status" aria-live="polite">
+                {alertaExito && (
+                  <div className="border-success/25 bg-success/8 text-text-primary mb-6 flex items-start gap-3 rounded-lg border px-4 py-3">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
-                      className="h-5 w-5"
+                      className="text-success mt-0.5 h-4 w-4 shrink-0"
                       aria-hidden="true"
                     >
-                      <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z"
+                        clipRule="evenodd"
+                      />
                     </svg>
-                  </button>
-                </div>
-              )}
+                    <p className="min-w-0 flex-1 text-sm leading-relaxed">
+                      {alertaExito}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={cerrarAlertaExito}
+                      className="text-text-secondary hover:text-text-primary focus-visible:ring-primary-400/30 -m-1 shrink-0 rounded-md p-1 transition-colors focus-visible:ring-3 focus-visible:outline-none"
+                      aria-label="Cerrar notificación"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className="h-5 w-5"
+                        aria-hidden="true"
+                      >
+                        <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                      </svg>
+                    </button>
+                  </div>
+                )}
+              </div>
 
               <form onSubmit={handleSubmit} noValidate className="space-y-6">
                 <div className="grid gap-6 sm:grid-cols-2">
