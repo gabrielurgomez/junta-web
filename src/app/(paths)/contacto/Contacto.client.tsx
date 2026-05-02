@@ -241,7 +241,8 @@ const ContactoClient = () => {
             >
               {alertaExito && (
                 <div
-                  role="alert"
+                  role="status"
+                  aria-live="polite"
                   className="border-success/25 bg-success/8 text-text-primary mb-6 flex items-start gap-3 rounded-lg border px-4 py-3"
                 >
                   <svg
