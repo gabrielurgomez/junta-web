@@ -20,7 +20,7 @@ async function verificarTurnstile(token: string): Promise<boolean> {
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ TURNSTILE_SECRET_KEY, response: token }),
+        body: JSON.stringify({ secret: TURNSTILE_SECRET_KEY, response: token }),
       },
     );
 
