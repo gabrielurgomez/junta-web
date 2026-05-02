@@ -292,6 +292,7 @@ const ContactoClient = () => {
                     <input
                       id="nombre"
                       type="text"
+                      maxLength={100}
                       autoComplete="name"
                       value={form.nombre}
                       onChange={actualizarCampo("nombre")}
@@ -321,6 +322,7 @@ const ContactoClient = () => {
                     <input
                       id="correo"
                       type="email"
+                      maxLength={100}
                       autoComplete="email"
                       value={form.correo}
                       onChange={actualizarCampo("correo")}
@@ -350,6 +352,7 @@ const ContactoClient = () => {
                     <input
                       id="telefono"
                       type="tel"
+                      maxLength={20}
                       autoComplete="tel"
                       value={form.telefono}
                       onChange={actualizarCampo("telefono")}

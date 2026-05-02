@@ -61,8 +61,16 @@ export async function enviarFormularioContacto({
     return { status: 400, message: "El nombre completo es requerido." };
   }
 
+  if (nombre.trim().length > 100) {
+    return { status: 400, message: "El nombre no puede exceder 100 caracteres." };
+  }
+
   if (!correo?.trim()) {
     return { status: 400, message: "El correo electrónico es requerido." };
+  }
+
+  if (correo.trim().length > 100) {
+    return { status: 400, message: "El correo no puede exceder 100 caracteres." };
   }
 
   if (!emailEsValido(correo)) {
@@ -70,6 +78,10 @@ export async function enviarFormularioContacto({
       status: 400,
       message: "El correo electrónico no tiene un formato válido.",
     };
+  }
+
+  if (telefono && telefono.trim().length > 20) {
+    return { status: 400, message: "El teléfono no puede exceder 20 caracteres." };
   }
 
   if (!mensaje?.trim()) {
