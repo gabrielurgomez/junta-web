@@ -94,3 +94,4 @@ src/app/
 4. **Cada página es un Server Component** a menos que requiera interactividad del lado del cliente.
 5. **Rutas en español con kebab-case**: `/atencion-al-usuario`, `/contratacion`, etc.
 6. **Tailwind CSS v4** se usa para estilos. Consultar la configuración via `@tailwindcss/postcss`.
+7. **Documentación de Next.js**: La documentación instalada localmente es la fuente de la verdad. Antes de codificar, proponer soluciones o hacer revisiones de código (code review) relacionadas con Next.js, **SIEMPRE debes buscar y leer la documentación oficial relevante ubicada en `node_modules/next/dist/docs/`**.
