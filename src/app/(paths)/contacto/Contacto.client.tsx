@@ -35,6 +35,14 @@ const ContactoClient = () => {
   const exitoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const turnstileRef = useRef<TurnstileInstance>(null);
 
+  /* WCAG 2.2 — 3.3.1 Error Identification (A):
+     Refs a cada campo del formulario para mover el foco
+     al primer campo inválido cuando la validación falla. */
+  const nombreRef = useRef<HTMLInputElement>(null);
+  const correoRef = useRef<HTMLInputElement>(null);
+  const mensajeRef = useRef<HTMLTextAreaElement>(null);
+  const politicaRef = useRef<HTMLInputElement>(null);
+
   const limpiarTimerExito = () => {
     if (exitoTimerRef.current) {
       clearTimeout(exitoTimerRef.current);
@@ -70,6 +78,16 @@ const ContactoClient = () => {
       }
     };
 
+  /* Mapa de campos a sus refs para la gestión del foco.
+     El orden del Map determina la prioridad de enfoque
+     (primer campo inválido en el orden visual del formulario). */
+  const campoRefs: Record<string, React.RefObject<HTMLElement | null>> = {
+    nombre: nombreRef,
+    correo: correoRef,
+    mensaje: mensajeRef,
+    politica: politicaRef,
+  };
+
   const validarFormulario = (): boolean => {
     const errores: Partial<FormState> = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -88,7 +106,8 @@ const ContactoClient = () => {
       errores.mensaje = "El mensaje no puede exceder 1000 caracteres.";
     }
 
-    if (!aceptaPolitica) {
+    const tienePoliticaError = !aceptaPolitica;
+    if (tienePoliticaError) {
       setErrorPolitica(
         "Debe aceptar la política de tratamiento de datos personales.",
       );
@@ -97,7 +116,21 @@ const ContactoClient = () => {
     }
 
     setErroresCampo(errores);
-    return Object.keys(errores).length === 0 && aceptaPolitica;
+
+    const esValido = Object.keys(errores).length === 0 && !tienePoliticaError;
+
+    /* WCAG 2.2 — 3.3.1 Error Identification (A):
+       Si la validación falla, mueve el foco al primer campo
+       inválido para que el usuario sepa dónde corregir. */
+    if (!esValido) {
+      const primerCampoError =
+        Object.keys(errores)[0] ?? (tienePoliticaError ? "politica" : null);
+      if (primerCampoError && campoRefs[primerCampoError]) {
+        campoRefs[primerCampoError].current?.focus();
+      }
+    }
+
+    return esValido;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -285,6 +318,7 @@ const ContactoClient = () => {
                       </span>
                     </label>
                     <input
+                      ref={nombreRef}
                       id="nombre"
                       type="text"
                       maxLength={100}
@@ -315,6 +349,7 @@ const ContactoClient = () => {
                       </span>
                     </label>
                     <input
+                      ref={correoRef}
                       id="correo"
                       type="email"
                       maxLength={100}
@@ -364,7 +399,18 @@ const ContactoClient = () => {
                         *
                       </span>
                     </label>
+                    {/* WCAG 2.2 — 3.3.2 Labels or Instructions (A):
+                        Texto de ayuda visible que anuncia los requisitos de
+                        longitud antes del envío, no solo en el mensaje de error.
+                        Se vincula al textarea vía aria-describedby. */}
+                    <p
+                      id="mensaje-hint"
+                      className="text-text-tertiary mb-1.5 text-xs"
+                    >
+                      Mínimo 20 caracteres, máximo 1000.
+                    </p>
                     <textarea
+                      ref={mensajeRef}
                       id="mensaje"
                       rows={5}
                       maxLength={1000}
@@ -372,9 +418,12 @@ const ContactoClient = () => {
                       onChange={actualizarCampo("mensaje")}
                       placeholder="Describa con detalle su solicitud o consulta..."
                       className={`${inputBaseClasses} resize-none ${erroresCampo.mensaje ? "border-error" : "border-border"}`}
-                      aria-describedby={
-                        erroresCampo.mensaje ? "mensaje-error" : undefined
-                      }
+                      aria-describedby={[
+                        "mensaje-hint",
+                        erroresCampo.mensaje ? "mensaje-error" : "",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
                       aria-invalid={!!erroresCampo.mensaje}
                     />
                     <div className="mt-1 flex items-start justify-between">
@@ -420,6 +469,7 @@ const ContactoClient = () => {
                 <div>
                   <div className="flex items-start gap-3">
                     <input
+                      ref={politicaRef}
                       id="acepta-politica"
                       type="checkbox"
                       checked={aceptaPolitica}
