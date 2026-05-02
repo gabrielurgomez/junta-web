@@ -234,13 +234,7 @@ const ContactoClient = () => {
 
           {/* Panel derecho — formulario */}
           <div className="lg:col-span-3">
-            <div
-              className="rounded-2xl bg-white p-8 md:p-10"
-              style={{
-                boxShadow:
-                  "rgba(0,0,0,0.03) 0px 0px 0px 1px, rgba(0,0,0,0.05) 0px 2px 8px, rgba(0,0,0,0.08) 0px 4px 12px",
-              }}
-            >
+            <div className="shadow-card rounded-2xl bg-white p-8 md:p-10">
               <div role="status" aria-live="polite">
                 {alertaExito && (
                   <div className="border-success/25 bg-success/8 text-text-primary mb-6 flex items-start gap-3 rounded-lg border px-4 py-3">
