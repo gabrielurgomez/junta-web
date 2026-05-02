@@ -1,5 +1,7 @@
 # Instrucciones y Reglas para GitHub Copilot / LLM
 
+Cuando se realice un code review siempre responde en español
+
 Al interactuar con este proyecto, ten en cuenta las siguientes directrices, especialmente en lo que respecta a la accesibilidad del sitio web.
 
 ## Accesibilidad Web (WCAG)
