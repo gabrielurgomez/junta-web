@@ -167,8 +167,7 @@ const Modal = ({
       <div
         ref={panelRef}
         tabIndex={-1}
-        className={`relative z-10 flex w-full ${maxWidth} max-h-[90vh] flex-col rounded-2xl bg-white outline-none`}
-        style={{ boxShadow: "rgba(0,0,0,0.1) 0px 8px 24px" }}
+        className={`shadow-modal relative z-10 flex w-full ${maxWidth} max-h-[90vh] flex-col rounded-2xl bg-white outline-none`}
       >
         {/* Botón de cierre — siempre visible, esquina superior derecha */}
         <button
