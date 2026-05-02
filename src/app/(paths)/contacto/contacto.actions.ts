@@ -1,4 +1,5 @@
 "use server";
+import { TURNSTILE_SECRET_KEY } from "../../../../.config";
 
 import { sendContactFormBrevoTemplateEmail } from "@/app/libs/utils/email.utils";
 import { emailEsValido } from "@/app/libs/utils/strings.utils";
@@ -6,9 +7,7 @@ import { emailEsValido } from "@/app/libs/utils/strings.utils";
 // ─── Verificación Turnstile ───────────────────────────────────────────────────
 
 async function verificarTurnstile(token: string): Promise<boolean> {
-  const secret = process.env.TURNSTILE_SECRET_KEY;
-
-  if (!secret) {
+  if (!TURNSTILE_SECRET_KEY) {
     console.error("[Turnstile] TURNSTILE_SECRET_KEY no está definida.");
     return false;
   }
@@ -21,7 +20,7 @@ async function verificarTurnstile(token: string): Promise<boolean> {
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ secret, response: token }),
+        body: JSON.stringify({ TURNSTILE_SECRET_KEY, response: token }),
       },
     );
 
