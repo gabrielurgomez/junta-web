@@ -103,6 +103,8 @@ const ContactoClient = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (estadoEnvio === "enviando") return;
+
     if (!validarFormulario()) return;
 
     setEstadoEnvio("enviando");
@@ -496,8 +498,12 @@ const ContactoClient = () => {
                   </p>
                   <button
                     type="submit"
-                    disabled={estadoEnvio === "enviando"}
-                    className="bg-primary-400 hover:bg-primary-500 focus:ring-primary-400/30 inline-flex items-center gap-2 rounded-md px-6 py-3 text-sm font-semibold tracking-wide text-white transition-all duration-200 focus:ring-3 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60"
+                    aria-disabled={estadoEnvio === "enviando"}
+                    className={`focus:ring-primary-400/30 inline-flex items-center gap-2 rounded-md px-6 py-3 text-sm font-semibold tracking-wide text-white transition-all duration-200 focus:ring-3 focus:outline-none ${
+                      estadoEnvio === "enviando"
+                        ? "bg-primary-400 cursor-not-allowed opacity-60"
+                        : "bg-primary-400 hover:bg-primary-500"
+                    }`}
                   >
                     {estadoEnvio === "enviando" ? (
                       <>
