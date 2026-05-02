@@ -62,7 +62,10 @@ export async function enviarFormularioContacto({
   }
 
   if (nombre.trim().length > 100) {
-    return { status: 400, message: "El nombre no puede exceder 100 caracteres." };
+    return {
+      status: 400,
+      message: "El nombre no puede exceder 100 caracteres.",
+    };
   }
 
   if (!correo?.trim()) {
@@ -70,7 +73,10 @@ export async function enviarFormularioContacto({
   }
 
   if (correo.trim().length > 100) {
-    return { status: 400, message: "El correo no puede exceder 100 caracteres." };
+    return {
+      status: 400,
+      message: "El correo no puede exceder 100 caracteres.",
+    };
   }
 
   if (!emailEsValido(correo)) {
@@ -81,7 +87,10 @@ export async function enviarFormularioContacto({
   }
 
   if (telefono && telefono.trim().length > 20) {
-    return { status: 400, message: "El teléfono no puede exceder 20 caracteres." };
+    return {
+      status: 400,
+      message: "El teléfono no puede exceder 20 caracteres.",
+    };
   }
 
   if (!mensaje?.trim()) {

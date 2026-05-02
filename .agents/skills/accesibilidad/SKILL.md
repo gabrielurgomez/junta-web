@@ -373,13 +373,15 @@ Cuando el sitio realiza peticiones asíncronas (envío de formularios, carga de 
 - **Contenedores de carga:** Los contenedores que cargan contenido deben usar `aria-busy="true"` mientras cargan y `aria-busy="false"` al terminar.
 
 ```tsx
-{/* WCAG 2.2 — 4.1.3 Status Messages (AA):
+{
+  /* WCAG 2.2 — 4.1.3 Status Messages (AA):
     aria-busy indica al lector de pantalla que la región
     está cargando contenido. role="status" anuncia el
-    cambio cuando finaliza la carga. */}
+    cambio cuando finaliza la carga. */
+}
 <div role="status" aria-live="polite" aria-busy={isLoading}>
   {isLoading ? <p>Cargando dictámenes...</p> : <ResultsList />}
-</div>
+</div>;
 ```
 
 ---
@@ -395,13 +397,15 @@ El sitio de la Junta expone resoluciones, normativas y dictámenes en formato PD
 - **Imágenes en PDFs:** El texto alternativo de imágenes dentro de PDFs es responsabilidad del creador del documento. Documentar este requisito para el equipo.
 
 ```tsx
-{/* WCAG 2.2 — 1.1.1 Non-text Content (A):
+{
+  /* WCAG 2.2 — 1.1.1 Non-text Content (A):
     El enlace indica formato, tamaño y que abre en nueva ventana
-    para que el usuario sepa qué esperar antes de hacer clic. */}
+    para que el usuario sepa qué esperar antes de hacer clic. */
+}
 <a href="/docs/resolucion-123.pdf" target="_blank" rel="noopener noreferrer">
   Resolución 123
   <span className="sr-only">(PDF, 245 KB — se abre en nueva ventana)</span>
-</a>
+</a>;
 ```
 
 ---
@@ -416,14 +420,16 @@ Abrir contenido en una nueva ventana o pestaña sin advertencia puede desorienta
 - **Consistencia:** Usar un patrón visual y semántico consistente en todo el sitio para indicar enlaces externos (por ejemplo, un ícono de enlace externo con `aria-hidden="true"` acompañado de texto `sr-only`).
 
 ```tsx
-{/* WCAG 2.2 — 3.2.5 Change on Request (AAA, aspiracional):
+{
+  /* WCAG 2.2 — 3.2.5 Change on Request (AAA, aspiracional):
     El usuario es informado de que el enlace abre en nueva ventana
-    antes de activarlo. El ícono es decorativo (aria-hidden). */}
+    antes de activarlo. El ícono es decorativo (aria-hidden). */
+}
 <a href="https://ejemplo.com" target="_blank" rel="noopener noreferrer">
   Sitio del Ministerio del Trabajo
-  <ExternalLinkIcon aria-hidden="true" className="inline-block w-4 h-4 ml-1" />
+  <ExternalLinkIcon aria-hidden="true" className="ml-1 inline-block h-4 w-4" />
   <span className="sr-only">(se abre en nueva ventana)</span>
-</a>
+</a>;
 ```
 
 ---
@@ -438,9 +444,11 @@ Las tablas de datos son comunes en el sitio (dictámenes, normativas, pagos). En
 - **Nunca usar `display: block`** en elementos `<table>`, `<tr>`, `<td>` sin agregar roles ARIA compensatorios (`role="table"`, `role="row"`, `role="cell"`).
 
 ```tsx
-{/* WCAG 2.2 — 1.3.1 Info and Relationships (A):
+{
+  /* WCAG 2.2 — 1.3.1 Info and Relationships (A):
     El contenedor scrollable tiene tabindex y role para ser
-    navegable por teclado y anunciado correctamente al lector. */}
+    navegable por teclado y anunciado correctamente al lector. */
+}
 <div
   role="region"
   aria-label="Tabla de dictámenes recientes"
@@ -457,7 +465,7 @@ Las tablas de datos son comunes en el sitio (dictámenes, normativas, pagos). En
     </thead>
     <tbody>{/* ... */}</tbody>
   </table>
-</div>
+</div>;
 ```
 
 ---
@@ -473,22 +481,30 @@ Cuando se integran componentes externos (mapas, videos embebidos, captchas), la 
 - **Widgets de chat o soporte:** Si se integra un widget de chat flotante, verificar que no bloquee el foco de otros elementos y que sea operable por teclado. Debe poder cerrarse con `Escape`.
 
 ```tsx
-{/* WCAG 2.2 — 4.1.2 Name, Role, Value (A):
+{
+  /* WCAG 2.2 — 4.1.2 Name, Role, Value (A):
     El iframe tiene title descriptivo para que el lector de
-    pantalla anuncie su propósito sin necesidad de cargarlo. */}
+    pantalla anuncie su propósito sin necesidad de cargarlo. */
+}
 <iframe
   src="https://maps.google.com/..."
   title="Mapa de ubicación de la Junta Regional — Calle 36 #19-20, Bucaramanga"
   loading="lazy"
-/>
-{/* Alternativa textual para usuarios que no pueden usar el mapa */}
+/>;
+{
+  /* Alternativa textual para usuarios que no pueden usar el mapa */
+}
 <p>
   <strong>Dirección:</strong> Calle 36 #19-20, Bucaramanga, Santander.
-  <a href="https://maps.google.com/..." target="_blank" rel="noopener noreferrer">
+  <a
+    href="https://maps.google.com/..."
+    target="_blank"
+    rel="noopener noreferrer"
+  >
     Ver en Google Maps
     <span className="sr-only">(se abre en nueva ventana)</span>
   </a>
-</p>
+</p>;
 ```
 
 ---
@@ -510,14 +526,15 @@ Las herramientas automatizadas pueden detectar aproximadamente el **30-40% de lo
 
 **Herramientas recomendadas:**
 
-| Herramienta | Uso | Alcance |
-|---|---|---|
-| `eslint-plugin-jsx-a11y` | Linting en desarrollo | Detecta errores de ARIA y semántica en JSX |
-| `axe-core` / `@axe-core/react` | Testing en navegador | Auditoría completa del DOM renderizado |
-| `pa11y` | CI/CD | Verificación automatizada en cada PR/build |
-| Lighthouse (accesibilidad) | Auditoría manual | Puntuación general y recomendaciones |
+| Herramienta                    | Uso                   | Alcance                                    |
+| ------------------------------ | --------------------- | ------------------------------------------ |
+| `eslint-plugin-jsx-a11y`       | Linting en desarrollo | Detecta errores de ARIA y semántica en JSX |
+| `axe-core` / `@axe-core/react` | Testing en navegador  | Auditoría completa del DOM renderizado     |
+| `pa11y`                        | CI/CD                 | Verificación automatizada en cada PR/build |
+| Lighthouse (accesibilidad)     | Auditoría manual      | Puntuación general y recomendaciones       |
 
 **Qué detecta el testing automatizado:**
+
 - Falta de `alt` en imágenes, `title` en iframes, `label` en inputs
 - Ratios de contraste insuficientes
 - Roles ARIA inválidos o mal usados
@@ -525,6 +542,7 @@ Las herramientas automatizadas pueden detectar aproximadamente el **30-40% de lo
 - Jerarquía de encabezados rota
 
 **Qué NO detecta (requiere prueba manual):**
+
 - Si el texto `alt` es realmente descriptivo (no solo que exista)
 - Si el orden de lectura tiene sentido semántico
 - Si la experiencia con lector de pantalla es coherente
@@ -532,6 +550,7 @@ Las herramientas automatizadas pueden detectar aproximadamente el **30-40% de lo
 - Si las live regions anuncian en el momento correcto
 
 **Checklist de prueba manual mínima por componente:**
+
 1. Navegar el componente usando solo teclado (Tab, Enter, Escape, flechas)
 2. Verificar que el indicador de foco sea visible en todo momento
 3. Activar un lector de pantalla y recorrer el componente
@@ -600,6 +619,7 @@ Los siguientes son requisitos que deben verificarse y mantenerse en el proyecto:
   ```
 
   Las transiciones de página de Next.js (si se implementan) deben respetar esta preferencia.
+
 - **Reflow:** Todo el contenido debe reorganizarse correctamente cuando cambie el tamaño del viewport o el nivel de zoom.
 - **Comunicación en el equipo:** Comunica claramente dentro de la organización del proyecto y la documentación que se requieren pruebas humanas y que los flujos de usuario deben ser evaluados continuamente por los diseñadores.
 - **Nunca mencionar accesibilidad en la UI:** En la interfaz de usuario, nunca menciones la accesibilidad directamente al usuario final.

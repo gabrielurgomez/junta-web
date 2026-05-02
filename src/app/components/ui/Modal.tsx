@@ -89,10 +89,11 @@ const Modal = ({
       }
 
       if (e.key === "Tab" && panelRef.current) {
-        const focusableElements = panelRef.current.querySelectorAll<HTMLElement>(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
-        
+        const focusableElements =
+          panelRef.current.querySelectorAll<HTMLElement>(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+          );
+
         if (focusableElements.length === 0) return;
 
         const firstElement = focusableElements[0];
@@ -100,11 +101,14 @@ const Modal = ({
 
         // Shift + Tab
         if (e.shiftKey) {
-          if (document.activeElement === firstElement || document.activeElement === panelRef.current) {
+          if (
+            document.activeElement === firstElement ||
+            document.activeElement === panelRef.current
+          ) {
             e.preventDefault();
             lastElement.focus();
           }
-        } 
+        }
         // Solo Tab
         else {
           if (document.activeElement === lastElement) {

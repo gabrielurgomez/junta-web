@@ -67,7 +67,10 @@ export async function sendContactFormBrevoTemplateEmail(
   const senderName = "Página web — Contacto";
 
   // Sanitización de nombre para evitar inyección en cabeceras (CRLF)
-  const sanitizedName = input.nombre.replace(/[\r\n\t]/g, " ").trim().substring(0, 100);
+  const sanitizedName = input.nombre
+    .replace(/[\r\n\t]/g, " ")
+    .trim()
+    .substring(0, 100);
 
   const body = {
     sender: { email: senderEmail, name: senderName },

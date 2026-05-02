@@ -437,7 +437,7 @@ const ContactoClient = () => {
                         errorPolitica ? "politica-error" : undefined
                       }
                       aria-invalid={!!errorPolitica}
-                      className="border-border text-primary-400 focus-visible:ring-primary-400/30 focus-visible:ring-3 focus-visible:outline-none mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded accent-(--color-primary-400)"
+                      className="border-border text-primary-400 focus-visible:ring-primary-400/30 mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded accent-(--color-primary-400) focus-visible:ring-3 focus-visible:outline-none"
                     />
                     <div className="flex flex-col gap-0.5">
                       <label
@@ -450,7 +450,7 @@ const ContactoClient = () => {
                       <button
                         type="button"
                         onClick={() => setModalPoliticaAbierto(true)}
-                        className="text-primary-400 hover:text-primary-500 focus-visible:ring-primary-400/30 focus-visible:ring-3 focus-visible:outline-none rounded-sm w-fit text-xs font-medium underline underline-offset-2 transition-colors"
+                        className="text-primary-400 hover:text-primary-500 focus-visible:ring-primary-400/30 w-fit rounded-sm text-xs font-medium underline underline-offset-2 transition-colors focus-visible:ring-3 focus-visible:outline-none"
                       >
                         Ver Política
                       </button>
