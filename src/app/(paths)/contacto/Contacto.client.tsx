@@ -140,7 +140,7 @@ const ContactoClient = () => {
   };
 
   const inputBaseClasses =
-    "w-full rounded-md border px-3.5 py-2.5 text-sm text-text-primary placeholder:text-text-disabled bg-white transition-all duration-200 outline-none focus:ring-3 focus:ring-primary-400/20 focus:border-primary-400";
+    "w-full rounded-md border px-3.5 py-2.5 text-sm text-text-primary placeholder:text-text-disabled bg-white transition-all duration-200 outline-none focus-visible:ring-3 focus-visible:ring-primary-400/20 focus-visible:border-primary-400";
 
   const labelClasses = "block text-sm font-medium text-text-secondary mb-1.5";
 
@@ -437,7 +437,7 @@ const ContactoClient = () => {
                         errorPolitica ? "politica-error" : undefined
                       }
                       aria-invalid={!!errorPolitica}
-                      className="border-border text-primary-400 focus:ring-primary-400/30 mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded accent-(--color-primary-400)"
+                      className="border-border text-primary-400 focus-visible:ring-primary-400/30 focus-visible:ring-3 focus-visible:outline-none mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded accent-(--color-primary-400)"
                     />
                     <div className="flex flex-col gap-0.5">
                       <label
@@ -450,7 +450,7 @@ const ContactoClient = () => {
                       <button
                         type="button"
                         onClick={() => setModalPoliticaAbierto(true)}
-                        className="text-primary-400 hover:text-primary-500 w-fit text-xs font-medium underline underline-offset-2 transition-colors"
+                        className="text-primary-400 hover:text-primary-500 focus-visible:ring-primary-400/30 focus-visible:ring-3 focus-visible:outline-none rounded-sm w-fit text-xs font-medium underline underline-offset-2 transition-colors"
                       >
                         Ver Política
                       </button>
@@ -497,7 +497,7 @@ const ContactoClient = () => {
                   <button
                     type="submit"
                     aria-disabled={estadoEnvio === "enviando"}
-                    className={`focus:ring-primary-400/30 inline-flex items-center gap-2 rounded-md px-6 py-3 text-sm font-semibold tracking-wide text-white transition-all duration-200 focus:ring-3 focus:outline-none ${
+                    className={`focus-visible:ring-primary-400/30 inline-flex items-center gap-2 rounded-md px-6 py-3 text-sm font-semibold tracking-wide text-white transition-all duration-200 focus-visible:ring-3 focus-visible:outline-none ${
                       estadoEnvio === "enviando"
                         ? "bg-primary-400 cursor-not-allowed opacity-60"
                         : "bg-primary-400 hover:bg-primary-500"

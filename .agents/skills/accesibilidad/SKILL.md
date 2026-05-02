@@ -143,6 +143,41 @@ Cualquier cambio de contenido que ocurra **sin recarga de página** debe ser anu
 
 - **Modales/Diálogos:** Al abrir un modal, mueve el foco al primer elemento enfocable dentro de él. Al cerrarlo, devuelve el foco al elemento que lo disparó. Usa el elemento nativo `<dialog>` que gestiona esto automáticamente, o implementa un _focus trap_ manualmente.
 - **Navegación entre páginas (Next.js):** Al navegar con `<Link>`, Next.js no mueve el foco automáticamente en App Router. Implementa un mecanismo para anunciar el cambio de página al lector de pantalla (por ejemplo, moviendo el foco al `<h1>` de la nueva página o usando un `aria-live` region de anuncio de ruta).
+
+  > **Importante:** Antes de implementar un anunciador de rutas propio, verifica en `node_modules/next/dist/docs/` si la versión actual de Next.js ya incluye uno integrado.
+
+  Patrón de implementación recomendado si Next.js no lo incluye:
+
+  ```tsx
+  /* WCAG 2.2 — 4.1.3 Status Messages (AA):
+     Anuncia el cambio de ruta al lector de pantalla sin
+     mover el foco, para que el usuario sepa que la página cambió. */
+  "use client";
+  import { usePathname } from "next/navigation";
+  import { useEffect, useState } from "react";
+
+  export function RouteAnnouncer() {
+    const pathname = usePathname();
+    const [announcement, setAnnouncement] = useState("");
+
+    useEffect(() => {
+      const title = document.title;
+      setAnnouncement(`Navegaste a: ${title}`);
+    }, [pathname]);
+
+    return (
+      <div
+        role="status"
+        aria-live="assertive"
+        aria-atomic="true"
+        className="sr-only"
+      >
+        {announcement}
+      </div>
+    );
+  }
+  ```
+
 - **Contenido que se expande/colapsa:** Cuando un acordeón o dropdown se expande, el foco no debe saltar inesperadamente. El botón de control mantiene el foco; el contenido expandido queda disponible en el orden del DOM a continuación.
 - **Toasts y Notificaciones:** Nunca muevas el foco a un toast. Usa `role="status"` o `role="alert"` para que sea anunciado sin interrumpir el flujo del usuario.
 
@@ -305,6 +340,158 @@ Las personas con discapacidades cognitivas, de atención o de memoria también s
 - **Consistencia de navegación (WCAG 3.2.3 AA):** El navbar, footer y elementos de navegación deben aparecer en el mismo orden relativo en todas las páginas.
 - **Identificación de errores (WCAG 3.3.1 A):** Los errores en formularios deben identificar específicamente el campo con error y describir el problema en texto (no solo con color ni icono).
 - **Sugerencias de corrección (WCAG 3.3.3 AA):** Si se detecta un error y se conoce la corrección, proporciónala (por ejemplo: "El formato de fecha debe ser DD/MM/AAAA").
+- **Gestión del foco en errores:** Cuando un formulario se envía con errores, el foco debe moverse automáticamente al **primer campo con error** o a un **resumen de errores** al inicio del formulario. El resumen debe ser una lista de enlaces que salten al campo correspondiente.
+- **Vinculación programática de errores:** Usa `aria-describedby` para vincular cada mensaje de error al campo correspondiente, y `aria-invalid="true"` para marcar semánticamente el campo como inválido. Los errores de validación en tiempo real (al perder el foco) deben usar `aria-live="polite"` para no interrumpir al usuario.
+
+  ```tsx
+  {/* WCAG 2.2 — 3.3.1 Error Identification (A):
+      aria-describedby vincula el mensaje de error al campo.
+      aria-invalid indica semánticamente que el valor es inválido.
+      El mensaje usa role="alert" para anuncio inmediato. */}
+  <label htmlFor="email">Correo electrónico</label>
+  <input
+    id="email"
+    type="email"
+    aria-invalid={!!errors.email}
+    aria-describedby={errors.email ? "email-error" : undefined}
+  />
+  {errors.email && (
+    <p id="email-error" role="alert">
+      {errors.email}
+    </p>
+  )}
+  ```
+
+### 10. Estados de Carga (Loading States)
+
+Cuando el sitio realiza peticiones asíncronas (envío de formularios, carga de datos), los usuarios de tecnologías de asistencia no tienen indicación de que algo está ocurriendo a menos que se implemente explícitamente.
+
+- **Anuncio de estado:** Usa `aria-live="polite"` con `role="status"` para anunciar estados de carga ("Enviando formulario...", "Carga completa").
+- **Spinners y skeletons:** Los indicadores de carga visuales deben tener `aria-label` descriptivo y `role="status"`. Los lectores de pantalla deben poder anunciar su presencia.
+- **Foco durante la carga:** Nunca muevas el foco a un indicador de carga (spinner, skeleton).
+- **Botones con estado de carga:** Cambiar el texto del botón (ej: "Enviar" → "Enviando...") en vez de solo deshabilitarlo. Si se deshabilita, usar `aria-disabled="true"` junto con un texto de estado que explique por qué.
+- **Contenedores de carga:** Los contenedores que cargan contenido deben usar `aria-busy="true"` mientras cargan y `aria-busy="false"` al terminar.
+
+```tsx
+{/* WCAG 2.2 — 4.1.3 Status Messages (AA):
+    aria-busy indica al lector de pantalla que la región
+    está cargando contenido. role="status" anuncia el
+    cambio cuando finaliza la carga. */}
+<div role="status" aria-live="polite" aria-busy={isLoading}>
+  {isLoading ? <p>Cargando dictámenes...</p> : <ResultsList />}
+</div>
+```
+
+---
+
+### 11. Documentos Descargables (PDFs y Archivos)
+
+El sitio de la Junta expone resoluciones, normativas y dictámenes en formato PDF. Si esos documentos no son accesibles, toda la accesibilidad del sitio queda incompleta.
+
+- **PDFs etiquetados:** Los PDFs enlazados deben ser **PDFs etiquetados** (tagged PDFs) con estructura semántica (encabezados, listas, tablas), no escaneos de imagen sin OCR.
+- **Indicación de formato en enlaces:** El texto del enlace debe indicar el formato y tamaño del archivo: "Resolución 123 (PDF, 245 KB)".
+- **Alternativa HTML:** Si un PDF no puede hacerse accesible (por ejemplo, un escaneo antiguo), proporcionar una alternativa HTML del contenido o documentarlo como tarea pendiente.
+- **Nueva ventana:** Si el enlace abre el PDF en nueva pestaña, indicarlo claramente (ver sección 12).
+- **Imágenes en PDFs:** El texto alternativo de imágenes dentro de PDFs es responsabilidad del creador del documento. Documentar este requisito para el equipo.
+
+```tsx
+{/* WCAG 2.2 — 1.1.1 Non-text Content (A):
+    El enlace indica formato, tamaño y que abre en nueva ventana
+    para que el usuario sepa qué esperar antes de hacer clic. */}
+<a href="/docs/resolucion-123.pdf" target="_blank" rel="noopener noreferrer">
+  Resolución 123
+  <span className="sr-only">(PDF, 245 KB — se abre en nueva ventana)</span>
+</a>
+```
+
+---
+
+### 12. Enlaces Externos y Nuevas Ventanas
+
+Abrir contenido en una nueva ventana o pestaña sin advertencia puede desorientar a los usuarios, especialmente a quienes usan lectores de pantalla o tienen discapacidades cognitivas.
+
+- **Aviso obligatorio:** Siempre que un enlace use `target="_blank"`, informar al usuario mediante texto visible o `sr-only` que se abrirá en nueva ventana/pestaña.
+- **Seguridad:** Incluir siempre `rel="noopener noreferrer"` en enlaces con `target="_blank"` para prevenir ataques de tipo `window.opener`.
+- **Uso justificado:** No abrir enlaces en nueva ventana salvo que haya razón justificada (por ejemplo, el usuario está en medio de un formulario y perdería datos al salir de la página).
+- **Consistencia:** Usar un patrón visual y semántico consistente en todo el sitio para indicar enlaces externos (por ejemplo, un ícono de enlace externo con `aria-hidden="true"` acompañado de texto `sr-only`).
+
+```tsx
+{/* WCAG 2.2 — 3.2.5 Change on Request (AAA, aspiracional):
+    El usuario es informado de que el enlace abre en nueva ventana
+    antes de activarlo. El ícono es decorativo (aria-hidden). */}
+<a href="https://ejemplo.com" target="_blank" rel="noopener noreferrer">
+  Sitio del Ministerio del Trabajo
+  <ExternalLinkIcon aria-hidden="true" className="inline-block w-4 h-4 ml-1" />
+  <span className="sr-only">(se abre en nueva ventana)</span>
+</a>
+```
+
+---
+
+### 13. Tablas Responsivas
+
+Las tablas de datos son comunes en el sitio (dictámenes, normativas, pagos). En dispositivos móviles, la accesibilidad de tablas se complica si no se maneja correctamente.
+
+- **No convertir tablas a divs:** Transformar `<table>` en divs con CSS para móviles destruye la semántica. Los lectores de pantalla pierden la relación entre encabezados y celdas.
+- **Scroll horizontal accesible:** Envolver la tabla en un contenedor con `overflow-x: auto`, `tabindex="0"`, `role="region"` y `aria-label` descriptivo para que sea navegable por teclado.
+- **Reflow a tarjetas (alternativa):** Si se usa reflow a formato de tarjetas en móvil, mantener la asociación entre encabezado y dato mediante encabezados visibles o `aria-label` en cada celda.
+- **Nunca usar `display: block`** en elementos `<table>`, `<tr>`, `<td>` sin agregar roles ARIA compensatorios (`role="table"`, `role="row"`, `role="cell"`).
+
+```tsx
+{/* WCAG 2.2 — 1.3.1 Info and Relationships (A):
+    El contenedor scrollable tiene tabindex y role para ser
+    navegable por teclado y anunciado correctamente al lector. */}
+<div
+  role="region"
+  aria-label="Tabla de dictámenes recientes"
+  tabIndex={0}
+  className="overflow-x-auto"
+>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Número</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Estado</th>
+      </tr>
+    </thead>
+    <tbody>{/* ... */}</tbody>
+  </table>
+</div>
+```
+
+---
+
+### 14. Componentes de Terceros (Embeds e Iframes)
+
+Cuando se integran componentes externos (mapas, videos embebidos, captchas), la accesibilidad del sitio depende también de esos componentes.
+
+- **Iframes con `title`:** Todo `<iframe>` debe tener un atributo `title` descriptivo que indique su propósito al lector de pantalla.
+- **Mapas interactivos:** Los embeds de mapas (Google Maps, etc.) deben tener una alternativa textual: la dirección completa como texto + enlace directo a la aplicación de mapas.
+- **Captchas:** Cualquier captcha en el sitio (Turnstile, reCAPTCHA, etc.) debe ofrecer una alternativa accesible. No deshabilitar `autocomplete` en campos protegidos por captcha (WCAG 1.3.5). Verificar que el widget del captcha sea navegable por teclado.
+- **Videos embebidos:** Verificar que los controles del reproductor embebido (YouTube, Vimeo) sean accesibles por teclado. Proporcionar transcripciones o subtítulos cuando estén disponibles.
+- **Widgets de chat o soporte:** Si se integra un widget de chat flotante, verificar que no bloquee el foco de otros elementos y que sea operable por teclado. Debe poder cerrarse con `Escape`.
+
+```tsx
+{/* WCAG 2.2 — 4.1.2 Name, Role, Value (A):
+    El iframe tiene title descriptivo para que el lector de
+    pantalla anuncie su propósito sin necesidad de cargarlo. */}
+<iframe
+  src="https://maps.google.com/..."
+  title="Mapa de ubicación de la Junta Regional — Calle 36 #19-20, Bucaramanga"
+  loading="lazy"
+/>
+{/* Alternativa textual para usuarios que no pueden usar el mapa */}
+<p>
+  <strong>Dirección:</strong> Calle 36 #19-20, Bucaramanga, Santander.
+  <a href="https://maps.google.com/..." target="_blank" rel="noopener noreferrer">
+    Ver en Google Maps
+    <span className="sr-only">(se abre en nueva ventana)</span>
+  </a>
+</p>
+```
+
+---
 
 ## Mantenimiento Continuo y Anti-Patrones
 
@@ -315,7 +502,41 @@ Lograr la accesibilidad no es una tarea única: requiere evaluación continua a 
 - **Alt en cada imagen nueva:** Cada vez que se añada una imagen u otro medio, es obligatorio proporcionar texto `alt` (o marcarla como decorativa con `alt=""`). Para iconos, añade siempre una etiqueta correspondiente y usa `aria-hidden="true"` para el contenido solo visual.
 - **Contraste en cada cambio de UI:** Cada vez que se introduzca un color nuevo (para texto, fondos, iconos, botones, etc.) o se cambien estilos de diseño, verifica que el contraste de color cumpla las directrices WCAG.
 - **Estructura de encabezados y landmarks:** Al añadir nuevo contenido o páginas, asegúrate de que la jerarquía de encabezados permanezca lógica (sin saltar niveles arbitrariamente) y de que se usen elementos de sección donde corresponda.
-- **Re-evaluación con cada cambio:** Incorpora pruebas automatizadas (como Pa11y) en los conjuntos de pruebas de regresión para que cada build las ejecute.
+- **Re-evaluación con cada cambio:** Incorpora pruebas automatizadas en los conjuntos de pruebas de regresión para que cada build las ejecute.
+
+#### Testing Automatizado de Accesibilidad
+
+Las herramientas automatizadas pueden detectar aproximadamente el **30-40% de los problemas** de accesibilidad. El resto requiere prueba manual. Ambos enfoques son necesarios.
+
+**Herramientas recomendadas:**
+
+| Herramienta | Uso | Alcance |
+|---|---|---|
+| `eslint-plugin-jsx-a11y` | Linting en desarrollo | Detecta errores de ARIA y semántica en JSX |
+| `axe-core` / `@axe-core/react` | Testing en navegador | Auditoría completa del DOM renderizado |
+| `pa11y` | CI/CD | Verificación automatizada en cada PR/build |
+| Lighthouse (accesibilidad) | Auditoría manual | Puntuación general y recomendaciones |
+
+**Qué detecta el testing automatizado:**
+- Falta de `alt` en imágenes, `title` en iframes, `label` en inputs
+- Ratios de contraste insuficientes
+- Roles ARIA inválidos o mal usados
+- Elementos no accesibles por teclado
+- Jerarquía de encabezados rota
+
+**Qué NO detecta (requiere prueba manual):**
+- Si el texto `alt` es realmente descriptivo (no solo que exista)
+- Si el orden de lectura tiene sentido semántico
+- Si la experiencia con lector de pantalla es coherente
+- Si el flujo de foco es lógico en interacciones complejas
+- Si las live regions anuncian en el momento correcto
+
+**Checklist de prueba manual mínima por componente:**
+1. Navegar el componente usando solo teclado (Tab, Enter, Escape, flechas)
+2. Verificar que el indicador de foco sea visible en todo momento
+3. Activar un lector de pantalla y recorrer el componente
+4. Hacer zoom al 200% y verificar que nada se corte
+5. Probar con `prefers-reduced-motion: reduce` activado
 
 ### Anti-Patrones a Evitar
 
@@ -336,9 +557,53 @@ Los siguientes son requisitos que deben verificarse y mantenerse en el proyecto:
 - **Elemento `<title>`:** Los elementos `<title>` son un requisito. Entiende dónde en el proyecto se añaden (en Next.js App Router, en el `metadata` de cada `page.tsx`) y cámbialo dinámicamente según el contenido de cada ruta.
 - **Skip Links:** Implementa skip links antes de cada bloque que no sea contenido (por ejemplo, justo antes de la navegación) que solo sean visibles una vez enfocados. También añade skip links antes de grupos grandes (≥ 5) de contenido posiblemente irrelevante, como carruseles. Llámalos "Saltar [cosa]", por ejemplo "Saltar navegación". Asegúrate de que permanezcan correctos cuando cambie la estructura.
 - **`prefers-reduced-motion`:** Maneja y respeta la media query `prefers-reduced-motion`. Cualquier animación o transición debe reducirse o eliminarse cuando el usuario la solicite.
+
+  Distingue entre animaciones **esenciales** (que transmiten información, como un spinner de carga) y **decorativas** (parallax, hover effects, transiciones de página). Solo elimina las decorativas.
+
+  Implementación CSS global recomendada:
+
+  ```css
+  /* WCAG 2.2 — 2.3.3 Animation from Interactions (AAA, aspiracional):
+     Reduce todas las animaciones no esenciales cuando el usuario
+     ha configurado su sistema para reducir movimiento. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  ```
+
+  Para animaciones JavaScript, crear un hook:
+
+  ```tsx
+  "use client";
+  import { useEffect, useState } from "react";
+
+  export function useReducedMotion(): boolean {
+    const [reducedMotion, setReducedMotion] = useState(false);
+
+    useEffect(() => {
+      const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+      setReducedMotion(mq.matches);
+      const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+      mq.addEventListener("change", handler);
+      return () => mq.removeEventListener("change", handler);
+    }, []);
+
+    return reducedMotion;
+  }
+  ```
+
+  Las transiciones de página de Next.js (si se implementan) deben respetar esta preferencia.
 - **Reflow:** Todo el contenido debe reorganizarse correctamente cuando cambie el tamaño del viewport o el nivel de zoom.
 - **Comunicación en el equipo:** Comunica claramente dentro de la organización del proyecto y la documentación que se requieren pruebas humanas y que los flujos de usuario deben ser evaluados continuamente por los diseñadores.
 - **Nunca mencionar accesibilidad en la UI:** En la interfaz de usuario, nunca menciones la accesibilidad directamente al usuario final.
+- **`prefers-color-scheme` (modo oscuro):** Si el sitio implementa modo oscuro, verificar que los ratios de contraste se cumplan en **ambos esquemas** (claro y oscuro). Los indicadores de foco, bordes de inputs y estados interactivos deben ser visibles en ambos modos. Los Design Tokens deben tener variantes para cada esquema. Respetar la preferencia del sistema operativo con `prefers-color-scheme` y, si se implementa un toggle manual, que el valor elegido por el usuario persista entre sesiones.
 
 ---
 
