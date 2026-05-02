@@ -10,35 +10,16 @@ Su función principal es la calificación de pacientes con presuntas discapacida
 
 ## Stack Tecnológico
 
-| Tecnología          | Versión | Notas                         |
-| ------------------- | ------- | ----------------------------- |
-| **Next.js**         | 16.2.4  | App Router, Server Components |
-| **React**           | 19.2.4  |                               |
-| **React DOM**       | 19.2.4  |                               |
-| **TypeScript**      | ^5      |                               |
-| **Tailwind CSS**    | ^4      | Con `@tailwindcss/postcss`    |
-| **ESLint**          | ^9      | Con `eslint-config-next`      |
-| **Package Manager** | pnpm    |                               |
+**Next.js:** la versión instalada está en `package.json`. Antes de cualquier trabajo en Next.js, leer el fragmento pertinente en `node_modules/next/dist/docs/`; ahí está la documentación acorde a esa versión (no sustituir por conocimiento genérico del modelo).
 
----
-
-## Renderizado
-
-En **Next.js App Router**, las páginas son **Server Components por defecto**. Esto significa que su renderizado se resuelve en el servidor, pero **no todas las rutas son SSR en cada visita**.
-
-Dependiendo del uso de datos y de la configuración de la ruta, una página puede renderizarse de forma:
-
-- **Estática** por defecto, cuando Next.js puede prerenderizarla y servirla desde caché.
-- **Dinámica**, si la ruta o sus datos requieren renderizado por solicitud.
-- **Revalidada o cacheada**, según opciones como `revalidate`, `dynamic` y la estrategia de caché de `fetch`.
-
-Esto permite combinar:
-
-- Buen SEO (el contenido llega renderizado en el HTML).
-- Buen rendimiento y tiempos de carga percibidos más rápidos.
-- Flexibilidad para servir contenido estático o actualizado según las necesidades de cada ruta.
-
-Solo se usa `"use client"` cuando es estrictamente necesario para interactividad del lado del cliente.
+| Tecnología          | Versión | Notas                      |
+| ------------------- | ------- | -------------------------- |
+| **React**           | 19.2.4  |                            |
+| **React DOM**       | 19.2.4  |                            |
+| **TypeScript**      | ^5      |                            |
+| **Tailwind CSS**    | ^4      | Con `@tailwindcss/postcss` |
+| **ESLint**          | ^9      |                            |
+| **Package Manager** | pnpm    |                            |
 
 ---
 
@@ -56,7 +37,7 @@ El sitio web tiene un **navbar** con las siguientes secciones/páginas:
 | **Pagos**               | `/pagos`               | Información y canales de pago para los servicios de la entidad                                     |
 | **Contratación**        | `/contratacion`        | Procesos de contratación, convocatorias, documentos de contratación                                |
 
-### Estructura de Archivos (App Router)
+### Estructura de Archivos (`src/app/`)
 
 ```
 src/app/
@@ -91,6 +72,6 @@ src/app/
 1. **Idioma del contenido**: Español (Colombia).
 2. **Idioma del código**: Variables, funciones y componentes en inglés. Contenido (textos, labels) en español.
 3. **Componentes compartidos** (navbar, footer, etc.) se ubican en `src/components/`.
-4. **Cada página es un Server Component** a menos que requiera interactividad del lado del cliente.
+4. **Componentes cliente vs servidor**: seguir las convenciones del framework según `node_modules/next/dist/docs/` (no duplicar aquí reglas de renderizado).
 5. **Rutas en español con kebab-case**: `/atencion-al-usuario`, `/contratacion`, etc.
 6. **Tailwind CSS v4** se usa para estilos. Consultar la configuración via `@tailwindcss/postcss`.
