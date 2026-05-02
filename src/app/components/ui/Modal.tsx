@@ -76,20 +76,50 @@ const Modal = ({
   ariaLabelledBy,
 }: ModalProps) => {
   const panelRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
-  // Cerrar con tecla ESC
+  // Manejo de teclado: ESC para cerrar y Tab para atrapar el foco
   useEffect(() => {
     if (!isOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+
+      if (e.key === "Tab" && panelRef.current) {
+        const focusableElements = panelRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        
+        if (focusableElements.length === 0) return;
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        // Shift + Tab
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement || document.activeElement === panelRef.current) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } 
+        // Solo Tab
+        else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
+      }
     };
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Bloquear scroll del body mientras el modal está abierto
+  // Bloquear scroll del body
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -101,10 +131,15 @@ const Modal = ({
     };
   }, [isOpen]);
 
-  // Mover el foco al panel al abrir
+  // Mover el foco al panel al abrir y devolverlo al botón original al cerrar
   useEffect(() => {
     if (isOpen) {
-      panelRef.current?.focus();
+      previousFocusRef.current = document.activeElement as HTMLElement;
+      // setTimeout asegura que el render del portal haya finalizado
+      setTimeout(() => panelRef.current?.focus(), 0);
+    } else if (previousFocusRef.current) {
+      previousFocusRef.current.focus();
+      previousFocusRef.current = null;
     }
   }, [isOpen]);
 
