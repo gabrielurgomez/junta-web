@@ -1,6 +1,6 @@
 "use server";
 import { TURNSTILE_SECRET_KEY } from "../../../../.config";
-
+import { logger } from "@/app/libs/utils/logger.utils";
 import { sendContactFormBrevoTemplateEmail } from "@/app/libs/utils/email.utils";
 import { emailEsValido } from "@/app/libs/utils/strings.utils";
 
@@ -24,7 +24,18 @@ async function verificarTurnstile(token: string): Promise<boolean> {
       },
     );
 
-    const data = (await res.json()) as { success: boolean };
+    const data = (await res.json()) as {
+      success: boolean;
+      "error-codes"?: string[];
+    };
+
+    if (!data.success) {
+      logger({
+        level: "error",
+        message: `[Turnstile] Verificación fallida. Códigos de error: ${data["error-codes"]}`,
+      });
+    }
+
     return data.success === true;
   } catch (error) {
     console.error("[Turnstile] Error al verificar token:", error);
