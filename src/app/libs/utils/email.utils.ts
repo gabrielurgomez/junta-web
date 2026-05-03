@@ -72,10 +72,15 @@ export async function sendContactFormBrevoTemplateEmail(
     .trim()
     .substring(0, 100);
 
+  // Sanitización estricta del correo (CRLF y espacios)
+  const sanitizedEmail = input.correo
+    .replace(/[\r\n\t\s]/g, "")
+    .substring(0, 100);
+
   const body = {
     sender: { email: senderEmail, name: senderName },
     to: [{ email: toEmail }],
-    replyTo: { email: input.correo, name: sanitizedName },
+    replyTo: { email: sanitizedEmail, name: sanitizedName },
     templateId: CONTACT_TEMPLATE_ID,
     params: buildTemplateParams(input),
   };

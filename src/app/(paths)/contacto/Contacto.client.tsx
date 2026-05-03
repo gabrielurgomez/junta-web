@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { enviarFormularioContacto } from "./contacto.actions";
 import PoliticaTratamientoDatos from "@/app/components/PoliticaTratamientoDatos";
+import { NEXT_PUBLIC_TURNSTILE_SITE_KEY } from "../../../../.config";
 
 type EstadoEnvio = "enviando" | "error" | null;
 
@@ -268,7 +269,7 @@ const ContactoClient = () => {
           {/* Panel derecho — formulario */}
           <div className="lg:col-span-3">
             <div className="shadow-card rounded-2xl bg-white p-8 md:p-10">
-              <div role="status" aria-live="polite">
+              <div role="status" aria-live="polite" aria-atomic="true">
                 {alertaExito && (
                   <div className="border-success/25 bg-success/8 text-text-primary mb-6 flex items-start gap-3 rounded-lg border px-4 py-3">
                     <svg
@@ -527,7 +528,7 @@ const ContactoClient = () => {
                 {/* Cloudflare Turnstile */}
                 <Turnstile
                   ref={turnstileRef}
-                  siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+                  siteKey={NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ""}
                   onSuccess={(token) => setTurnstileToken(token)}
                   onExpire={() => setTurnstileToken(null)}
                   onError={() => setTurnstileToken(null)}
