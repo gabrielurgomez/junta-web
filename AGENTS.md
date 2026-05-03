@@ -70,8 +70,11 @@ src/app/
 ## Convenciones del Proyecto
 
 1. **Idioma del contenido**: Español (Colombia).
-2. **Idioma del código**: Variables, funciones y componentes en inglés. Contenido (textos, labels) en español.
+2. **Idioma del código**: Variables, funciones y componentes en español. Contenido (textos, labels) en español.
 3. **Componentes compartidos** (navbar, footer, etc.) se ubican en `src/components/`.
 4. **Componentes cliente vs servidor**: seguir las convenciones del framework según `node_modules/next/dist/docs/` (no duplicar aquí reglas de renderizado).
 5. **Rutas en español con kebab-case**: `/atencion-al-usuario`, `/contratacion`, etc.
 6. **Tailwind CSS v4** se usa para estilos. Consultar la configuración via `@tailwindcss/postcss`.
+7. **Documentación de Next.js**: La documentación instalada localmente es la fuente de la verdad. Antes de codificar, proponer soluciones o hacer revisiones de código (code review) relacionadas con Next.js, **SIEMPRE debes buscar y leer la documentación oficial relevante ubicada en `node_modules/next/dist/docs/`**.
+8. **Accesibilidad Web**: Para garantizar la accesibilidad web y cumplir con los estándares requeridos, se deben revisar y aplicar estrictamente las instrucciones descritas en el skill de accesibilidad que está ubicado en `.agents/skills/accesibilidad/SKILL.md`.
+9. **Diseño y UI**: Cuando vayas a crear o modificar componentes, estilos o cualquier aspecto visual (UI), debes revisar y apegarte estrictamente a las directrices establecidas en el archivo `DESIGN.md`.
