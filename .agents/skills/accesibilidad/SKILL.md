@@ -260,12 +260,12 @@ Las herramientas detectan ~30-40% de los problemas. El resto requiere prueba man
 
 **Herramientas recomendadas:**
 
-| Herramienta | Uso | Alcance |
-|---|---|---|
-| `eslint-plugin-jsx-a11y` | Linting en desarrollo | Errores de ARIA y semántica en JSX |
-| `axe-core` / `@axe-core/react` | Testing en navegador | Auditoría del DOM renderizado |
-| `pa11y` | CI/CD | Verificación en cada PR/build |
-| Lighthouse | Auditoría manual | Puntuación general |
+| Herramienta                    | Uso                   | Alcance                            |
+| ------------------------------ | --------------------- | ---------------------------------- |
+| `eslint-plugin-jsx-a11y`       | Linting en desarrollo | Errores de ARIA y semántica en JSX |
+| `axe-core` / `@axe-core/react` | Testing en navegador  | Auditoría del DOM renderizado      |
+| `pa11y`                        | CI/CD                 | Verificación en cada PR/build      |
+| Lighthouse                     | Auditoría manual      | Puntuación general                 |
 
 **Checklist de prueba manual mínima por componente:**
 
@@ -301,13 +301,13 @@ Las herramientas detectan ~30-40% de los problemas. El resto requiere prueba man
 
 ## Referencias Normativas
 
-| Recurso | URL |
-|---|---|
-| WCAG 2.2 (oficial W3C) | https://www.w3.org/TR/WCAG22/ |
-| Understanding WCAG 2.2 | https://www.w3.org/WAI/WCAG22/Understanding/ |
-| ARIA Authoring Practices Guide | https://www.w3.org/WAI/ARIA/apg/ |
-| Accessible Name Computation | https://www.w3.org/TR/accname-1.2/ |
-| WebAIM Contrast Checker | https://webaim.org/resources/contrastchecker/ |
-| Forced Colors / High Contrast | https://developer.mozilla.org/en-US/docs/Web/CSS/@media/forced-colors |
+| Recurso                        | URL                                                                   |
+| ------------------------------ | --------------------------------------------------------------------- |
+| WCAG 2.2 (oficial W3C)         | https://www.w3.org/TR/WCAG22/                                         |
+| Understanding WCAG 2.2         | https://www.w3.org/WAI/WCAG22/Understanding/                          |
+| ARIA Authoring Practices Guide | https://www.w3.org/WAI/ARIA/apg/                                      |
+| Accessible Name Computation    | https://www.w3.org/TR/accname-1.2/                                    |
+| WebAIM Contrast Checker        | https://webaim.org/resources/contrastchecker/                         |
+| Forced Colors / High Contrast  | https://developer.mozilla.org/en-US/docs/Web/CSS/@media/forced-colors |
 
 > **Nota importante:** Este skill no constituye una conciencia plena de todo lo que es importante para desarrollar de forma accesible. Si tienes dudas, documéntalo y consulta únicamente los recursos oficiales de W3C/WCAG listados arriba.

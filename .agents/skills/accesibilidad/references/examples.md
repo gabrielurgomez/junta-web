@@ -41,13 +41,15 @@ Este archivo contiene los ejemplos de implementación referenciados desde `SKILL
 ## 2. Texto sr-only
 
 ```tsx
-{/* WCAG 2.2 — 1.3.1 Info and Relationships (A):
+{
+  /* WCAG 2.2 — 1.3.1 Info and Relationships (A):
     El texto sr-only proporciona el nombre accesible del botón
-    ya que el ícono SVG por sí solo no tiene semántica. */}
+    ya que el ícono SVG por sí solo no tiene semántica. */
+}
 <button type="button" aria-label="Cerrar">
   <XIcon aria-hidden="true" />
   <span className="sr-only">Cerrar</span>
-</button>
+</button>;
 ```
 
 ---
@@ -55,12 +57,14 @@ Este archivo contiene los ejemplos de implementación referenciados desde `SKILL
 ## 3. Regiones ARIA Live
 
 ```tsx
-{/* WCAG 2.2 — 4.1.3 Status Messages (AA):
+{
+  /* WCAG 2.2 — 4.1.3 Status Messages (AA):
     El mensaje de éxito se anuncia automáticamente al lector
-    de pantalla sin requerir que el foco se mueva al elemento. */}
+    de pantalla sin requerir que el foco se mueva al elemento. */
+}
 <div role="status" aria-live="polite" aria-atomic="true">
   {mensaje && <p>{mensaje}</p>}
-</div>
+</div>;
 ```
 
 ---
@@ -104,13 +108,15 @@ export function RouteAnnouncer() {
 ## 5. Nombres accesibles
 
 ```tsx
-{/* WCAG 2.2 — 4.1.2 Name, Role, Value (A):
+{
+  /* WCAG 2.2 — 4.1.2 Name, Role, Value (A):
     aria-labelledby referencia el texto visible del encabezado
-    de la sección, asociando la tabla a su contexto. */}
+    de la sección, asociando la tabla a su contexto. */
+}
 <section aria-labelledby="tabla-dictamenes-titulo">
   <h2 id="tabla-dictamenes-titulo">Dictámenes recientes</h2>
   <table aria-labelledby="tabla-dictamenes-titulo">...</table>
-</section>
+</section>;
 ```
 
 ---
@@ -148,9 +154,11 @@ export function RouteAnnouncer() {
 ## 8. Focus Appearance
 
 ```tsx
-{/* WCAG 2.2 — 2.4.13 Focus Appearance (AA):
+{
+  /* WCAG 2.2 — 2.4.13 Focus Appearance (AA):
     Indicador de foco visible, con contraste suficiente (anillo
-    de 2px azul sobre fondo blanco = ratio ~4.5:1). */}
+    de 2px azul sobre fondo blanco = ratio ~4.5:1). */
+}
 // En Tailwind CSS v4:
 // focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600
 ```
@@ -183,13 +191,15 @@ export function RouteAnnouncer() {
 ## 10. Estados de carga
 
 ```tsx
-{/* WCAG 2.2 — 4.1.3 Status Messages (AA):
+{
+  /* WCAG 2.2 — 4.1.3 Status Messages (AA):
     aria-busy indica al lector de pantalla que la región
     está cargando contenido. role="status" anuncia el
-    cambio cuando finaliza la carga. */}
+    cambio cuando finaliza la carga. */
+}
 <div role="status" aria-live="polite" aria-busy={isLoading}>
   {isLoading ? <p>Cargando dictámenes...</p> : <ResultsList />}
-</div>
+</div>;
 ```
 
 ---
@@ -197,13 +207,15 @@ export function RouteAnnouncer() {
 ## 11. Enlaces a PDFs
 
 ```tsx
-{/* WCAG 2.2 — 1.1.1 Non-text Content (A):
+{
+  /* WCAG 2.2 — 1.1.1 Non-text Content (A):
     El enlace indica formato, tamaño y que abre en nueva ventana
-    para que el usuario sepa qué esperar antes de hacer clic. */}
+    para que el usuario sepa qué esperar antes de hacer clic. */
+}
 <a href="/docs/resolucion-123.pdf" target="_blank" rel="noopener noreferrer">
   Resolución 123
   <span className="sr-only">(PDF, 245 KB — se abre en nueva ventana)</span>
-</a>
+</a>;
 ```
 
 ---
@@ -211,14 +223,16 @@ export function RouteAnnouncer() {
 ## 12. Enlaces externos
 
 ```tsx
-{/* WCAG 2.2 — 3.2.5 Change on Request (AAA, aspiracional):
+{
+  /* WCAG 2.2 — 3.2.5 Change on Request (AAA, aspiracional):
     El usuario es informado de que el enlace abre en nueva ventana
-    antes de activarlo. El ícono es decorativo (aria-hidden). */}
+    antes de activarlo. El ícono es decorativo (aria-hidden). */
+}
 <a href="https://ejemplo.com" target="_blank" rel="noopener noreferrer">
   Sitio del Ministerio del Trabajo
   <ExternalLinkIcon aria-hidden="true" className="ml-1 inline-block h-4 w-4" />
   <span className="sr-only">(se abre en nueva ventana)</span>
-</a>
+</a>;
 ```
 
 ---
@@ -226,9 +240,11 @@ export function RouteAnnouncer() {
 ## 13. Tablas responsivas
 
 ```tsx
-{/* WCAG 2.2 — 1.3.1 Info and Relationships (A):
+{
+  /* WCAG 2.2 — 1.3.1 Info and Relationships (A):
     El contenedor scrollable tiene tabindex y role para ser
-    navegable por teclado y anunciado correctamente al lector. */}
+    navegable por teclado y anunciado correctamente al lector. */
+}
 <div
   role="region"
   aria-label="Tabla de dictámenes recientes"
@@ -245,7 +261,7 @@ export function RouteAnnouncer() {
     </thead>
     <tbody>{/* ... */}</tbody>
   </table>
-</div>
+</div>;
 ```
 
 ---
@@ -253,22 +269,30 @@ export function RouteAnnouncer() {
 ## 14. Iframes y alternativas
 
 ```tsx
-{/* WCAG 2.2 — 4.1.2 Name, Role, Value (A):
+{
+  /* WCAG 2.2 — 4.1.2 Name, Role, Value (A):
     El iframe tiene title descriptivo para que el lector de
-    pantalla anuncie su propósito sin necesidad de cargarlo. */}
+    pantalla anuncie su propósito sin necesidad de cargarlo. */
+}
 <iframe
   src="https://maps.google.com/..."
   title="Mapa de ubicación de la Junta Regional — Calle 36 #19-20, Bucaramanga"
   loading="lazy"
-/>
-{/* Alternativa textual para usuarios que no pueden usar el mapa */}
+/>;
+{
+  /* Alternativa textual para usuarios que no pueden usar el mapa */
+}
 <p>
   <strong>Dirección:</strong> Calle 36 #19-20, Bucaramanga, Santander.
-  <a href="https://maps.google.com/..." target="_blank" rel="noopener noreferrer">
+  <a
+    href="https://maps.google.com/..."
+    target="_blank"
+    rel="noopener noreferrer"
+  >
     Ver en Google Maps
     <span className="sr-only">(se abre en nueva ventana)</span>
   </a>
-</p>
+</p>;
 ```
 
 ---
