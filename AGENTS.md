@@ -89,7 +89,7 @@ src/app/
 ## Convenciones del Proyecto
 
 1. **Idioma del contenido**: Español (Colombia).
-2. **Idioma del código**: Variables, funciones y componentes en inglés. Contenido (textos, labels) en español.
+2. **Idioma del código**: Variables, funciones y componentes en español. Contenido (textos, labels) en español.
 3. **Componentes compartidos** (navbar, footer, etc.) se ubican en `src/components/`.
 4. **Cada página es un Server Component** a menos que requiera interactividad del lado del cliente.
 5. **Rutas en español con kebab-case**: `/atencion-al-usuario`, `/contratacion`, etc.

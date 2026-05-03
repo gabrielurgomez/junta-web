@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { enviarFormularioContacto } from "./contacto.actions";
 import PoliticaTratamientoDatos from "@/app/components/PoliticaTratamientoDatos";
-import { isValidEmail } from "@/app/libs/utils/strings.utils";
+import { emailEsValido } from "@/app/libs/utils/strings.utils";
 
 type EstadoEnvio = "enviando" | "error" | null;
 
@@ -95,7 +95,7 @@ const ContactoClient = () => {
     if (!form.nombre.trim()) errores.nombre = "El nombre es requerido.";
     if (!form.correo.trim()) {
       errores.correo = "El correo electrónico es requerido.";
-    } else if (!isValidEmail(form.correo.trim())) {
+    } else if (!emailEsValido(form.correo.trim())) {
       errores.correo = "El correo electrónico no es válido.";
     }
     if (!form.mensaje.trim()) {
