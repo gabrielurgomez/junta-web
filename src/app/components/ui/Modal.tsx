@@ -5,15 +5,27 @@ import { createPortal } from "react-dom";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-interface ModalProps {
+type BaseModalProps = {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
   /** Ancho máximo del panel. Por defecto: max-w-lg */
   maxWidth?: string;
-  /** aria-labelledby — debe apuntar al id del h* dentro de ModalHeader */
-  ariaLabelledBy?: string;
-}
+};
+
+type ModalProps = BaseModalProps &
+  (
+    | {
+        /** aria-labelledby — debe apuntar al id del h* dentro de ModalHeader */
+        ariaLabelledBy: string;
+        ariaLabel?: never;
+      }
+    | {
+        /** aria-label — nombre accesible explícito cuando no hay un título visible */
+        ariaLabel: string;
+        ariaLabelledBy?: never;
+      }
+  );
 
 interface ModalSectionProps {
   children: React.ReactNode;
@@ -74,6 +86,7 @@ const Modal = ({
   children,
   maxWidth = "max-w-lg",
   ariaLabelledBy,
+  ariaLabel,
 }: ModalProps) => {
   const panelRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
@@ -154,6 +167,7 @@ const Modal = ({
       role="dialog"
       aria-modal="true"
       aria-labelledby={ariaLabelledBy}
+      aria-label={ariaLabel}
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
     >
       {/* Backdrop semitransparente */}
