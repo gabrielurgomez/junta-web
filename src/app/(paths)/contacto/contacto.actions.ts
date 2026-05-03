@@ -15,14 +15,25 @@ async function verificarTurnstile(token: string): Promise<boolean> {
   if (!token) return false;
 
   try {
+    const formData = new URLSearchParams();
+    formData.append("secret", TURNSTILE_SECRET_KEY);
+    formData.append("response", token);
+
     const res = await fetch(
       "https://challenges.cloudflare.com/turnstile/v0/siteverify",
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ secret: TURNSTILE_SECRET_KEY, response: token }),
+        body: formData,
       },
     );
+
+    if (!res.ok) {
+      logger({
+        level: "error",
+        message: `[Turnstile] Error HTTP: ${res.status}`,
+      });
+      return false;
+    }
 
     const data = (await res.json()) as {
       success: boolean;
