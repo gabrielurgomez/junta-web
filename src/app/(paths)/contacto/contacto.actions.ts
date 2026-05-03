@@ -2,7 +2,7 @@
 import { TURNSTILE_SECRET_KEY } from "../../../../.config";
 import { logger } from "@/app/libs/utils/logger.utils";
 import { sendContactFormBrevoTemplateEmail } from "@/app/libs/utils/email.utils";
-import { emailEsValido } from "@/app/libs/utils/strings.utils";
+import { isValidEmail } from "@/app/libs/utils/strings.utils";
 
 // ─── Verificación Turnstile ───────────────────────────────────────────────────
 
@@ -90,7 +90,7 @@ export async function enviarFormularioContacto({
     };
   }
 
-  if (!emailEsValido(correo)) {
+  if (!isValidEmail(correo)) {
     return {
       status: 400,
       message: "El correo electrónico no tiene un formato válido.",

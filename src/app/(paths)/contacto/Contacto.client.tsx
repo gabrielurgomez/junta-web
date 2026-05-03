@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { enviarFormularioContacto } from "./contacto.actions";
 import PoliticaTratamientoDatos from "@/app/components/PoliticaTratamientoDatos";
-import { NEXT_PUBLIC_TURNSTILE_SITE_KEY } from "../../../../.config";
+import { isValidEmail } from "@/app/libs/utils/strings.utils";
 
 type EstadoEnvio = "enviando" | "error" | null;
 
@@ -91,12 +91,11 @@ const ContactoClient = () => {
 
   const validarFormulario = (): boolean => {
     const errores: Partial<FormState> = {};
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!form.nombre.trim()) errores.nombre = "El nombre es requerido.";
     if (!form.correo.trim()) {
       errores.correo = "El correo electrónico es requerido.";
-    } else if (!emailRegex.test(form.correo.trim())) {
+    } else if (!isValidEmail(form.correo.trim())) {
       errores.correo = "El correo electrónico no es válido.";
     }
     if (!form.mensaje.trim()) {
@@ -528,7 +527,7 @@ const ContactoClient = () => {
                 {/* Cloudflare Turnstile */}
                 <Turnstile
                   ref={turnstileRef}
-                  siteKey={NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ""}
+                  siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ""}
                   onSuccess={(token) => setTurnstileToken(token)}
                   onExpire={() => setTurnstileToken(null)}
                   onError={() => setTurnstileToken(null)}
