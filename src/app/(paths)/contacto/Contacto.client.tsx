@@ -182,7 +182,7 @@ const ContactoClient = () => {
       <section className="mx-auto w-full max-w-300 px-4 py-16 md:px-8 md:py-24">
         <div className="grid gap-12 lg:grid-cols-5">
           {/* Panel izquierdo — información de contacto */}
-          <aside className="lg:col-span-2">
+          <div className="lg:col-span-2">
             <h1 className="text-text-primary text-3xl font-bold tracking-tight md:text-4xl">
               Contáctenos
             </h1>
@@ -263,7 +263,7 @@ const ContactoClient = () => {
                 value="Lunes a viernes, 8:00 a.m. – 12:00 m. y 2:00 p.m. – 6:00 p.m."
               />
             </div>
-          </aside>
+          </div>
 
           {/* Panel derecho — formulario */}
           <div className="lg:col-span-3">
