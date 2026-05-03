@@ -527,6 +527,7 @@ const ContactoClient = () => {
                 {/* Cloudflare Turnstile */}
                 <Turnstile
                   ref={turnstileRef}
+                  {/*No se debe importar el NEXT_PUBLIC_TURNSTILE_SITE_KEY desde el .config.ts ya que obligaria a Next.js (y al bundler) a procesar todo el archivo en el contexto del navegador.*/}
                   siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ""}
                   onSuccess={(token) => setTurnstileToken(token)}
                   onExpire={() => setTurnstileToken(null)}
