@@ -78,3 +78,30 @@ src/app/
 7. **Documentación de Next.js**: La documentación instalada localmente es la fuente de la verdad. Antes de codificar, proponer soluciones o hacer revisiones de código (code review) relacionadas con Next.js, **SIEMPRE debes buscar y leer la documentación oficial relevante ubicada en `node_modules/next/dist/docs/`**.
 8. **Accesibilidad Web**: Para garantizar la accesibilidad web y cumplir con los estándares requeridos, se deben revisar y aplicar estrictamente las instrucciones descritas en el skill de accesibilidad que está ubicado en `.agents/skills/accesibilidad/SKILL.md`.
 9. **Diseño y UI**: Cuando vayas a crear o modificar componentes, estilos o cualquier aspecto visual (UI), debes revisar y apegarte estrictamente a las directrices establecidas en el archivo `DESIGN.md`.
+
+---
+
+## Cursor Cloud specific instructions
+
+### Servicios
+
+Este es un sitio web Next.js 16 estático/informacional. El único servicio necesario es el servidor de desarrollo de Next.js.
+
+- **Dev server**: `pnpm dev` → http://localhost:3000
+- No requiere base de datos, Docker, ni servicios externos para funcionar.
+- El formulario de contacto (`/contacto`) necesita variables de entorno opcionales (`BREVO_API_KEY`, `TURNSTILE_SECRET_KEY`, etc.) definidas en `.config.ts`, pero el resto del sitio funciona sin ellas.
+
+### Comandos principales
+
+| Acción | Comando |
+| ------ | ------- |
+| Instalar dependencias | `pnpm install` |
+| Lint | `pnpm lint` |
+| Build | `pnpm build` |
+| Dev server | `pnpm dev` |
+
+### Notas importantes
+
+- `pnpm install` muestra advertencias sobre build scripts ignorados de `sharp` y `unrs-resolver`. Esto no afecta el funcionamiento; son dependencias opcionales de Next.js para optimización de imágenes.
+- El proyecto usa Tailwind CSS v4 (sin archivo `tailwind.config.js`); la configuración está en `postcss.config.mjs` y los tokens de diseño en `src/app/globals.css` con `@theme`.
+- Las variables de entorno no tienen archivo `.env` en el repo. Para probar el formulario de contacto, crear un `.env.local` con las claves de Brevo y Turnstile.
