@@ -89,16 +89,26 @@ export function Footer() {
                 <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                   Correo general
                 </dt>
-                <dd className="mt-1 text-[0.88rem] leading-[1.50] text-white/90">
-                  INFO@JRCI.COM.CO
+                <dd className="mt-1 text-[0.88rem] leading-[1.50]">
+                  <a
+                    href="mailto:info@jrci.com.co"
+                    className="text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:ring-primary-200/50 focus-visible:outline-none"
+                  >
+                    info@jrci.com.co
+                  </a>
                 </dd>
               </div>
               <div>
                 <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                   Correo exclusivo para trámites
                 </dt>
-                <dd className="mt-1 text-[0.88rem] leading-[1.50] text-white/90">
-                  tramitesrecursos@jrci.com.co
+                <dd className="mt-1 text-[0.88rem] leading-[1.50]">
+                  <a
+                    href="mailto:tramitesrecursos@jrci.com.co"
+                    className="text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:ring-primary-200/50 focus-visible:outline-none"
+                  >
+                    tramitesrecursos@jrci.com.co
+                  </a>
                 </dd>
               </div>
             </dl>
@@ -187,24 +197,39 @@ export function Footer() {
                   <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                     Teléfono
                   </dt>
-                  <dd className="mt-0.5 text-[0.88rem] leading-[1.50] text-white/90">
-                    6302250 ext. 6831
+                  <dd className="mt-0.5 text-[0.88rem] leading-[1.50]">
+                    <a
+                      href="tel:+576302250"
+                      className="text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:ring-primary-200/50 focus-visible:outline-none"
+                    >
+                      6302250 ext. 6831
+                    </a>
                   </dd>
                 </div>
                 <div>
                   <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                     Línea nacional
                   </dt>
-                  <dd className="mt-0.5 text-[0.88rem] leading-[1.50] text-white/90">
-                    0180000112318
+                  <dd className="mt-0.5 text-[0.88rem] leading-[1.50]">
+                    <a
+                      href="tel:0180000112318"
+                      className="text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:ring-primary-200/50 focus-visible:outline-none"
+                    >
+                      0180000112318
+                    </a>
                   </dd>
                 </div>
                 <div>
                   <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                     Correo electrónico
                   </dt>
-                  <dd className="mt-0.5 text-[0.88rem] leading-[1.50] text-white/90">
-                    dtsantander@mintrabajo.gov.co
+                  <dd className="mt-0.5 text-[0.88rem] leading-[1.50]">
+                    <a
+                      href="mailto:dtsantander@mintrabajo.gov.co"
+                      className="text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:ring-primary-200/50 focus-visible:outline-none"
+                    >
+                      dtsantander@mintrabajo.gov.co
+                    </a>
                   </dd>
                 </div>
                 <div>
@@ -218,14 +243,7 @@ export function Footer() {
               </dl>
               <p className="pt-2 text-[0.88rem] leading-[1.50] text-white/90">
                 O en nuestro buzón de sugerencias ubicado en la entidad o en
-                esta página web en la pestaña{" "}
-                <a
-                  href="/atencion-al-usuario"
-                  className="text-primary-200 underline underline-offset-2 transition-colors hover:text-white"
-                >
-                  Atención al usuario
-                </a>
-                .
+                esta página web en la pestaña Atención al usuario.
               </p>
             </div>
           </div>
