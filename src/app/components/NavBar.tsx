@@ -98,17 +98,11 @@ function NavBar() {
           <Image
             src="/imagenes/logo.webp"
             alt="Logo Junta Regional"
-            width={40}
-            height={40}
-            className="navbar-logo-icon object-contain"
+            width={180}
+            height={60}
+            className="object-contain"
             priority
           />
-          <div className="navbar-brand-text">
-            <span className="navbar-brand-name">Junta Regional</span>
-            <span className="navbar-brand-subtitle">
-              Calificación de Invalidez de Santander
-            </span>
-          </div>
         </Link>
 
         {/* Desktop Navigation Links */}
