@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className="flex min-h-screen flex-col font-sans">
         <a
           href="#contenido-principal"
-          className="sr-only absolute top-2 left-2 z-50 rounded-md bg-primary-400 px-4 py-2 text-white focus:not-sr-only focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-white"
+          className="bg-primary-400 sr-only absolute top-2 left-2 z-50 rounded-md px-4 py-2 text-white focus:not-sr-only focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-white"
         >
           Saltar al contenido principal
         </a>

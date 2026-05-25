@@ -79,14 +79,14 @@ export function Footer() {
           {/* Columna 1: Correos */}
           <div>
             <div className="mb-5 flex items-center gap-2">
-              <IconoCorreo className="h-5 w-5 text-primary-200" />
-              <h3 className="text-[1.00rem] font-semibold leading-[1.50]">
+              <IconoCorreo className="text-primary-200 h-5 w-5" />
+              <h3 className="text-[1.00rem] leading-[1.50] font-semibold">
                 Correos electrónicos
               </h3>
             </div>
             <dl className="space-y-4">
               <div>
-                <dt className="text-[0.81rem] font-medium leading-[1.38] text-white/60">
+                <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                   Correo general
                 </dt>
                 <dd className="mt-1 text-[0.88rem] leading-[1.50] text-white/90">
@@ -94,7 +94,7 @@ export function Footer() {
                 </dd>
               </div>
               <div>
-                <dt className="text-[0.81rem] font-medium leading-[1.38] text-white/60">
+                <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                   Correo exclusivo para trámites
                 </dt>
                 <dd className="mt-1 text-[0.88rem] leading-[1.50] text-white/90">
@@ -107,14 +107,14 @@ export function Footer() {
           {/* Columna 2: Horarios */}
           <div>
             <div className="mb-5 flex items-center gap-2">
-              <IconoReloj className="h-5 w-5 text-primary-200" />
-              <h3 className="text-[1.00rem] font-semibold leading-[1.50]">
+              <IconoReloj className="text-primary-200 h-5 w-5" />
+              <h3 className="text-[1.00rem] leading-[1.50] font-semibold">
                 Horarios de atención
               </h3>
             </div>
             <dl className="space-y-4">
               <div>
-                <dt className="text-[0.81rem] font-medium leading-[1.38] text-white/60">
+                <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                   Lunes a viernes
                 </dt>
                 <dd className="mt-1 text-[0.88rem] leading-[1.50] text-white/90">
@@ -122,7 +122,7 @@ export function Footer() {
                 </dd>
               </div>
               <div>
-                <dt className="text-[0.81rem] font-medium leading-[1.38] text-white/60">
+                <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                   Sábados
                 </dt>
                 <dd className="mt-1 text-[0.88rem] leading-[1.50] text-white/90">
@@ -135,14 +135,14 @@ export function Footer() {
           {/* Columna 3: Dirección y audiencias */}
           <div>
             <div className="mb-5 flex items-center gap-2">
-              <IconoUbicacion className="h-5 w-5 text-primary-200" />
-              <h3 className="text-[1.00rem] font-semibold leading-[1.50]">
+              <IconoUbicacion className="text-primary-200 h-5 w-5" />
+              <h3 className="text-[1.00rem] leading-[1.50] font-semibold">
                 Dirección y audiencias
               </h3>
             </div>
             <dl className="space-y-4">
               <div>
-                <dt className="text-[0.81rem] font-medium leading-[1.38] text-white/60">
+                <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                   Dirección
                 </dt>
                 <dd className="mt-1 text-[0.88rem] leading-[1.50] text-white/90">
@@ -150,7 +150,7 @@ export function Footer() {
                 </dd>
               </div>
               <div>
-                <dt className="text-[0.81rem] font-medium leading-[1.38] text-white/60">
+                <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                   Horario de audiencias privadas
                 </dt>
                 <dd className="mt-1 text-[0.88rem] leading-[1.50] text-white/90">
@@ -163,8 +163,8 @@ export function Footer() {
           {/* Columna 4: Quejas y sugerencias */}
           <div>
             <div className="mb-5 flex items-center gap-2">
-              <IconoTelefono className="h-5 w-5 text-primary-200" />
-              <h3 className="text-[1.00rem] font-semibold leading-[1.50]">
+              <IconoTelefono className="text-primary-200 h-5 w-5" />
+              <h3 className="text-[1.00rem] leading-[1.50] font-semibold">
                 Quejas y sugerencias
               </h3>
             </div>
@@ -176,7 +176,7 @@ export function Footer() {
               </p>
               <dl className="space-y-3">
                 <div>
-                  <dt className="text-[0.81rem] font-medium leading-[1.38] text-white/60">
+                  <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                     Dirección
                   </dt>
                   <dd className="mt-0.5 text-[0.88rem] leading-[1.50] text-white/90">
@@ -184,7 +184,7 @@ export function Footer() {
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[0.81rem] font-medium leading-[1.38] text-white/60">
+                  <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                     Teléfono
                   </dt>
                   <dd className="mt-0.5 text-[0.88rem] leading-[1.50] text-white/90">
@@ -192,7 +192,7 @@ export function Footer() {
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[0.81rem] font-medium leading-[1.38] text-white/60">
+                  <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                     Línea nacional
                   </dt>
                   <dd className="mt-0.5 text-[0.88rem] leading-[1.50] text-white/90">
@@ -200,7 +200,7 @@ export function Footer() {
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[0.81rem] font-medium leading-[1.38] text-white/60">
+                  <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                     Correo electrónico
                   </dt>
                   <dd className="mt-0.5 text-[0.88rem] leading-[1.50] text-white/90">
@@ -208,7 +208,7 @@ export function Footer() {
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[0.81rem] font-medium leading-[1.38] text-white/60">
+                  <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                     Horario de atención
                   </dt>
                   <dd className="mt-0.5 text-[0.88rem] leading-[1.50] text-white/90">
@@ -217,8 +217,8 @@ export function Footer() {
                 </div>
               </dl>
               <p className="pt-2 text-[0.88rem] leading-[1.50] text-white/90">
-                O en nuestro buzón de sugerencias ubicado en la entidad o en esta
-                página web en la pestaña{" "}
+                O en nuestro buzón de sugerencias ubicado en la entidad o en
+                esta página web en la pestaña{" "}
                 <a
                   href="/atencion-al-usuario"
                   className="text-primary-200 underline underline-offset-2 transition-colors hover:text-white"
