@@ -28,8 +28,7 @@ function IconoEstrategia(props: React.SVGProps<SVGSVGElement>) {
 const pilares = [
   {
     numero: "01",
-    texto:
-      "Cumplimiento de la normatividad legal aplicable a la entidad",
+    texto: "Cumplimiento de la normatividad legal aplicable a la entidad",
   },
   {
     numero: "02",
@@ -48,15 +47,15 @@ export function PerspectivaEstrategica() {
     <section className="bg-surface-secondary py-16 md:py-24">
       <div className="mx-auto max-w-[1200px] px-4 md:px-6">
         <div className="mb-12 flex flex-col items-center text-center">
-          <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-primary-50 text-primary-400">
+          <div className="bg-primary-50 text-primary-400 mb-5 flex h-12 w-12 items-center justify-center rounded-full">
             <IconoEstrategia className="h-6 w-6" />
           </div>
 
-          <h2 className="mb-4 text-[1.50rem] font-bold leading-[1.33] tracking-[-0.3px] text-text-primary">
+          <h2 className="text-text-primary mb-4 text-[1.50rem] leading-[1.33] font-bold tracking-[-0.3px]">
             Perspectiva Estratégica
           </h2>
 
-          <p className="max-w-[720px] text-[1.00rem] leading-[1.625] font-normal text-text-secondary">
+          <p className="text-text-secondary max-w-[720px] text-[1.00rem] leading-[1.625] font-normal">
             En el Periodo 2023-2030 La Junta Regional de Calificación de
             Invalidez de Santander establece su perspectiva estratégica en el
             cumplimiento de 3 pilares fundamentales:
@@ -67,12 +66,12 @@ export function PerspectivaEstrategica() {
           {pilares.map((pilar) => (
             <div
               key={pilar.numero}
-              className="flex flex-col items-start rounded-[12px] bg-surface p-8 shadow-card transition-shadow duration-200 hover:shadow-[rgba(0,0,0,0.1)_0px_4px_16px]"
+              className="bg-surface shadow-card flex flex-col items-start rounded-[12px] p-8 transition-shadow duration-200 hover:shadow-[rgba(0,0,0,0.1)_0px_4px_16px]"
             >
-              <span className="mb-4 text-[2.00rem] font-bold leading-none text-primary-400">
+              <span className="text-primary-400 mb-4 text-[2.00rem] leading-none font-bold">
                 {pilar.numero}
               </span>
-              <p className="text-[1.00rem] leading-[1.625] font-normal text-text-secondary">
+              <p className="text-text-secondary text-[1.00rem] leading-[1.625] font-normal">
                 {pilar.texto}
               </p>
             </div>
