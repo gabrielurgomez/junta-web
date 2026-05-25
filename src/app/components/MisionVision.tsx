@@ -3,6 +3,7 @@ import React from "react";
 function IconoMision(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
+      aria-hidden="true"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -20,6 +21,7 @@ function IconoMision(props: React.SVGProps<SVGSVGElement>) {
 function IconoVision(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
+      aria-hidden="true"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -48,7 +50,7 @@ export function MisionVision() {
       <div className="mx-auto max-w-[1200px] px-4 md:px-6">
         <div className="grid gap-8 md:grid-cols-2">
           {/* Card Misión */}
-          <div className="flex flex-col items-start rounded-[12px] bg-surface p-8 shadow-card transition-shadow duration-200 hover:shadow-[rgba(0,0,0,0.1)_0px_4px_16px]">
+          <article className="flex flex-col items-start rounded-[12px] bg-surface p-8 shadow-card transition-shadow duration-200 hover:shadow-[rgba(0,0,0,0.1)_0px_4px_16px]">
             <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-primary-50 text-primary-400">
               <IconoMision className="h-6 w-6" />
             </div>
@@ -58,10 +60,10 @@ export function MisionVision() {
             <p className="text-[0.88rem] leading-[1.50] font-normal text-text-secondary">
               La Junta Regional de Calificación de Invalidez de Santander es una entidad que garantiza su imparcialidad, objetividad y transparencia en la emisión de los dictámenes técnico-científicos frente a las inconformidades y controversias del Sistema General de Seguridad Social Integral, y las solicitudes de peritazgo en donde se define el origen, la pérdida de capacidad laboral u ocupacional y la fecha de estructuración respecto de las solicitudes presentadas por las entidades de Seguridad Social ( ARL, AFP, EPS), trabajadores, empleadores así como por las entidades que requieren Peritazgo.
             </p>
-          </div>
+          </article>
 
           {/* Card Visión */}
-          <div className="flex flex-col items-start rounded-[12px] bg-surface p-8 shadow-card transition-shadow duration-200 hover:shadow-[rgba(0,0,0,0.1)_0px_4px_16px]">
+          <article className="flex flex-col items-start rounded-[12px] bg-surface p-8 shadow-card transition-shadow duration-200 hover:shadow-[rgba(0,0,0,0.1)_0px_4px_16px]">
             <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-primary-50 text-primary-400">
               <IconoVision className="h-6 w-6" />
             </div>
@@ -71,7 +73,7 @@ export function MisionVision() {
             <p className="text-[0.88rem] leading-[1.50] font-normal text-text-secondary">
               La Junta Regional de Calificación de Invalidez de Santander busca para el año 2030 ser reconocida como una entidad imparcial y confiable, que realiza los procesos con eficiencia, eficacia y con la más alta calidad, contando con profesionales idóneos, encargados de la emisión de dictámenes técnico-científicos bajo los parámetros establecidos en la reglamentación vigente y bajo los lineamientos del Sistema de Gestión de Calidad.
             </p>
-          </div>
+          </article>
         </div>
       </div>
     </section>

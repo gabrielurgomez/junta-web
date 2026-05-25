@@ -3,6 +3,7 @@ import React from "react";
 function IconoCorreo(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
+      aria-hidden="true"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -20,6 +21,7 @@ function IconoCorreo(props: React.SVGProps<SVGSVGElement>) {
 function IconoReloj(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
+      aria-hidden="true"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -37,6 +39,7 @@ function IconoReloj(props: React.SVGProps<SVGSVGElement>) {
 function IconoUbicacion(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
+      aria-hidden="true"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -54,6 +57,7 @@ function IconoUbicacion(props: React.SVGProps<SVGSVGElement>) {
 function IconoTelefono(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
+      aria-hidden="true"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

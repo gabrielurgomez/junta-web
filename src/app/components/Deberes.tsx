@@ -3,6 +3,7 @@ import React from "react";
 function IconoDeberes(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
+      aria-hidden="true"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
