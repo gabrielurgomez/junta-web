@@ -33,13 +33,23 @@ function enriquecerDocumentosConTamano(
   documentos: DocumentoNormativoBase[],
 ): DocumentoNormativo[] {
   return documentos.map((documento) => {
-    const rutaArchivo = join(process.cwd(), "public", documento.archivo);
-    const tamanoEnBytes = statSync(rutaArchivo).size;
+    const archivoRelativo = documento.archivo.replace(/^\/+/, "");
+    const rutaArchivo = join(process.cwd(), "public", archivoRelativo);
 
-    return {
-      ...documento,
-      tamano: formatearTamanoDocumento(tamanoEnBytes),
-    };
+    try {
+      const tamanoEnBytes = statSync(rutaArchivo).size;
+
+      return {
+        ...documento,
+        tamano: formatearTamanoDocumento(tamanoEnBytes),
+      };
+    } catch {
+      return {
+        ...documento,
+        tamano: "tamaño no disponible",
+      };
+    }
+
   });
 }
 
@@ -213,8 +223,8 @@ function IconoNuevaVentana(props: SVGProps<SVGSVGElement>) {
     aviso de que se abre en nueva ventana (texto sr-only).
   - El pseudo-elemento `::after` extiende el área activable a toda la tarjeta
     (objetivo ≥ 24×24 px) sin meter la descripción dentro del nombre del enlace.
-  - El foco se quita del enlace y se traslada a la tarjeta con `has-[a:focus-visible]`
-    como indicador alternativo visible (anillo de 2px, contraste ≥ 3:1).
+  - La tarjeta refuerza el foco con `has-[a:focus-visible]`, pero el propio enlace
+    conserva un indicador visible como fallback si esa variante CSS no estuviera disponible.
 */
 function DocumentoCard({ doc }: { doc: DocumentoNormativo }) {
   return (
@@ -233,7 +243,7 @@ function DocumentoCard({ doc }: { doc: DocumentoNormativo }) {
               href={doc.archivo}
               target="_blank"
               rel="noopener noreferrer"
-              className="after:absolute after:inset-0 hover:text-primary-700 focus-visible:outline-none"
+              className="after:absolute after:inset-0 hover:text-primary-700 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-400"
             >
               {doc.titulo}
               <span className="sr-only">
