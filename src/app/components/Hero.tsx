@@ -51,10 +51,7 @@ export const Hero = ({
           alt={altImagen}
           fill
           priority={prioridadImagen}
-          className={[
-            "object-cover object-center",
-            imageClassName,
-          ]
+          className={["object-cover object-center", imageClassName]
             .filter(Boolean)
             .join(" ")}
           sizes="100vw"

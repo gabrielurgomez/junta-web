@@ -82,9 +82,9 @@ export function Organigrama() {
           </h2>
           <p className="text-text-secondary mt-4 max-w-[720px] text-[1.00rem] leading-[1.625] font-normal">
             Estructura organizacional de la Junta Regional de Calificación de
-            Invalidez de Santander. Los Integrantes conforman la sala de decisión
-            y actúan con independencia, junto al equipo de apoyo administrativo
-            que garantiza la operación.
+            Invalidez de Santander. Los Integrantes conforman la sala de
+            decisión y actúan con independencia, junto al equipo de apoyo
+            administrativo que garantiza la operación.
           </p>
         </div>
 
