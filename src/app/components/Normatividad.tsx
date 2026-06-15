@@ -49,7 +49,6 @@ function enriquecerDocumentosConTamano(
         tamano: "tamaño no disponible",
       };
     }
-
   });
 }
 
@@ -63,7 +62,8 @@ const POLITICAS: DocumentoNormativo[] = enriquecerDocumentosConTamano([
     archivo: "/documentos/normatividad/politica-prevencion-acoso-laboral.pdf",
   },
   {
-    titulo: "Política de Prevención del Consumo de Alcohol, Vapeadores y Drogas",
+    titulo:
+      "Política de Prevención del Consumo de Alcohol, Vapeadores y Drogas",
     archivo:
       "/documentos/normatividad/politica-prevencion-consumo-alcohol-drogas.pdf",
   },
@@ -130,7 +130,8 @@ const NORMAS: DocumentoNormativo[] = enriquecerDocumentosConTamano([
   },
   {
     titulo: "Decreto 2566 de 2009",
-    descripcion: "Por el cual se adopta la tabla de enfermedades profesionales.",
+    descripcion:
+      "Por el cual se adopta la tabla de enfermedades profesionales.",
     archivo: "/documentos/normatividad/decreto-2566-2009.pdf",
   },
   {
@@ -229,7 +230,7 @@ function IconoNuevaVentana(props: SVGProps<SVGSVGElement>) {
 function DocumentoCard({ doc }: { doc: DocumentoNormativo }) {
   return (
     <li>
-      <article className="bg-surface border-border shadow-card relative flex h-full items-start gap-4 rounded-xl border p-5 transition-shadow duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.1)] has-[a:focus-visible]:shadow-[0_4px_16px_rgba(0,0,0,0.1)] has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-primary-400">
+      <article className="bg-surface border-border shadow-card has-[a:focus-visible]:outline-primary-400 relative flex h-full items-start gap-4 rounded-xl border p-5 transition-shadow duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.1)] has-[a:focus-visible]:shadow-[0_4px_16px_rgba(0,0,0,0.1)] has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2">
         <span
           aria-hidden="true"
           className="bg-primary-50 text-primary-600 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-lg"
@@ -243,7 +244,7 @@ function DocumentoCard({ doc }: { doc: DocumentoNormativo }) {
               href={doc.archivo}
               target="_blank"
               rel="noopener noreferrer"
-              className="after:absolute after:inset-0 hover:text-primary-700 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-400"
+              className="hover:text-primary-700 focus-visible:outline-primary-400 after:absolute after:inset-0 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4"
             >
               {doc.titulo}
               <span className="sr-only">
@@ -283,8 +284,9 @@ export function Normatividad() {
       <section className="mx-auto w-full max-w-300 px-4 pt-12 md:px-8 md:pt-16">
         <p className="text-text-secondary max-w-[65ch] text-base leading-relaxed">
           Consulta y descarga las políticas institucionales y el marco normativo
-          que rige la actuación de la Junta Regional de Calificación de Invalidez
-          de Santander. Todos los documentos están disponibles en formato PDF.
+          que rige la actuación de la Junta Regional de Calificación de
+          Invalidez de Santander. Todos los documentos están disponibles en
+          formato PDF.
         </p>
 
         {/* WCAG 2.2 — 2.4.1 Bypass Blocks (A): índice para saltar a cada grupo. */}
