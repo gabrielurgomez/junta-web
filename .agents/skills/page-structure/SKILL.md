@@ -26,13 +26,13 @@ Se usa cuando la página solo muestra contenido: texto, imágenes, tarjetas info
 
 ```tsx
 // src/app/(paths)/entidad/page.tsx
-import { Hero2 } from "@/app/components/Hero2";
+import { Hero } from "@/app/components/Hero";
 import { Card } from "@/app/components/Card";
 
 export default function EntidadPage() {
   return (
     <>
-      <Hero2
+      <Hero
         title="Conoce la entidad"
         subtitle="Somos un organismo del Sistema de Seguridad Social Integral."
         imageSrc="/doc-sergio.webp"

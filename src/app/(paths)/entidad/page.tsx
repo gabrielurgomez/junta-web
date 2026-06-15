@@ -1,15 +1,16 @@
-import { Hero2 } from "@/app/components/Hero2";
+import { Hero } from "@/app/components/Hero";
 import { Card } from "@/app/components/Card";
 import { Equipo } from "@/app/components/Equipo";
 
 export default function EntidadPage() {
   return (
     <>
-      <Hero2
+      <Hero
         title="Conoce la entidad"
         subtitle="Junta Regional de Calificación de Invalidez de Santander. Somos un organismo del Sistema de Seguridad Social Integral."
         imageSrc="/imagenes/docsergio_medicos_psicologa.webp"
         imageAlt="Recepción de la Junta Regional de Calificación de Invalidez de Santander"
+        imageClassName="object-bottom"
         badgeText="Sobre Nosotros"
         priority={true}
       />
