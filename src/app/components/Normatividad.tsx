@@ -1,3 +1,5 @@
+import { statSync } from "node:fs";
+import { join } from "node:path";
 import type { SVGProps } from "react";
 
 /* ============================================================
@@ -5,17 +7,43 @@ import type { SVGProps } from "react";
    Cada documento es un PDF que se abre en una nueva pestaña.
    ============================================================ */
 
-interface DocumentoNormativo {
+interface DocumentoNormativoBase {
   titulo: string;
   /** Epígrafe oficial de la norma (opcional en políticas). */
   descripcion?: string;
   /** Ruta del PDF en /public. */
   archivo: string;
-  /** Tamaño legible del archivo, p. ej. "586 KB" o "1,9 MB". */
+}
+
+interface DocumentoNormativo extends DocumentoNormativoBase {
+  /** Tamaño legible calculado desde el archivo real en /public. */
   tamano: string;
 }
 
-const POLITICAS: DocumentoNormativo[] = [
+function formatearTamanoDocumento(bytes: number) {
+  if (bytes < 1024 * 1024) {
+    return `${Math.round(bytes / 1024)} KB`;
+  }
+
+  const megabytes = bytes / (1024 * 1024);
+  return `${megabytes.toFixed(1).replace(".", ",")} MB`;
+}
+
+function enriquecerDocumentosConTamano(
+  documentos: DocumentoNormativoBase[],
+): DocumentoNormativo[] {
+  return documentos.map((documento) => {
+    const rutaArchivo = join(process.cwd(), "public", documento.archivo);
+    const tamanoEnBytes = statSync(rutaArchivo).size;
+
+    return {
+      ...documento,
+      tamano: formatearTamanoDocumento(tamanoEnBytes),
+    };
+  });
+}
+
+const POLITICAS: DocumentoNormativo[] = enriquecerDocumentosConTamano([
   {
     titulo: "Política de Seguridad y Salud en el Trabajo",
     archivo: "/documentos/normatividad/politica-seguridad-salud-trabajo.pdf",
@@ -52,9 +80,9 @@ const POLITICAS: DocumentoNormativo[] = [
     archivo: "/documentos/normatividad/politica-proteccion-datos.pdf",
     tamano: "290 KB",
   },
-];
+]);
 
-const NORMAS: DocumentoNormativo[] = [
+const NORMAS: DocumentoNormativo[] = enriquecerDocumentosConTamano([
   {
     titulo: "Ley 100 de 1993",
     descripcion:
@@ -158,7 +186,7 @@ const NORMAS: DocumentoNormativo[] = [
     archivo: "/documentos/normatividad/decreto-1072-2015.pdf",
     tamano: "3,0 MB",
   },
-];
+]);
 
 /* Ícono de documento PDF (decorativo). */
 function IconoDocumento(props: SVGProps<SVGSVGElement>) {
@@ -213,7 +241,7 @@ function IconoNuevaVentana(props: SVGProps<SVGSVGElement>) {
 function DocumentoCard({ doc }: { doc: DocumentoNormativo }) {
   return (
     <li>
-      <article className="bg-surface border-border relative flex h-full items-start gap-4 rounded-xl border p-5 shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_8px_rgba(0,0,0,0.05),0_4px_12px_rgba(0,0,0,0.08)] transition-shadow hover:shadow-[0_4px_16px_rgba(0,0,0,0.1)] has-[a:focus-visible]:shadow-[0_4px_16px_rgba(0,0,0,0.1)] has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-primary-400">
+      <article className="bg-surface border-border shadow-card relative flex h-full items-start gap-4 rounded-xl border p-5 transition-shadow duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.1)] has-[a:focus-visible]:shadow-[0_4px_16px_rgba(0,0,0,0.1)] has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-primary-400">
         <span
           aria-hidden="true"
           className="bg-primary-50 text-primary-600 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-lg"
@@ -222,7 +250,7 @@ function DocumentoCard({ doc }: { doc: DocumentoNormativo }) {
         </span>
 
         <div className="min-w-0 flex-1">
-          <h3 className="text-text-primary text-base leading-snug font-semibold">
+          <h3 className="text-text-primary text-xl leading-[1.3] font-semibold tracking-[-0.2px]">
             <a
               href={doc.archivo}
               target="_blank"
@@ -249,7 +277,7 @@ function DocumentoCard({ doc }: { doc: DocumentoNormativo }) {
             aria-hidden="true"
             className="text-text-secondary mt-3 flex items-center gap-2 text-xs font-medium"
           >
-            <span className="bg-primary-50 text-primary-700 rounded px-1.5 py-0.5 text-[11px] font-semibold tracking-wide">
+            <span className="bg-primary-50 text-primary-700 rounded px-1.5 py-0.5 text-[0.69rem] font-semibold tracking-wide">
               PDF
             </span>
             {doc.tamano}
