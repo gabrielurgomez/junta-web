@@ -39,8 +39,8 @@ function NodeCard({ variant, children, className = "" }: NodeCardProps) {
 function lineas(partes: string[]) {
   return (
     <span className="flex flex-col items-center">
-      {partes.map((parte, i) => (
-        <span key={i}>{parte}</span>
+      {partes.map((parte) => (
+        <span key={parte}>{parte}</span>
       ))}
     </span>
   );
@@ -63,7 +63,7 @@ const auxiliares: string[][] = [
   ["Auxiliar", "Médico", "(1) y (2)"],
   ["Auxiliar", "Psicóloga"],
   ["Auxiliar", "Servicios", "Generales"],
-  ["Super", "numeraria"],
+  ["Supernumeraria"],
 ];
 
 const integrantes = ["Médico (1)", "Médico (2)", "Psicóloga"];
@@ -105,7 +105,7 @@ export function Organigrama() {
                 listas anidadas y los conectores van con aria-hidden. */}
             <figcaption className="sr-only">
               Organigrama de la Junta Regional de Calificación de Invalidez de
-              Santander. La Dirección Administrativa y Financiera encabeza el
+              Santander. El Director Administrativo y Financiero encabeza el
               equipo de apoyo —Revisor Fiscal, Coordinadora de RRHH y SGI,
               Asesora Jurídica y Contadora— y los auxiliares. Los Integrantes
               conforman la sala de decisión: Médico (1), Médico (2) y Psicóloga.
