@@ -47,38 +47,31 @@ const POLITICAS: DocumentoNormativo[] = enriquecerDocumentosConTamano([
   {
     titulo: "Política de Seguridad y Salud en el Trabajo",
     archivo: "/documentos/normatividad/politica-seguridad-salud-trabajo.pdf",
-    tamano: "290 KB",
   },
   {
     titulo: "Política de Prevención del Acoso Laboral",
     archivo: "/documentos/normatividad/politica-prevencion-acoso-laboral.pdf",
-    tamano: "316 KB",
   },
   {
     titulo: "Política de Prevención del Consumo de Alcohol, Vapeadores y Drogas",
     archivo:
       "/documentos/normatividad/politica-prevencion-consumo-alcohol-drogas.pdf",
-    tamano: "344 KB",
   },
   {
     titulo: "Política de Desconexión Laboral",
     archivo: "/documentos/normatividad/politica-desconexion-laboral.pdf",
-    tamano: "752 KB",
   },
   {
     titulo: "Política de Prevención del Acoso Sexual",
     archivo: "/documentos/normatividad/politica-acoso-sexual.pdf",
-    tamano: "977 KB",
   },
   {
     titulo: "Política de Gestión de Calidad",
     archivo: "/documentos/normatividad/politica-gestion-calidad.pdf",
-    tamano: "274 KB",
   },
   {
     titulo: "Política de Protección de Datos",
     archivo: "/documentos/normatividad/politica-proteccion-datos.pdf",
-    tamano: "290 KB",
   },
 ]);
 
@@ -88,7 +81,6 @@ const NORMAS: DocumentoNormativo[] = enriquecerDocumentosConTamano([
     descripcion:
       "Por la cual se crea el sistema de seguridad social integral y se dictan otras disposiciones.",
     archivo: "/documentos/normatividad/ley-100-1993.pdf",
-    tamano: "586 KB",
   },
   {
     titulo:
@@ -96,95 +88,81 @@ const NORMAS: DocumentoNormativo[] = enriquecerDocumentosConTamano([
     descripcion:
       "Reglamento de funcionamiento de la Junta Regional de Calificación de Invalidez de Santander, año 2025.",
     archivo: "/documentos/normatividad/reglamento-interno-jrcis-2025.pdf",
-    tamano: "15,9 MB",
   },
   {
     titulo: "Decreto 1040 de 2022",
     descripcion:
       "Valor de los honorarios para las víctimas del conflicto armado.",
     archivo: "/documentos/normatividad/decreto-1040-2022.pdf",
-    tamano: "74 KB",
   },
   {
     titulo: "Ley 1562 de 2012",
     descripcion:
       "Por la cual se modifica el sistema de riesgos laborales y se dictan otras disposiciones en materia de salud ocupacional.",
     archivo: "/documentos/normatividad/ley-1562-2012.pdf",
-    tamano: "1,9 MB",
   },
   {
     titulo: "Resolución 0312 de 2019",
     descripcion:
       "Por la cual se definen los estándares mínimos del Sistema de Gestión de Seguridad y Salud en el Trabajo.",
     archivo: "/documentos/normatividad/resolucion-0312-2019.pdf",
-    tamano: "2,7 MB",
   },
   {
     titulo: "Decreto 1295 de 1994",
     descripcion:
       "Por el cual se determina la organización y administración del Sistema General de Riesgos Profesionales.",
     archivo: "/documentos/normatividad/decreto-1295-1994.pdf",
-    tamano: "453 KB",
   },
   {
     titulo: "Decreto 917 de 1999",
     descripcion: "Por el cual se modifica el Decreto 692 de 1995.",
     archivo: "/documentos/normatividad/decreto-917-1999.pdf",
-    tamano: "652 KB",
   },
   {
     titulo: "Decreto 2566 de 2009",
     descripcion: "Por el cual se adopta la tabla de enfermedades profesionales.",
     archivo: "/documentos/normatividad/decreto-2566-2009.pdf",
-    tamano: "220 KB",
   },
   {
     titulo: "Decreto 019 de 2012",
     descripcion:
       "Por el cual se dictan normas para suprimir o reformar regulaciones, procedimientos y trámites innecesarios existentes en la administración pública.",
     archivo: "/documentos/normatividad/decreto-019-2012.pdf",
-    tamano: "6,5 MB",
   },
   {
     titulo: "Decreto 1352 de 2013",
     descripcion:
       "Por el cual se reglamenta la organización y funcionamiento de las juntas de calificación de invalidez y se dictan otras disposiciones.",
     archivo: "/documentos/normatividad/decreto-1352-2013.pdf",
-    tamano: "3,0 MB",
   },
   {
     titulo: "Decreto 1507 de 2014",
     descripcion:
       "Por el cual se expide el manual único para la calificación de la pérdida de la capacidad laboral y ocupacional.",
     archivo: "/documentos/normatividad/decreto-1507-2014.pdf",
-    tamano: "4,3 MB",
   },
   {
     titulo: "Decreto 1477 de 2014",
     descripcion: "Por el cual se expide la tabla de enfermedades laborales.",
     archivo: "/documentos/normatividad/decreto-1477-2014.pdf",
-    tamano: "6,2 MB",
   },
   {
     titulo: "Resolución 2050 de 2022",
     descripcion:
       "Por la cual se establece el Manual de Funcionamiento de las Juntas de Calificación.",
     archivo: "/documentos/normatividad/resolucion-2050-2022.pdf",
-    tamano: "17,9 MB",
   },
   {
     titulo: "Resolución 2051 de 2022",
     descripcion:
       "Por la cual se establecen los estándares mínimos del Sistema Obligatorio de Garantía de la Calidad del Sistema General de Riesgos Laborales para las Juntas de Calificación.",
     archivo: "/documentos/normatividad/resolucion-2051-2022.pdf",
-    tamano: "6,4 MB",
   },
   {
     titulo: "Decreto 1072 de 2015",
     descripcion:
       "Por el cual se expide el Decreto Único Reglamentario del Sector Trabajo.",
     archivo: "/documentos/normatividad/decreto-1072-2015.pdf",
-    tamano: "3,0 MB",
   },
 ]);
 
