@@ -92,7 +92,7 @@ export function Footer() {
                 <dd className="mt-1 text-[0.88rem] leading-[1.50]">
                   <a
                     href="mailto:info@jrci.com.co"
-                    className="text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:ring-primary-200/50 focus-visible:outline-none"
+                    className="focus-visible:ring-primary-200/50 text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:outline-none"
                   >
                     info@jrci.com.co
                   </a>
@@ -105,7 +105,7 @@ export function Footer() {
                 <dd className="mt-1 text-[0.88rem] leading-[1.50]">
                   <a
                     href="mailto:tramitesrecursos@jrci.com.co"
-                    className="text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:ring-primary-200/50 focus-visible:outline-none"
+                    className="focus-visible:ring-primary-200/50 text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:outline-none"
                   >
                     tramitesrecursos@jrci.com.co
                   </a>
@@ -200,7 +200,7 @@ export function Footer() {
                   <dd className="mt-0.5 text-[0.88rem] leading-[1.50]">
                     <a
                       href="tel:+576076302250,,6831"
-                      className="text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:ring-primary-200/50 focus-visible:outline-none"
+                      className="focus-visible:ring-primary-200/50 text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:outline-none"
                     >
                       6302250 ext. 6831
                     </a>
@@ -213,7 +213,7 @@ export function Footer() {
                   <dd className="mt-0.5 text-[0.88rem] leading-[1.50]">
                     <a
                       href="tel:0180000112318"
-                      className="text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:ring-primary-200/50 focus-visible:outline-none"
+                      className="focus-visible:ring-primary-200/50 text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:outline-none"
                     >
                       0180000112318
                     </a>
@@ -226,7 +226,7 @@ export function Footer() {
                   <dd className="mt-0.5 text-[0.88rem] leading-[1.50]">
                     <a
                       href="mailto:dtsantander@mintrabajo.gov.co"
-                      className="text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:ring-primary-200/50 focus-visible:outline-none"
+                      className="focus-visible:ring-primary-200/50 text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:outline-none"
                     >
                       dtsantander@mintrabajo.gov.co
                     </a>
