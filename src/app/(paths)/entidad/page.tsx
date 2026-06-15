@@ -2,7 +2,6 @@ import { Hero } from "@/app/components/Hero";
 import { Card } from "@/app/components/Card";
 import { Equipo } from "@/app/components/Equipo";
 import { Organigrama } from "@/app/components/Organigrama";
-import { EquipoConsultor } from "@/app/components/EquipoConsultor";
 
 export default function EntidadPage() {
   return (
@@ -32,7 +31,6 @@ export default function EntidadPage() {
       </div>
       <Equipo />
       <Organigrama />
-      <EquipoConsultor />
     </>
   );
 }
