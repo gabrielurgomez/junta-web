@@ -1,6 +1,6 @@
-import React from "react";
+import type { SVGProps } from "react";
 
-function IconoEstrategia(props: React.SVGProps<SVGSVGElement>) {
+function IconoEstrategia(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       aria-hidden="true"
@@ -69,7 +69,8 @@ export function PerspectivaEstrategica() {
               key={pilar.numero}
               className="bg-surface shadow-card flex flex-col items-start rounded-[12px] p-8 transition-shadow duration-200 hover:shadow-[rgba(0,0,0,0.1)_0px_4px_16px]"
             >
-              <span className="text-primary-400 mb-4 text-[2.00rem] leading-none font-bold">
+              <h3 className="sr-only">Pilar {pilar.numero}</h3>
+              <span className="text-primary-400 mb-4 text-[2.00rem] leading-none font-bold" aria-hidden="true">
                 {pilar.numero}
               </span>
               <p className="text-text-secondary text-[1.00rem] leading-[1.625] font-normal">

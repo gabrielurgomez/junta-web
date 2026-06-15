@@ -1,6 +1,6 @@
-import React from "react";
+import type { SVGProps } from "react";
 
-function IconoCorreo(props: React.SVGProps<SVGSVGElement>) {
+function IconoCorreo(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       aria-hidden="true"
@@ -18,7 +18,7 @@ function IconoCorreo(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-function IconoReloj(props: React.SVGProps<SVGSVGElement>) {
+function IconoReloj(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       aria-hidden="true"
@@ -36,7 +36,7 @@ function IconoReloj(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-function IconoUbicacion(props: React.SVGProps<SVGSVGElement>) {
+function IconoUbicacion(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       aria-hidden="true"
@@ -54,7 +54,7 @@ function IconoUbicacion(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-function IconoTelefono(props: React.SVGProps<SVGSVGElement>) {
+function IconoTelefono(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       aria-hidden="true"
@@ -80,9 +80,9 @@ export function Footer() {
           <div>
             <div className="mb-5 flex items-center gap-2">
               <IconoCorreo className="text-primary-200 h-5 w-5" />
-              <h3 className="text-[1.00rem] leading-[1.50] font-semibold">
+              <h2 className="text-[1.00rem] leading-[1.50] font-semibold">
                 Correos electrónicos
-              </h3>
+              </h2>
             </div>
             <dl className="space-y-4">
               <div>
@@ -118,9 +118,9 @@ export function Footer() {
           <div>
             <div className="mb-5 flex items-center gap-2">
               <IconoReloj className="text-primary-200 h-5 w-5" />
-              <h3 className="text-[1.00rem] leading-[1.50] font-semibold">
+              <h2 className="text-[1.00rem] leading-[1.50] font-semibold">
                 Horarios de atención
-              </h3>
+              </h2>
             </div>
             <dl className="space-y-4">
               <div>
@@ -146,9 +146,9 @@ export function Footer() {
           <div>
             <div className="mb-5 flex items-center gap-2">
               <IconoUbicacion className="text-primary-200 h-5 w-5" />
-              <h3 className="text-[1.00rem] leading-[1.50] font-semibold">
+              <h2 className="text-[1.00rem] leading-[1.50] font-semibold">
                 Dirección y audiencias
-              </h3>
+              </h2>
             </div>
             <dl className="space-y-4">
               <div>
@@ -174,9 +174,9 @@ export function Footer() {
           <div>
             <div className="mb-5 flex items-center gap-2">
               <IconoTelefono className="text-primary-200 h-5 w-5" />
-              <h3 className="text-[1.00rem] leading-[1.50] font-semibold">
+              <h2 className="text-[1.00rem] leading-[1.50] font-semibold">
                 Quejas y sugerencias
-              </h3>
+              </h2>
             </div>
             <div className="space-y-4">
               <p className="text-[0.88rem] leading-[1.50] text-white/90">
@@ -199,7 +199,7 @@ export function Footer() {
                   </dt>
                   <dd className="mt-0.5 text-[0.88rem] leading-[1.50]">
                     <a
-                      href="tel:+576302250"
+                      href="tel:+576076302250,,6831"
                       className="text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:ring-primary-200/50 focus-visible:outline-none"
                     >
                       6302250 ext. 6831
