@@ -3,9 +3,11 @@ import type { ReactNode } from "react";
 type NodeVariant = "direccion" | "integrante" | "revisor" | "apoyo";
 
 const variantStyles: Record<NodeVariant, string> = {
-  // Cajas de mando — azul institucional, texto blanco
+  // Cajas de mando — azul institucional, texto blanco.
+  // WCAG 1.4.3 (AA): blanco sobre primary-600 (#2366b5) ≈ 5.8:1 (≥ 4.5:1).
+  // primary-400 daba ~3.2:1, insuficiente para texto normal.
   direccion:
-    "bg-primary-400 text-white font-semibold uppercase tracking-[0.3px]",
+    "bg-primary-600 text-white font-semibold uppercase tracking-[0.3px]",
   // Integrantes (sala de decisión) — acento dorado
   integrante:
     "bg-accent-light border border-accent text-text-primary font-semibold",
@@ -24,8 +26,9 @@ interface NodeCardProps {
 
 function NodeCard({ variant, children, className = "" }: NodeCardProps) {
   return (
+    // WCAG/skill §7.2: texto secundario ≥ 14px (0.875rem).
     <div
-      className={`shadow-card flex items-center justify-center rounded-[8px] px-3 py-2.5 text-center text-[0.78rem] leading-[1.3] ${variantStyles[variant]} ${className}`}
+      className={`shadow-card flex items-center justify-center rounded-[8px] px-3 py-2.5 text-center text-[0.875rem] leading-[1.3] ${variantStyles[variant]} ${className}`}
     >
       {children}
     </div>
@@ -85,12 +88,27 @@ export function Organigrama() {
           </p>
         </div>
 
-        {/* Solo este contenedor hace scroll horizontal: la página no se ensancha */}
-        <div className="overflow-x-auto pb-4">
+        {/*
+          Solo este contenedor hace scroll horizontal: la página no se ensancha.
+          WCAG 2.1.1 (A) / 2.4.13 (AA) + skill §13: región desplazable operable
+          por teclado (role="region", aria-label, tabIndex) con foco visible.
+        */}
+        <div
+          className="focus-visible:outline-primary-400 overflow-x-auto pb-4 focus-visible:outline-2 focus-visible:outline-offset-2"
+          role="region"
+          aria-label="Organigrama de la estructura organizacional"
+          tabIndex={0}
+        >
           <figure className="m-0 mx-auto w-max">
+            {/* WCAG 1.1.1 (A): alternativa textual que describe la jerarquía
+                para lectores de pantalla; la estructura también se expone con
+                listas anidadas y los conectores van con aria-hidden. */}
             <figcaption className="sr-only">
               Organigrama de la Junta Regional de Calificación de Invalidez de
-              Santander.
+              Santander. La Dirección Administrativa y Financiera encabeza el
+              equipo de apoyo —Revisor Fiscal, Coordinadora de RRHH y SGI,
+              Asesora Jurídica y Contadora— y los auxiliares. Los Integrantes
+              conforman la sala de decisión: Médico (1), Médico (2) y Psicóloga.
             </figcaption>
 
             {/* Nivel raíz: une la Dirección con los Integrantes */}
@@ -109,7 +127,7 @@ export function Organigrama() {
                     <li>
                       <NodeCard
                         variant="revisor"
-                        className="min-h-[64px] w-[150px]"
+                        className="min-h-[72px] w-[160px]"
                       >
                         Revisor Fiscal
                       </NodeCard>
@@ -118,7 +136,7 @@ export function Organigrama() {
                       <li key={cargo}>
                         <NodeCard
                           variant="apoyo"
-                          className="min-h-[64px] w-[150px]"
+                          className="min-h-[72px] w-[160px]"
                         >
                           {cargo}
                         </NodeCard>
@@ -133,7 +151,7 @@ export function Organigrama() {
                       <li key={cargo.join("-")}>
                         <NodeCard
                           variant="apoyo"
-                          className="min-h-[92px] w-[100px] px-1 text-[0.68rem] leading-[1.3] break-words"
+                          className="min-h-[104px] w-[132px] leading-[1.3] break-words"
                         >
                           {lineas(cargo)}
                         </NodeCard>
@@ -154,7 +172,7 @@ export function Organigrama() {
                   <ul className="org-comb">
                     {integrantes.map((cargo) => (
                       <li key={cargo}>
-                        <NodeCard variant="integrante" className="w-[104px]">
+                        <NodeCard variant="integrante" className="w-[112px]">
                           {cargo}
                         </NodeCard>
                       </li>
