@@ -8,7 +8,7 @@ export default function EntidadPage() {
       <Hero2
         title="Conoce la entidad"
         subtitle="Junta Regional de Calificación de Invalidez de Santander. Somos un organismo del Sistema de Seguridad Social Integral."
-        imageSrc="/recepcion.webp"
+        imageSrc="/imagenes/docsergio_medicos_psicologa.webp"
         imageAlt="Recepción de la Junta Regional de Calificación de Invalidez de Santander"
         badgeText="Sobre Nosotros"
         priority={true}
