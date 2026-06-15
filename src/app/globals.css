@@ -460,3 +460,88 @@ body {
     animation: none !important;
   }
 }
+
+/* ============================================
+   Organigrama — Conectores del árbol
+   ============================================ */
+
+/* Tronco vertical entre niveles */
+.org-trunk {
+  width: 1px;
+  height: 28px;
+  background: var(--color-border);
+  flex-shrink: 0;
+}
+
+/* Peine: distribuye una rama hacia varios nodos hijos */
+.org-comb {
+  display: flex;
+  justify-content: center;
+  width: max-content;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.org-comb > li {
+  position: relative;
+  flex: 0 0 auto;
+  padding: 28px 6px 0;
+}
+
+/* Mitad izquierda (::before) y mitad derecha + caída vertical (::after) */
+.org-comb > li::before,
+.org-comb > li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 50%;
+  width: 50%;
+  height: 28px;
+  border-top: 1px solid var(--color-border);
+}
+
+.org-comb > li::after {
+  right: auto;
+  left: 50%;
+  border-left: 1px solid var(--color-border);
+}
+
+/* Recortar los brazos exteriores del peine */
+.org-comb > li:first-child::before,
+.org-comb > li:last-child::after {
+  border: 0;
+}
+
+.org-comb > li:last-child::before {
+  border-right: 1px solid var(--color-border);
+}
+
+/* Hijo único: solo la caída vertical, sin barra horizontal */
+.org-comb > li:only-child::before {
+  display: none;
+}
+
+.org-comb > li:only-child::after {
+  left: 50%;
+  width: 0;
+  border-top: 0;
+}
+
+/* Línea central que atraviesa un peine para dar continuidad vertical:
+   permite que la línea baje desde la Dirección y cruce el nivel de
+   asesoría hasta llegar al peine de los auxiliares. */
+.org-comb--through {
+  position: relative;
+}
+
+.org-comb--through::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--color-border);
+  transform: translateX(-50%);
+}
