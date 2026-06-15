@@ -9,7 +9,7 @@ export const Card = ({ id, title, text }: CardProps) => {
   return (
     <article
       className="bg-surface border-border flex flex-col rounded-xl border p-6 shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_8px_rgba(0,0,0,0.05),0_4px_12px_rgba(0,0,0,0.08)] transition-all hover:shadow-[0_4px_16px_rgba(0,0,0,0.1)] md:p-8"
-      aria-labelledby={`card-${id}`}
+      aria-labelledby={id}
     >
       <h2
         id={id}

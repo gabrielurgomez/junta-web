@@ -3,6 +3,7 @@ import React from "react";
 function IconoDerechos(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
+      aria-hidden="true"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -75,11 +76,11 @@ export function Derechos() {
     <section className="bg-surface py-16 md:py-24">
       <div className="mx-auto max-w-[1200px] px-4 md:px-6">
         <div className="mb-12 flex flex-col items-center text-center">
-          <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-primary-50 text-primary-400">
+          <div className="bg-primary-50 text-primary-400 mb-5 flex h-12 w-12 items-center justify-center rounded-full">
             <IconoDerechos className="h-6 w-6" />
           </div>
 
-          <h2 className="text-[1.50rem] font-bold leading-[1.33] tracking-[-0.3px] text-text-primary">
+          <h2 className="text-text-primary text-[1.50rem] leading-[1.33] font-bold tracking-[-0.3px]">
             Derechos
           </h2>
         </div>
@@ -87,12 +88,12 @@ export function Derechos() {
         <ul className="grid gap-x-8 gap-y-6 md:grid-cols-2">
           {derechos.map((item) => (
             <li key={item.titulo} className="flex gap-3">
-              <span className="mt-2.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary-400" />
+              <span className="bg-primary-400 mt-2.5 h-2 w-2 flex-shrink-0 rounded-full" />
               <div>
-                <h3 className="mb-1 text-[0.94rem] font-semibold uppercase tracking-[0.2px] text-text-primary">
+                <h3 className="text-text-primary mb-1 text-[0.94rem] font-semibold tracking-[0.2px] uppercase">
                   {item.titulo}
                 </h3>
-                <p className="text-[0.88rem] leading-[1.50] font-normal text-text-secondary">
+                <p className="text-text-secondary text-[0.88rem] leading-[1.50] font-normal">
                   {item.descripcion}
                 </p>
               </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import NavBar from "@/app/components/NavBar";
+import { Footer } from "@/app/components/Footer";
 import "./../globals.css";
 
 const inter = Inter({
@@ -20,10 +21,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${inter.variable} antialiased`}>
+    <html lang="es-CO" className={`${inter.variable} antialiased`}>
       <body className="flex min-h-screen flex-col font-sans">
+        <a
+          href="#contenido-principal"
+          className="bg-primary-400 sr-only absolute top-2 left-2 z-50 rounded-md px-4 py-2 text-white focus-visible:not-sr-only focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        >
+          Saltar al contenido principal
+        </a>
         <NavBar />
-        <main className="flex flex-1 flex-col">{children}</main>
+        <main id="contenido-principal" className="flex flex-1 flex-col">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

@@ -4,6 +4,7 @@ import Modal, {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  ModalOkButton,
 } from "@/app/components/ui/Modal";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -91,6 +92,7 @@ const PoliticaTratamientoDatos = ({
             23 de febrero de 2026
           </span>
         </p>
+        <ModalOkButton onClose={onClose} label="Entendido" />
       </ModalFooter>
     </Modal>
   );

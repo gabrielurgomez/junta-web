@@ -439,3 +439,24 @@ body {
   color: var(--color-text-tertiary);
   line-height: 1.5;
 }
+
+/* ============================================
+   Accessibility — Scroll margin & Motion
+   ============================================ */
+
+/* Compensar navbar sticky (64px) + buffer en elementos enfocables */
+:target,
+:focus-visible {
+  scroll-margin-top: 80px;
+}
+
+/* Respetar preferencia de reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .navbar-drawer,
+  .navbar-drawer-open,
+  .hamburger-icon span,
+  .navbar-overlay {
+    transition: none !important;
+    animation: none !important;
+  }
+}
