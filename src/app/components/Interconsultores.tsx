@@ -61,7 +61,7 @@ export function Interconsultores() {
           de la sección mediante <caption>.
         */}
         <div
-          className="focus-visible:outline-primary-400 shadow-card overflow-x-auto rounded-[12px] focus-visible:outline-2 focus-visible:outline-offset-2"
+          className="bg-surface focus-visible:outline-primary-400 shadow-card overflow-x-auto rounded-[12px] focus-visible:outline-2 focus-visible:outline-offset-2"
           role="region"
           aria-label="Directorio de interconsultores"
           tabIndex={0}
