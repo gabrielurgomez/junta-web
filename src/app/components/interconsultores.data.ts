@@ -136,7 +136,10 @@ export const interconsultores: Interconsultor[] = [
     especialidad: "Salud ocupacional",
     direccion: "Carrera 21 # 53-24 Brr Concordia",
     telefono: "6174070",
-    correos: ["comercial.eslabonar@gmail.com", "gestionhumana.eslabonar@gmail.com"],
+    correos: [
+      "comercial.eslabonar@gmail.com",
+      "gestionhumana.eslabonar@gmail.com",
+    ],
   },
   {
     nombre: "Yolanda Cruz Serrano",
@@ -290,7 +293,11 @@ export const interconsultores: Interconsultor[] = [
     especialidad: "Neumologia",
     direccion: "Cll. 53 # 31 – 30",
     telefono: "607 6972473 - 3103014562",
-    correos: ["cotizaciones@ino.com.co", "convenios@ino.com.co", "facturacion.cartera@ino.com.co"],
+    correos: [
+      "cotizaciones@ino.com.co",
+      "convenios@ino.com.co",
+      "facturacion.cartera@ino.com.co",
+    ],
   },
   {
     nombre: "Mario Bueno Duran",
@@ -304,14 +311,21 @@ export const interconsultores: Interconsultor[] = [
     especialidad: "Neurocirujano",
     direccion: "",
     telefono: "3168262081",
-    correos: ["neurovargas308@hotmail.com", "gabrielvargasneurocirujia@gmail.com"],
+    correos: [
+      "neurovargas308@hotmail.com",
+      "gabrielvargasneurocirujia@gmail.com",
+    ],
   },
   {
     nombre: "CATME",
     especialidad: "Imágenes diagnosticas",
     direccion: "",
     telefono: "6076059440",
-    correos: ["citascatme@hotmail.com", "coordinacion@catme.com.co", "direccionadministrativa@catme.com.co"],
+    correos: [
+      "citascatme@hotmail.com",
+      "coordinacion@catme.com.co",
+      "direccionadministrativa@catme.com.co",
+    ],
   },
   {
     nombre: "William Omar Contreras",
