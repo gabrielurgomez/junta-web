@@ -1,31 +1,37 @@
 import { interconsultores } from "./interconsultores.data";
 
-// Extrae las direcciones de correo de un campo que puede contener varias
-// separadas por «;», «,», «-» o espacios, además de texto que no es correo
-// (p. ej. «www.fcv.org»). Cada correo válido se ofrece como enlace mailto,
-// texto de enlace descriptivo (WCAG 2.4.4 A), y el resto se muestra como texto.
-function Correos({ valor }: { valor: string }) {
-  if (!valor) {
+// Valida una dirección de correo. Los tokens ya vienen separados desde los
+// datos; aquí solo se decide si cada uno es un enlace mailto o texto plano
+// (p. ej. «www.fcv.org» o correos malformados del origen).
+const CORREO_VALIDO = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+// Renderiza la lista de correos: cada correo válido como enlace mailto con
+// texto descriptivo (WCAG 2.4.4 A), en una sola línea; los tokens que no son
+// correos válidos se muestran como texto. Varios se apilan verticalmente.
+// El color usa `link-hover` (#2366b5 ≈ 5.77:1) para cumplir WCAG 1.4.3 AA;
+// `text-link` (#348ceb) queda en ~3.44:1 sobre blanco, insuficiente.
+function Correos({ valores }: { valores: string[] }) {
+  if (valores.length === 0) {
     return <span className="text-text-tertiary">—</span>;
-  }
-
-  const correos = valor.match(/[^\s;,]+@[^\s;,]+/g) ?? [];
-
-  if (correos.length === 0) {
-    return <span className="break-words">{valor}</span>;
   }
 
   return (
     <span className="flex flex-col gap-1">
-      {correos.map((correo) => (
-        <a
-          key={correo}
-          href={`mailto:${correo}`}
-          className="text-link hover:text-link-hover focus-visible:outline-primary-400 rounded-[4px] whitespace-nowrap underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2"
-        >
-          {correo}
-        </a>
-      ))}
+      {valores.map((valor) =>
+        CORREO_VALIDO.test(valor) ? (
+          <a
+            key={valor}
+            href={`mailto:${valor}`}
+            className="text-link-hover hover:text-primary-700 focus-visible:outline-primary-400 rounded-[4px] whitespace-nowrap underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2"
+          >
+            {valor}
+          </a>
+        ) : (
+          <span key={valor} className="break-words">
+            {valor}
+          </span>
+        ),
+      )}
     </span>
   );
 }
@@ -140,7 +146,7 @@ export function Interconsultores() {
                     <Texto valor={item.telefono} />
                   </td>
                   <td className="text-text-secondary px-4 py-3">
-                    <Correos valor={item.correo} />
+                    <Correos valores={item.correos} />
                   </td>
                 </tr>
               ))}
