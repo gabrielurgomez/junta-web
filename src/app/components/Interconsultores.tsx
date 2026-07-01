@@ -1,15 +1,7 @@
 import { interconsultores } from "./interconsultores.data";
 
-// Valida una dirección de correo. Los tokens ya vienen separados desde los
-// datos; aquí solo se decide si cada uno es un enlace mailto o texto plano
-// (p. ej. «www.fcv.org» o correos malformados del origen).
-const CORREO_VALIDO = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-
-// Renderiza la lista de correos: cada correo válido como enlace mailto con
-// texto descriptivo (WCAG 2.4.4 A), en una sola línea; los tokens que no son
-// correos válidos se muestran como texto. Varios se apilan verticalmente.
-// El color usa `link-hover` (#2366b5 ≈ 5.77:1) para cumplir WCAG 1.4.3 AA;
-// `text-link` (#348ceb) queda en ~3.44:1 sobre blanco, insuficiente.
+// Renderiza la lista de correos como texto plano (sin enlaces mailto). Cada
+// correo se muestra en una sola línea; varios se apilan verticalmente.
 function Correos({ valores }: { valores: string[] }) {
   if (valores.length === 0) {
     return <span className="text-text-tertiary">—</span>;
@@ -17,21 +9,11 @@ function Correos({ valores }: { valores: string[] }) {
 
   return (
     <span className="flex flex-col gap-1">
-      {valores.map((valor) =>
-        CORREO_VALIDO.test(valor) ? (
-          <a
-            key={valor}
-            href={`mailto:${valor}`}
-            className="text-link-hover hover:text-primary-700 focus-visible:outline-primary-400 rounded-[4px] whitespace-nowrap underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2"
-          >
-            {valor}
-          </a>
-        ) : (
-          <span key={valor} className="break-words">
-            {valor}
-          </span>
-        ),
-      )}
+      {valores.map((valor) => (
+        <span key={valor} className="whitespace-nowrap">
+          {valor}
+        </span>
+      ))}
     </span>
   );
 }
