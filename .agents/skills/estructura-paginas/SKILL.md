@@ -1,5 +1,5 @@
 ---
-name: page-structure
+name: estructura-paginas
 description: Estructura estándar de páginas en el proyecto Next.js de la Junta Regional de Calificación de Invalidez de Santander. Define cuándo usar una página estática simple (solo page.tsx) y cuándo usar la estructura de 3 archivos (page.tsx + Client + actions) para páginas con interactividad y lógica de servidor.
 ---
 
@@ -9,6 +9,10 @@ El proyecto distingue dos tipos de páginas según su naturaleza:
 
 1. **Página estática**: solo contenido informativo, sin interactividad ni funciones de servidor. Un único archivo `page.tsx` es suficiente.
 2. **Página interactiva**: tiene un componente de UI interactivo (formularios, acciones del usuario) y/o funciones que se ejecutan del lado del servidor. Requiere la estructura de **3 archivos**.
+
+Este skill define **cómo se estructura una página**: qué archivos deben existir, qué responsabilidad tiene cada archivo y cómo se separan Server Components, Client Components, Server Actions y utilidades.
+
+Cuando una página requiera crear, modificar o extraer un componente UI, ese componente debe seguir estrictamente la regla `.agents/rules/ui-components.md`. Este skill no reemplaza esa regla ni debe duplicar sus criterios de modularización, props, accesibilidad o consistencia visual.
 
 ---
 
@@ -40,7 +44,7 @@ export default function EntidadPage() {
         badgeText="Sobre Nosotros"
         priority={true}
       />
-      <div className="mx-auto w-full max-w-300 px-4 py-16 md:px-8 md:py-24">
+      <div className="max-w-300 mx-auto w-full px-4 py-16 md:px-8 md:py-24">
         <div className="grid gap-8 md:grid-cols-2">
           <Card id="card-creacion" title="Creación de las Juntas" text="..." />
           <Card id="card-importancia" title="Importancia" text="..." />
@@ -293,6 +297,7 @@ Y la utilidad `emailEsValido` vive en `src/app/libs/utils/strings.utils.ts` porq
 | Página con formulario o interacción del usuario          | `page.tsx` + `Nombre.client.tsx` + `nombre.actions.ts`         |
 | Página privada que consulta datos del servidor al cargar | `page.tsx` (async) + `Nombre.client.tsx` + `nombre.actions.ts` |
 | Función de validación/transformación reutilizable        | `src/app/libs/utils/nombreDominio.utils.ts`                    |
+| Componente UI creado, extraído o modificado              | Seguir `.agents/rules/ui-components.md`                        |
 
 ---
 

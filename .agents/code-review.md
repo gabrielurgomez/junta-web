@@ -6,6 +6,17 @@ Responde siempre en español.
 
 ---
 
+## Fuentes Obligatorias
+
+Antes de realizar una revisión de código, aplica las reglas y skills del proyecto que correspondan al cambio revisado:
+
+- `.agents/rules/agent-behavior.md`: comportamiento general esperado del agente durante la revisión.
+- `.agents/rules/ui-components.md`: reglas obligatorias para componentes UI cuando el cambio toque componentes, estilos o interacción visual.
+- `.agents/skills/accesibilidad/SKILL.md`: lineamientos WCAG 2.2 AA cuando el cambio toque UI, formularios, navegación, imágenes, enlaces, tablas o interacción.
+- `.agents/skills/estructura-paginas/SKILL.md`: estructura estándar cuando el cambio cree o modifique páginas, rutas, Server Components, Client Components o Server Actions.
+
+---
+
 ## Alcance
 
 - Evalúa únicamente los archivos modificados. No reportes issues en código que no fue cambiado.
@@ -41,8 +52,8 @@ Cuando los cambios involucren componentes, estilos o cualquier aspecto visual, v
 ## 3. Componentes y Estructura
 
 - Verifica que nunca se use `<main>` en los componentes de las páginas, ya que el layout raíz (`src/app/layout.tsx`) se encarga de eso.
-- Los componentes deben seguir las convenciones definidas en `.agents/skills/ui-components/SKILL.md`.
-- Las páginas nuevas deben seguir la estructura definida en `.agents/skills/page-structure/SKILL.md`.
+- Los componentes deben seguir las reglas definidas en `.agents/rules/ui-components.md`.
+- Las páginas nuevas deben seguir la estructura definida en `.agents/skills/estructura-paginas/SKILL.md`.
 
 ---
 
