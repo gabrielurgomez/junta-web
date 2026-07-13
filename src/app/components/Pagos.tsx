@@ -1,43 +1,5 @@
 import type { SVGProps } from "react";
-
-interface CanalPago {
-  titulo: string;
-  descripcion: string;
-  href: string;
-}
-
-const CANALES_PAGO: CanalPago[] = [
-  {
-    titulo: "Pagos (Entidades)",
-    descripcion:
-      "Acceda al canal de pago para entidades y realice el proceso correspondiente.",
-    href: "https://www.pagosvirtualesavvillas.com.co/personal/pagos/",
-  },
-  {
-    titulo: "Pagos (Persona natural)",
-    descripcion: "Consulte las instrucciones de pago para personas naturales.",
-    href: "https://jrci.com.co/persona-natural/",
-  },
-];
-
-function IconoPago(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.75}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <rect width="20" height="14" x="2" y="5" rx="2" />
-      <path d="M2 10h20" />
-      <path d="M6 15h3" />
-    </svg>
-  );
-}
+import CanalesPagoClient from "@/app/components/CanalesPago.client";
 
 function IconoBanco(props: SVGProps<SVGSVGElement>) {
   return (
@@ -58,39 +20,6 @@ function IconoBanco(props: SVGProps<SVGSVGElement>) {
       <path d="M19 10v7" />
       <path d="M3 19h18" />
     </svg>
-  );
-}
-
-/*
-  WCAG 2.2 — 2.4.4 (A), 2.4.13 (AA) y 2.5.8 (AA):
-  el enlace tiene un nombre descriptivo, cubre la tarjeta completa y conserva
-  un indicador de foco visible para su uso con teclado.
-*/
-function CanalPagoCard({ canal }: { canal: CanalPago }) {
-  return (
-    <li>
-      <article className="bg-surface border-border shadow-card has-[a:focus-visible]:outline-primary-400 relative flex h-full items-start gap-4 rounded-xl border p-6 transition-shadow duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.1)] has-[a:focus-visible]:shadow-[0_4px_16px_rgba(0,0,0,0.1)] has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 md:p-8">
-        <span
-          aria-hidden="true"
-          className="bg-primary-50 text-primary-600 flex h-12 w-12 shrink-0 items-center justify-center rounded-lg"
-        >
-          <IconoPago className="h-6 w-6" />
-        </span>
-        <div className="min-w-0 flex-1">
-          <h3 className="text-text-primary text-xl leading-[1.3] font-semibold tracking-[-0.2px]">
-            <a
-              href={canal.href}
-              className="hover:text-primary-700 focus-visible:outline-primary-400 after:absolute after:inset-0 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4"
-            >
-              {canal.titulo}
-            </a>
-          </h3>
-          <p className="text-text-secondary mt-2 text-base leading-relaxed">
-            {canal.descripcion}
-          </p>
-        </div>
-      </article>
-    </li>
   );
 }
 
@@ -129,11 +58,7 @@ export function Pagos() {
           </p>
         </div>
 
-        <ul className="mt-8 grid gap-5 md:grid-cols-2">
-          {CANALES_PAGO.map((canal) => (
-            <CanalPagoCard key={canal.href} canal={canal} />
-          ))}
-        </ul>
+        <CanalesPagoClient />
 
         <aside className="border-primary-200 bg-primary-50 mt-10 rounded-xl border p-6 md:p-8">
           <h3 className="text-primary-700 text-xl leading-[1.3] font-semibold tracking-[-0.2px]">
