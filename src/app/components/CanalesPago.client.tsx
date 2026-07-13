@@ -123,7 +123,10 @@ const CanalesPagoClient = () => {
             >
               <IconoEnlaceExterno className="h-5 w-5" />
               Ir al sitio
-              <span className="sr-only"> (se abre en una nueva pestaña)</span>
+              <span className="sr-only">
+                {" "}
+                de pago para entidades (se abre en una nueva pestaña)
+              </span>
             </a>
           }
         />
@@ -139,6 +142,7 @@ const CanalesPagoClient = () => {
             >
               <IconoOjo className="h-5 w-5" />
               Ver detalles
+              <span className="sr-only"> de pago para persona natural</span>
             </button>
           }
         />
