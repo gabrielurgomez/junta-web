@@ -83,6 +83,21 @@ const POLITICAS: DocumentoNormativo[] = enriquecerDocumentosConTamano([
     titulo: "Política de Protección de Datos",
     archivo: "/documentos/normatividad/politica-proteccion-datos.pdf",
   },
+  {
+    titulo: "Política de Equidad de Género",
+    archivo: "/documentos/normatividad/politica-equidad-genero.pdf",
+  },
+  {
+    titulo:
+      "Política Interna para el Uso Responsable de Audífonos, Dispositivos de Audio y Video y Control del Ruido en el Lugar de Trabajo",
+    archivo:
+      "/documentos/normatividad/politica-uso-responsable-audifonos.pdf",
+  },
+  {
+    titulo: "Política del Sistema de Gestión de Seguridad de la Información",
+    archivo:
+      "/documentos/normatividad/politica-seguridad-informacion.pdf",
+  },
 ]);
 
 const NORMAS: DocumentoNormativo[] = enriquecerDocumentosConTamano([
