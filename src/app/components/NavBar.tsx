@@ -9,6 +9,11 @@ const NAV_LINKS = [
   { href: "/", label: "Inicio" },
   { href: "/entidad", label: "Entidad" },
   { href: "/normatividad", label: "Normatividad" },
+  {
+    href: "https://app.digitalmedic.co/consulta/JRCIS/calificacion",
+    label: "Dictamenes",
+    esExterno: true,
+  },
   // { href: "/dictamenes", label: "Dictámenes" },
   // { href: "/atencion-al-usuario", label: "Atención al usuario" },
   // { href: "/pagos", label: "Pagos" },
@@ -107,15 +112,21 @@ function NavBar() {
 
         {/* Desktop Navigation Links */}
         <div className="navbar-links-desktop">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`navbar-link ${isActive(link.href) ? "navbar-link-active" : ""}`}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) =>
+            link.esExterno ? (
+              <a key={link.href} href={link.href} className="navbar-link">
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`navbar-link ${isActive(link.href) ? "navbar-link-active" : ""}`}
+              >
+                {link.label}
+              </Link>
+            ),
+          )}
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -190,16 +201,27 @@ function NavBar() {
           </button>
         </div>
         <div className="navbar-drawer-links">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`navbar-drawer-link ${isActive(link.href) ? "navbar-drawer-link-active" : ""}`}
-              onClick={() => setMenuMovilAbierto(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) =>
+            link.esExterno ? (
+              <a
+                key={link.href}
+                href={link.href}
+                className="navbar-drawer-link"
+                onClick={() => setMenuMovilAbierto(false)}
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`navbar-drawer-link ${isActive(link.href) ? "navbar-drawer-link-active" : ""}`}
+                onClick={() => setMenuMovilAbierto(false)}
+              >
+                {link.label}
+              </Link>
+            ),
+          )}
         </div>
         <div className="navbar-drawer-footer">
           <p>Junta Regional de Calificación de Invalidez de Santander</p>
