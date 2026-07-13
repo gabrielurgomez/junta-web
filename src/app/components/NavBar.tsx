@@ -16,7 +16,7 @@ const NAV_LINKS = [
   },
   // { href: "/dictamenes", label: "Dictámenes" },
   // { href: "/atencion-al-usuario", label: "Atención al usuario" },
-  // { href: "/pagos", label: "Pagos" },
+  { href: "/pagos", label: "Pagos" },
   // { href: "/contratacion", label: "Contratación" },
   { href: "/contacto", label: "Contacto" },
 ];
