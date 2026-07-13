@@ -14,7 +14,7 @@ const CANALES_PAGO: CanalPago[] = [
     href: "https://www.pagosvirtualesavvillas.com.co/personal/pagos/",
   },
   {
-    titulo: "Pagos (P. personal)",
+    titulo: "Pagos (Persona natural)",
     descripcion: "Consulte las instrucciones de pago para personas naturales.",
     href: "https://jrci.com.co/persona-natural/",
   },
@@ -77,14 +77,14 @@ function CanalPagoCard({ canal }: { canal: CanalPago }) {
           <IconoPago className="h-6 w-6" />
         </span>
         <div className="min-w-0 flex-1">
-          <h2 className="text-text-primary text-xl leading-[1.3] font-semibold tracking-[-0.2px]">
+          <h3 className="text-text-primary text-xl leading-[1.3] font-semibold tracking-[-0.2px]">
             <a
               href={canal.href}
               className="hover:text-primary-700 focus-visible:outline-primary-400 after:absolute after:inset-0 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4"
             >
               {canal.titulo}
             </a>
-          </h2>
+          </h3>
           <p className="text-text-secondary mt-2 text-base leading-relaxed">
             {canal.descripcion}
           </p>
@@ -136,9 +136,9 @@ export function Pagos() {
         </ul>
 
         <aside className="border-primary-200 bg-primary-50 mt-10 rounded-xl border p-6 md:p-8">
-          <h2 className="text-primary-700 text-xl leading-[1.3] font-semibold tracking-[-0.2px]">
+          <h3 className="text-primary-700 text-xl leading-[1.3] font-semibold tracking-[-0.2px]">
             Valor de honorarios 2026
-          </h2>
+          </h3>
           <p className="text-text-secondary mt-3 text-base leading-relaxed">
             El valor de los honorarios para el año 2026 es de{" "}
             <strong className="text-text-primary font-semibold">
