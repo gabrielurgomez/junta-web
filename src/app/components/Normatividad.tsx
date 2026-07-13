@@ -107,9 +107,9 @@ const NORMAS: DocumentoNormativo[] = enriquecerDocumentosConTamano([
   },
   {
     titulo:
-      "Reglamento Interno de la Junta Regional de Calificación de Invalidez 2025",
+      "Reglamento Interno de la Junta Regional de Calificación de Invalidez 2026",
     descripcion:
-      "Reglamento de funcionamiento de la Junta Regional de Calificación de Invalidez de Santander, año 2025.",
+      "Reglamento de funcionamiento de la Junta Regional de Calificación de Invalidez de Santander, año 2026.",
     archivo: "/documentos/normatividad/reglamento-interno-jrcis-2025.pdf",
   },
   {
