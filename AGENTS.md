@@ -1,5 +1,17 @@
 # Junta Regional de Calificación de Invalidez de Santander — Sitio Web
 
+## Reglas Operativas
+
+> **Leer esta sección antes de escribir código.**
+
+### Uso obligatorio de `.codegraph` (búsqueda semántica)
+
+Este proyecto tiene un grafo de código indexado en `.codegraph/`. **Siempre que la tarea implique** localizar dónde está definida una función, tipo, constante o módulo; entender las relaciones / dependencias entre archivos; refactorizar código existente; o responder preguntas del tipo _"¿dónde se usa X?"_ / _"¿qué archivos se verían afectados si cambio Y?"_, el agente **debe usar la herramienta de búsqueda semántica del codegraph como primer paso** antes de explorar manualmente con `grep` o listar directorios.
+
+> **Por qué:** el codegraph indexa símbolos, relaciones y dependencias del proyecto de forma semántica, lo que lo hace más preciso y rápido que una búsqueda textual para tareas de navegación y comprensión del código.
+
+---
+
 ## Acerca de la Entidad
 
 La Junta Regional de Calificación de Invalidez de Santander es un organismo del Sistema de la Seguridad Social Integral del Orden Nacional, de creación legal, adscrito al Ministerio del Trabajo. Tiene personería jurídica, de derecho privado, sin ánimo de lucro, de carácter interdisciplinario, sujeta a revisoría fiscal, con autonomía técnica y científica en los dictámenes periciales, cuyas decisiones son de carácter obligatorio.
