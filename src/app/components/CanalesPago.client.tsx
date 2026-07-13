@@ -106,7 +106,7 @@ const CanalesPagoClient = () => {
     useState(false);
 
   const clasesAccion =
-    "bg-primary-400 hover:bg-primary-500 focus-visible:ring-primary-400/30 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-[0.9375rem] leading-tight font-semibold tracking-[0.2px] text-white transition-all duration-200 focus-visible:ring-3 focus-visible:outline-none sm:w-auto";
+    "bg-primary-600 hover:bg-primary-700 focus-visible:outline-primary-700 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-[0.9375rem] leading-tight font-semibold tracking-[0.2px] text-white transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 sm:w-auto";
 
   return (
     <>

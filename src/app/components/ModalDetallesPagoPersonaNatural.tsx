@@ -66,7 +66,7 @@ const DetallesPagoPersonaNatural = ({
         <button
           type="button"
           onClick={onClose}
-          className="border-primary-400 text-primary-700 hover:bg-primary-50 focus-visible:ring-primary-400/30 min-h-11 w-full rounded-md border px-5 py-3 text-sm font-semibold transition-colors focus-visible:ring-3 focus-visible:outline-none sm:w-auto"
+          className="border-primary-400 text-primary-700 hover:bg-primary-50 focus-visible:outline-primary-700 min-h-11 w-full rounded-md border px-5 py-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 sm:w-auto"
         >
           Cerrar
         </button>
