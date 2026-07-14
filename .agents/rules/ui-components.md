@@ -10,6 +10,7 @@ Un componente UI debe construirse como una pieza modular, reutilizable, accesibl
 - Las paginas no deben contener el markup completo de secciones complejas como heroes, cards, navbars, banners, modales, listados visuales o bloques institucionales reutilizables.
 - Una pagina debe orquestar componentes; el componente debe encapsular su estructura visual, sus estilos y la interaccion que le corresponda.
 - Antes de crear un componente nuevo, se debe revisar si ya existe un componente equivalente o un patron cercano en `src/app/components/`.
+- Los iconos SVG reutilizables deben vivir en `src/app/components/iconos/` y los componentes consumidores deben importarlos desde alli; no se deben declarar SVG hardcodeados directamente en el componente que los usa.
 
 ## Reutilizacion y props
 
