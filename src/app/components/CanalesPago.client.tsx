@@ -1,66 +1,13 @@
 "use client";
 
-import { useState, type ReactNode, type SVGProps } from "react";
+import { useState, type ReactNode } from "react";
+import { IconoEnlaceExterno } from "@/app/components/iconos/IconoEnlaceExterno";
+import { IconoOjo } from "@/app/components/iconos/IconoOjo";
+import { IconoPago } from "@/app/components/iconos/IconoPago";
 import DetallesPagoPersonaNatural from "@/app/components/ModalDetallesPagoPersonaNatural";
 
 const URL_PAGO_ENTIDADES =
   "https://www.pagosvirtualesavvillas.com.co/personal/pagos/";
-
-function IconoPago(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.75}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <rect width="20" height="14" x="2" y="5" rx="2" />
-      <path d="M2 10h20" />
-      <path d="M6 15h3" />
-    </svg>
-  );
-}
-
-function IconoEnlaceExterno(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path d="M15 3h6v6" />
-      <path d="M10 14 21 3" />
-      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    </svg>
-  );
-}
-
-function IconoOjo(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path d="M2.1 12a10.4 10.4 0 0 1 19.8 0 10.4 10.4 0 0 1-19.8 0Z" />
-      <circle cx="12" cy="12" r="3" />
-    </svg>
-  );
-}
 
 interface CanalPagoCardProps {
   titulo: string;
