@@ -8,13 +8,13 @@
 
 ## 1. Resumen ejecutivo
 
-El proyecto tiene una base de seguridad razonable para su tamaño: la validación del formulario se repite en el servidor, el CAPTCHA se verifica del lado del servidor, los secretos no están versionados y no hay uso de `dangerouslySetInnerHTML` ni HTML inyectado. Originalmente había **tres brechas de alto riesgo**; la primera (Next.js vulnerable) ya está resuelta. Quedan pendientes: no existe ningún header de seguridad HTTP (ni CSP, ni HSTS, ni anti-clickjacking), y la Server Action de contacto no tiene rate limiting, lo que permite abuso del envío de correos y agotamiento de la cuota/costo de Brevo.
+El proyecto tiene una base de seguridad razonable para su tamaño: la validación del formulario se repite en el servidor, el CAPTCHA se verifica del lado del servidor, los secretos no están versionados y no hay uso de `dangerouslySetInnerHTML` ni HTML inyectado. Originalmente había **tres brechas de alto riesgo**; dos ya están resueltas (Next.js vulnerable y headers de seguridad HTTP). Queda pendiente: la Server Action de contacto no tiene rate limiting, lo que permite abuso del envío de correos y agotamiento de la cuota/costo de Brevo.
 
 | Riesgo   | Pendientes |
 | -------- | ---------- |
-| 🔴 Alto  | 2          |
+| 🔴 Alto  | 1          |
 | 🟡 Medio | 6          |
-| 🟢 Bajo  | 6          |
+| 🟢 Bajo  | 5          |
 
 ---
 
@@ -24,12 +24,7 @@ El proyecto tiene una base de seguridad razonable para su tamaño: la validació
 
 - [x] **A1. Actualizar Next.js a `>= 16.2.6`.** ✅ Completado (28-jul-2026): `next` y `eslint-config-next` actualizados de `16.2.4` a `16.2.12`. Adicionalmente se forzaron vía `pnpm.overrides` en `package.json` las versiones de `postcss` (`8.5.24`) y `sharp` (`0.35.1`), transitivas de `next`, que también estaban vulnerables. `pnpm audit --prod` ahora reporta **"No known vulnerabilities found"** (antes: 27, 14 altas). Verificado con `tsc --noEmit`, `pnpm lint`, `pnpm build` (8/8 páginas estáticas generadas con Next.js 16.2.12/Turbopack) y smoke test HTTP de `/` y `/contacto` (ambas 200, sin errores en logs).
 
-- [ ] **A2. Configurar headers de seguridad HTTP.** `next.config.ts` está vacío: el sitio no envía **ningún** header de seguridad. Faltan como mínimo:
-  - `Content-Security-Policy` (idealmente con nonce; debe permitir `https://challenges.cloudflare.com` para el widget de Turnstile en `script-src` y `frame-src`).
-  - `Strict-Transport-Security` (HSTS) — crítico para un sitio de una entidad pública que maneja datos de contacto de ciudadanos.
-  - `X-Frame-Options: DENY` / `frame-ancestors 'none'` (anti-clickjacking; relevante porque la página de pagos enlaza a pasarelas externas y es objetivo natural de phishing por superposición).
-  - `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy` restrictiva.
-  - **Acción:** definir la función `headers()` en `next.config.ts` (ver documentación local en `node_modules/next/dist/docs/` sobre CSP y headers).
+- [x] **A2. Configurar headers de seguridad HTTP.** ✅ Completado (28-jul-2026): se implementó la función `headers()` en `next.config.ts` aplicando a `/(.*)` los siguientes headers: `Content-Security-Policy` (sin nonces, para preservar el renderizado estático; permite `https://challenges.cloudflare.com` en `script-src`, `connect-src` y `frame-src` para el widget de Turnstile; `frame-ancestors 'none'`; `object-src 'none'`; `form-action 'self'`; `upgrade-insecure-requests`), `Strict-Transport-Security: max-age=63072000; includeSubDomains`, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin` y `Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()`. Verificado con `pnpm build` (8/8 páginas siguen estáticas) y `curl -I` a `/` y `/contacto` (todos los headers presentes, sin errores en logs).
 
 - [ ] **A3. Rate limiting en la Server Action `enviarFormularioContacto`.** Hoy no hay ningún límite por IP ni por ventana de tiempo. Turnstile mitiga bots simples, pero existen granjas de resolución de CAPTCHA; un atacante puede automatizar envíos y (a) agotar la cuota o generar costos en Brevo, (b) inundar el buzón `EMAIL_DESTINO_FORMULARIO_CONTACTO` (denegación de servicio del canal de atención al ciudadano), (c) usar el `replyTo` para spam indirecto.
   - **Acción:** limitar por IP (p. ej. 3–5 envíos por 10 minutos) leyendo `x-forwarded-for` vía `headers()` de `next/headers`. Con 1 réplica en Railway basta un limitador en memoria (LRU); si se escala a más réplicas, usar un almacén compartido (p. ej. Upstash/Redis).
@@ -55,7 +50,7 @@ El proyecto tiene una base de seguridad razonable para su tamaño: la validació
 
 ### 🟢 Riesgo BAJO
 
-- [ ] **B1. `poweredByHeader: false` en `next.config.ts`.** Hoy el sitio expone `X-Powered-By: Next.js` (facilita fingerprinting de la versión del framework).
+- [x] **B1. `poweredByHeader: false` en `next.config.ts`.** ✅ Completado (28-jul-2026): se añadió `poweredByHeader: false` al config. Verificado con `curl -I` a `/` y `/contacto`: el header `X-Powered-By` ya no se envía.
 - [ ] **B2. Publicar `/.well-known/security.txt`** (RFC 9116) con un contacto para reportes de vulnerabilidades — buena práctica esperada en entidades públicas.
 - [ ] **B3. Agregar `robots.txt` y revisar qué hay en `public/documentos/`** para confirmar que ningún documento contiene datos personales que no deban indexarse.
 - [ ] **B4. Deduplicación / anti-doble-envío en servidor.** El cliente bloquea reenvíos mientras `estadoEnvio === "enviando"`, pero el servidor no; un mismo token Turnstile no es reutilizable (mitiga), aun así un idempotency-key simple evitaría correos duplicados por reintentos.
@@ -86,7 +81,7 @@ El proyecto tiene una base de seguridad razonable para su tamaño: la validació
 | Sin `dangerouslySetInnerHTML`, `eval` ni HTML dinámico               | ✅ Bien         | Todo el contenido se renderiza vía JSX (escape automático de React).                                                                                          |
 | Logger estructurado (JSON)                                           | ✅ Aceptable    | `JSON.stringify` neutraliza inyección de logs. Mejorar cobertura en producción (B5).                                                                          |
 | `console.error` con detalle de excepciones en `verificarTurnstile`   | ⚠️ Mejorar      | Corre también en producción y sin formato JSON; unificar con `logger` y no volcar el objeto `error` completo.                                                 |
-| `next.config.ts`                                                     | ❌ Insuficiente | Vacío: sin headers de seguridad (A2) ni `poweredByHeader: false` (B1).                                                                                        |
+| `next.config.ts`                                                     | ✅ Corregido     | Define `headers()` con CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy y Permissions-Policy (A2); `poweredByHeader: false` (B1).                                                    |
 | CI (`.github/workflows`)                                             | ⚠️ Mejorar      | Solo lint/format/typecheck; sin auditoría de dependencias ni Dependabot (M5).                                                                                 |
 | Versión de Next.js                                                   | ✅ Corregido    | Actualizado a 16.2.12 con overrides de `postcss`/`sharp`; `pnpm audit --prod` limpio (A1 completado).                                                         |
 
