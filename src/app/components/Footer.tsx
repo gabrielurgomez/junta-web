@@ -80,7 +80,7 @@ export function Footer() {
           <div>
             <div className="mb-5 flex items-center gap-2">
               <IconoCorreo className="text-primary-200 h-5 w-5" />
-              <h2 className="text-[1.00rem] leading-[1.50] font-semibold">
+              <h2 className="text-[1.00rem] leading-normal font-semibold">
                 Correos electrónicos
               </h2>
             </div>
@@ -89,7 +89,7 @@ export function Footer() {
                 <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                   Correo general
                 </dt>
-                <dd className="mt-1 text-[0.88rem] leading-[1.50]">
+                <dd className="mt-1 text-[0.88rem] leading-normal">
                   <a
                     href="mailto:info@jrci.com.co"
                     className="focus-visible:ring-primary-200/50 text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:outline-none"
@@ -100,9 +100,9 @@ export function Footer() {
               </div>
               <div>
                 <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
-                  Correo exclusivo para trámites
+                  Correo exclusivo para tramitar recursos
                 </dt>
-                <dd className="mt-1 text-[0.88rem] leading-[1.50]">
+                <dd className="mt-1 text-[0.88rem] leading-normal">
                   <a
                     href="mailto:tramitesrecursos@jrci.com.co"
                     className="focus-visible:ring-primary-200/50 text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:outline-none"
@@ -118,7 +118,7 @@ export function Footer() {
           <div>
             <div className="mb-5 flex items-center gap-2">
               <IconoReloj className="text-primary-200 h-5 w-5" />
-              <h2 className="text-[1.00rem] leading-[1.50] font-semibold">
+              <h2 className="text-[1.00rem] leading-normal font-semibold">
                 Horarios de atención
               </h2>
             </div>
@@ -127,7 +127,7 @@ export function Footer() {
                 <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                   Lunes a viernes
                 </dt>
-                <dd className="mt-1 text-[0.88rem] leading-[1.50] text-white/90">
+                <dd className="mt-1 text-[0.88rem] leading-normal text-white/90">
                   7:00 a.m. a 12:00 p.m. y de 1:00 p.m. a 4:00 p.m.
                 </dd>
               </div>
@@ -135,7 +135,7 @@ export function Footer() {
                 <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                   Sábados
                 </dt>
-                <dd className="mt-1 text-[0.88rem] leading-[1.50] text-white/90">
+                <dd className="mt-1 text-[0.88rem] leading-normal text-white/90">
                   8:00 a.m. a 12:00 m.
                 </dd>
               </div>
@@ -146,7 +146,7 @@ export function Footer() {
           <div>
             <div className="mb-5 flex items-center gap-2">
               <IconoUbicacion className="text-primary-200 h-5 w-5" />
-              <h2 className="text-[1.00rem] leading-[1.50] font-semibold">
+              <h2 className="text-[1.00rem] leading-normal font-semibold">
                 Dirección y audiencias
               </h2>
             </div>
@@ -155,7 +155,7 @@ export function Footer() {
                 <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                   Dirección
                 </dt>
-                <dd className="mt-1 text-[0.88rem] leading-[1.50] text-white/90">
+                <dd className="mt-1 text-[0.88rem] leading-normal text-white/90">
                   Carrera 37 # 44-74 Cabecera
                 </dd>
               </div>
@@ -163,7 +163,7 @@ export function Footer() {
                 <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                   Horario de audiencias privadas
                 </dt>
-                <dd className="mt-1 text-[0.88rem] leading-[1.50] text-white/90">
+                <dd className="mt-1 text-[0.88rem] leading-normal text-white/90">
                   Lunes, miércoles y jueves de 7:00 a.m. a 9:00 a.m.
                 </dd>
               </div>
@@ -174,12 +174,12 @@ export function Footer() {
           <div>
             <div className="mb-5 flex items-center gap-2">
               <IconoTelefono className="text-primary-200 h-5 w-5" />
-              <h2 className="text-[1.00rem] leading-[1.50] font-semibold">
+              <h2 className="text-[1.00rem] leading-normal font-semibold">
                 Quejas y sugerencias
               </h2>
             </div>
             <div className="space-y-4">
-              <p className="text-[0.88rem] leading-[1.50] text-white/90">
+              <p className="text-[0.88rem] leading-normal text-white/90">
                 Si tiene alguna queja por la prestación del servicio, puede
                 dirigirla a la Dirección Territorial de Santander del Ministerio
                 del Trabajo.
@@ -189,7 +189,7 @@ export function Footer() {
                   <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                     Dirección
                   </dt>
-                  <dd className="mt-0.5 text-[0.88rem] leading-[1.50] text-white/90">
+                  <dd className="mt-0.5 text-[0.88rem] leading-normal text-white/90">
                     Calle 31 # 13-71, Bucaramanga
                   </dd>
                 </div>
@@ -197,7 +197,7 @@ export function Footer() {
                   <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                     Teléfono
                   </dt>
-                  <dd className="mt-0.5 text-[0.88rem] leading-[1.50]">
+                  <dd className="mt-0.5 text-[0.88rem] leading-normal">
                     <a
                       href="tel:+576076302250,,6831"
                       className="focus-visible:ring-primary-200/50 text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:outline-none"
@@ -210,7 +210,7 @@ export function Footer() {
                   <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                     Línea nacional
                   </dt>
-                  <dd className="mt-0.5 text-[0.88rem] leading-[1.50]">
+                  <dd className="mt-0.5 text-[0.88rem] leading-normal">
                     <a
                       href="tel:0180000112318"
                       className="focus-visible:ring-primary-200/50 text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:outline-none"
@@ -223,7 +223,7 @@ export function Footer() {
                   <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                     Correo electrónico
                   </dt>
-                  <dd className="mt-0.5 text-[0.88rem] leading-[1.50]">
+                  <dd className="mt-0.5 text-[0.88rem] leading-normal">
                     <a
                       href="mailto:dtsantander@mintrabajo.gov.co"
                       className="focus-visible:ring-primary-200/50 text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:outline-none"
@@ -236,12 +236,12 @@ export function Footer() {
                   <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
                     Horario de atención
                   </dt>
-                  <dd className="mt-0.5 text-[0.88rem] leading-[1.50] text-white/90">
+                  <dd className="mt-0.5 text-[0.88rem] leading-normal text-white/90">
                     Lunes a viernes de 7:00 a.m. a 4:00 p.m. (jornada continua)
                   </dd>
                 </div>
               </dl>
-              <p className="pt-2 text-[0.88rem] leading-[1.50] text-white/90">
+              <p className="pt-2 text-[0.88rem] leading-normal text-white/90">
                 O en nuestro buzón de sugerencias ubicado en la entidad o en
                 esta página web en la pestaña Atención al usuario.
               </p>
