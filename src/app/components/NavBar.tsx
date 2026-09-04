@@ -100,12 +100,15 @@ function NavBar() {
         {/* Logo & Entity Name */}
         <Link href="/" className="navbar-brand" aria-label="Ir al inicio">
           {/* Shield / institutional icon */}
+          {/* La altura se fija por CSS: el preflight de Tailwind aplica
+              `height: auto` a los <img>, así que el atributo `height` no la
+              controla y el logo se desbordaría del navbar (64px). */}
           <Image
             src="/imagenes/logo.webp"
             alt="Logo Junta Regional"
-            width={180}
-            height={60}
-            className="object-contain"
+            width={73}
+            height={48}
+            className="h-12 w-auto object-contain"
             priority
           />
         </Link>
