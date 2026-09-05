@@ -38,11 +38,15 @@ const leerEnCliente = () => {
 };
 
 /*
-  WCAG 2.2 — 2.1.2 (A), 2.4.13 (AA) y 1.4.4 (AA):
-  el aviso es informativo y no bloquea ningún trámite: se cierra con la X, con
-  el botón "Entendido", con Escape o pulsando fuera del panel, sin atrapar al
-  usuario. Modal gestiona el foco y el texto usa unidades relativas para
-  soportar zoom al 200 %.
+  El aviso usa Modal, así que es un diálogo modal real: mientras está abierto
+  aplica aria-modal, atrapa el Tab dentro del panel y deja fuera del alcance el
+  skip link y la navegación. Es deliberado —el anuncio debe verse en la primera
+  visita— y por eso ofrece cuatro salidas inmediatas: la X, el botón
+  "Entendido", Escape y pulsar fuera del panel.
+
+  WCAG 2.2 — 2.1.2 (A): no hay trampa de teclado, el foco siempre puede
+  liberarse con Escape. 2.4.13 (AA): Modal gestiona el foco y lo devuelve al
+  cerrar. 1.4.4 (AA): el texto usa unidades relativas y soporta zoom al 200 %.
 */
 const AvisoNuevaImagen = () => {
   const abierto = useSyncExternalStore(
@@ -85,7 +89,6 @@ const AvisoNuevaImagen = () => {
             width={250}
             height={165}
             className="h-auto w-40 object-contain"
-            priority
           />
         </div>
 

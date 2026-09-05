@@ -35,10 +35,16 @@ const ModalEstudiosIntegrante = ({
       ariaLabelledBy={tituloId}
     >
       <ModalHeader>
+        {/*
+          El prefijo sr-only nombra el propósito del diálogo ("Estudios de
+          <nombre>") sin repetirlo en pantalla, donde el encabezado "Estudios"
+          del cuerpo ya lo deja claro (skill de accesibilidad §6.5).
+        */}
         <h2
           id={tituloId}
           className="text-text-primary pr-6 text-xl leading-[1.3] font-semibold tracking-[-0.2px]"
         >
+          <span className="sr-only">Estudios de </span>
           {integrante.nombre}
         </h2>
         <p className="text-text-secondary mt-1 text-sm leading-relaxed">
