@@ -106,13 +106,6 @@ const NORMAS: DocumentoNormativo[] = enriquecerDocumentosConTamano([
     archivo: "/documentos/normatividad/ley-100-1993.pdf",
   },
   {
-    titulo:
-      "Reglamento Interno de la Junta Regional de Calificación de Invalidez 2026",
-    descripcion:
-      "Reglamento de funcionamiento de la Junta Regional de Calificación de Invalidez de Santander, año 2026.",
-    archivo: "/documentos/normatividad/reglamento-interno-jrcis-2025.pdf",
-  },
-  {
     titulo: "Decreto 1040 de 2022",
     descripcion:
       "Valor de los honorarios para las víctimas del conflicto armado.",
