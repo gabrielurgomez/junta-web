@@ -373,12 +373,23 @@ blockquote {
 }
 
 .cabecera-container {
-  max-width: 1200px;
-  margin: 0 auto;
+  /* La fila ocupa todo el ancho, no una columna de 1200px centrada, para que el
+     botón de ajustes pueda quedar pegado al borde derecho del viewport.
+
+     El padding izquierdo reproduce ese centrado: `(100% - 1200px) / 2 + 24px`
+     es exactamente donde empezaría la columna, así que el logo sigue alineado
+     con el contenido de las páginas. Por debajo de 1200px el `max()` cae a los
+     24px de siempre. Se usa `100%` y no `100vw` a propósito: el porcentaje se
+     resuelve contra el ancho de contenido del padre, que excluye la barra de
+     desplazamiento, mientras que `100vw` la incluye y desalinearía el logo unos
+     píxeles cuando hay scroll. */
+  max-width: none;
+  margin: 0;
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 0 24px;
+  padding-left: max(24px, calc((100% - 1200px) / 2 + 24px));
+  padding-right: 20px;
   /* `min-height` y no `height`: el logo es `h-12` (3rem) y con el texto al
      150 % mide 72px, que desbordaba el contenedor fijo de 64px. Al estar en
      rem, la barra crece con el ajuste de tamaño. */

@@ -149,31 +149,31 @@ function NavBar() {
               ),
             )}
           </div>
-
-          {/* Mobile Hamburger Button */}
-          <button
-            ref={triggerRef}
-            type="button"
-            className="navbar-hamburger"
-            aria-label={menuMovilAbierto ? "Cerrar menú" : "Abrir menú"}
-            aria-expanded={menuMovilAbierto}
-            aria-controls="navbar-menu-movil"
-            onClick={() => {
-              if (menuMovilAbierto) triggerRef.current?.focus();
-              setMenuMovilAbierto((prev) => !prev);
-            }}
-          >
-            <div
-              className={`hamburger-icon ${menuMovilAbierto ? "hamburger-icon-open" : ""}`}
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </button>
         </nav>
 
         <PanelVisualizacion />
+
+        {/* Mobile Hamburger Button */}
+        <button
+          ref={triggerRef}
+          type="button"
+          className="navbar-hamburger"
+          aria-label={menuMovilAbierto ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={menuMovilAbierto}
+          aria-controls="navbar-menu-movil"
+          onClick={() => {
+            if (menuMovilAbierto) triggerRef.current?.focus();
+            setMenuMovilAbierto((prev) => !prev);
+          }}
+        >
+          <div
+            className={`hamburger-icon ${menuMovilAbierto ? "hamburger-icon-open" : ""}`}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
       </div>
 
       {/* Mobile Overlay */}
