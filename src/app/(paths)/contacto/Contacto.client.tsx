@@ -173,7 +173,7 @@ const ContactoClient = () => {
   };
 
   const inputBaseClasses =
-    "w-full rounded-md border px-3.5 py-2.5 text-sm text-text-primary placeholder:text-text-disabled bg-white transition-all duration-200 outline-none focus-visible:ring-3 focus-visible:ring-primary-400/20 focus-visible:border-primary-400";
+    "w-full rounded-md border px-3.5 py-2.5 text-sm text-text-primary placeholder:text-text-disabled bg-surface transition-all duration-200 outline-none focus-visible:border-primary-600 focus-visible:outline-border-focus focus-visible:outline-2 focus-visible:outline-offset-2";
 
   const labelClasses = "block text-sm font-medium text-text-secondary mb-1.5";
 
@@ -267,7 +267,7 @@ const ContactoClient = () => {
 
           {/* Panel derecho — formulario */}
           <div className="lg:col-span-3">
-            <div className="shadow-card rounded-2xl bg-white p-8 md:p-10">
+            <div className="shadow-card bg-surface rounded-2xl p-8 md:p-10">
               <div role="status" aria-live="polite" aria-atomic="true">
                 {alertaExito && (
                   <div className="border-success/25 bg-success/8 text-text-primary mb-6 flex items-start gap-3 rounded-lg border px-4 py-3">
@@ -290,7 +290,7 @@ const ContactoClient = () => {
                     <button
                       type="button"
                       onClick={cerrarAlertaExito}
-                      className="text-text-secondary hover:text-text-primary focus-visible:ring-primary-400/30 -m-1 shrink-0 rounded-md p-1 transition-colors focus-visible:ring-3 focus-visible:outline-none"
+                      className="text-text-secondary hover:text-text-primary focus-visible:outline-border-focus -m-1 shrink-0 rounded-md p-1 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
                       aria-label="Cerrar notificación"
                     >
                       <svg
@@ -481,7 +481,7 @@ const ContactoClient = () => {
                         errorPolitica ? "politica-error" : undefined
                       }
                       aria-invalid={!!errorPolitica}
-                      className="border-border text-primary-400 focus-visible:ring-primary-400/30 mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded accent-(--color-primary-400) focus-visible:ring-3 focus-visible:outline-none"
+                      className="border-border text-primary-600 focus-visible:outline-border-focus mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded accent-(--color-primary-600) focus-visible:outline-2 focus-visible:outline-offset-2"
                     />
                     <div className="flex flex-col gap-0.5">
                       <label
@@ -494,7 +494,7 @@ const ContactoClient = () => {
                       <button
                         type="button"
                         onClick={() => setModalPoliticaAbierto(true)}
-                        className="text-primary-400 hover:text-primary-500 focus-visible:ring-primary-400/30 w-fit rounded-sm text-xs font-medium underline underline-offset-2 transition-colors focus-visible:ring-3 focus-visible:outline-none"
+                        className="text-primary-600 hover:text-primary-700 focus-visible:outline-border-focus w-fit rounded-sm text-xs font-medium underline underline-offset-2 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
                       >
                         Ver Política
                       </button>
@@ -542,10 +542,10 @@ const ContactoClient = () => {
                   <button
                     type="submit"
                     aria-disabled={estadoEnvio === "enviando"}
-                    className={`focus-visible:ring-primary-400/30 inline-flex items-center gap-2 rounded-md px-6 py-3 text-sm font-semibold tracking-wide text-white transition-all duration-200 focus-visible:ring-3 focus-visible:outline-none ${
+                    className={`focus-visible:outline-border-focus inline-flex items-center gap-2 rounded-md px-6 py-3 text-sm font-semibold tracking-wide text-white transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 ${
                       estadoEnvio === "enviando"
-                        ? "bg-primary-400 cursor-not-allowed opacity-60"
-                        : "bg-primary-400 hover:bg-primary-500"
+                        ? "bg-primary-600 cursor-not-allowed opacity-60"
+                        : "bg-primary-600 hover:bg-primary-700"
                     }`}
                   >
                     {estadoEnvio === "enviando" ? (
@@ -613,7 +613,7 @@ const ContactInfoItem = ({
   value: string;
 }) => (
   <div className="flex items-start gap-4">
-    <div className="bg-primary-50 text-primary-400 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg">
+    <div className="bg-primary-50 text-primary-600 border-border flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border">
       {icon}
     </div>
     <div>

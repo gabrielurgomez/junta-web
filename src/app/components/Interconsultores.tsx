@@ -37,7 +37,7 @@ export function Interconsultores() {
       <div className="mx-auto max-w-[1200px] px-4 md:px-6">
         {/* Encabezado — mismo patrón que Organigrama */}
         <div className="mb-12 flex flex-col items-center text-center">
-          <span className="bg-primary-50 text-primary-700 mb-4 inline-flex rounded-full px-3 py-1 text-[0.75rem] font-medium tracking-[0.3px]">
+          <span className="bg-primary-50 text-primary-700 border-border mb-4 inline-flex rounded-full border px-3 py-1 text-[0.75rem] font-medium tracking-[0.3px]">
             Red de apoyo
           </span>
           <h2
@@ -66,7 +66,7 @@ export function Interconsultores() {
           aria-label="Directorio de interconsultores"
           tabIndex={0}
         >
-          <table className="w-full min-w-[880px] border-collapse text-left text-[0.875rem]">
+          <table className="w-full min-w-[55rem] border-collapse text-left text-[0.875rem]">
             <caption className="sr-only">
               Directorio de profesionales o entidades interconsultores de la
               Junta Regional de Calificación de Invalidez de Santander, con su

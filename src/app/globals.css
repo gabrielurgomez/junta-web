@@ -20,6 +20,9 @@
   --jr-color-accent: #d4a017;
   --jr-color-accent-light: #f5e6b8;
   --jr-color-accent-dark: #b8860b;
+  /* Dorado legible sobre fondos oscuros (Hero). El `accent` normal solo alcanza
+     3.33:1 sobre el velo; este llega a 4.88:1 en tema claro. */
+  --jr-color-accent-sobre-oscuro: #f5c53d;
 
   /* Semantic */
   --jr-color-success: #16a34a;
@@ -32,7 +35,9 @@
   --jr-color-text-primary: #1a1a2e;
   --jr-color-text-secondary: #374151;
   --jr-color-text-tertiary: #6b7280;
-  --jr-color-text-disabled: #9ca3af;
+  /* WCAG 1.4.3 (AA): se usa como color de placeholder, que es texto. El
+     #9ca3af anterior daba 2.54:1 sobre blanco; este da 7.00:1. */
+  --jr-color-text-disabled: #595959;
 
   /* Interactive */
   --jr-color-link: #348ceb;
@@ -47,6 +52,27 @@
     rgba(0, 0, 0, 0.03) 0px 0px 0px 1px, rgba(0, 0, 0, 0.05) 0px 2px 8px,
     rgba(0, 0, 0, 0.08) 0px 4px 12px;
   --jr-shadow-modal: rgba(0, 0, 0, 0.1) 0px 8px 24px;
+  --jr-shadow-card-hover: rgba(0, 0, 0, 0.1) 0px 4px 16px;
+
+  /* Velo compartido por el drawer y los diálogos modales */
+  --jr-color-velo: rgba(0, 0, 0, 0.4);
+
+  /* Separadores de cabecera y drawer. Se declaran como tokens porque en alto
+     contraste la sombra desaparece y debe sustituirla un borde sólido; así las
+     reglas que los consumen no necesitan duplicarse por tema. */
+  --jr-cabecera-sombra: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --jr-cabecera-borde: transparent;
+  --jr-drawer-sombra: -4px 0 24px rgba(0, 0, 0, 0.12);
+  --jr-drawer-borde: transparent;
+
+  /* Decoración de enlaces de contenido: en alto contraste el azul de enlace
+     queda a 1.87:1 del texto negro, así que la distinción no puede ser el
+     color (WCAG 1.4.1 / técnica G183). */
+  --jr-enlace-decoracion: none;
+
+  /* Métricas de layout en rem para que escalen con el tamaño de texto */
+  --jr-navbar-alto: 4rem;
+  --jr-org-conector: 1.75rem;
 
   /* Shortcuts */
   --jr-background: #ffffff;
@@ -76,6 +102,7 @@
   --color-accent: var(--jr-color-accent);
   --color-accent-light: var(--jr-color-accent-light);
   --color-accent-dark: var(--jr-color-accent-dark);
+  --color-accent-sobre-oscuro: var(--jr-color-accent-sobre-oscuro);
 
   /* Semantic */
   --color-success: var(--jr-color-success);
@@ -100,7 +127,9 @@
   --color-surface: var(--jr-color-surface);
   --color-surface-secondary: var(--jr-color-surface-secondary);
   --shadow-card: var(--jr-shadow-card);
+  --shadow-card-hover: var(--jr-shadow-card-hover);
   --shadow-modal: var(--jr-shadow-modal);
+  --color-velo: var(--jr-color-velo);
 }
 
 body {
@@ -109,24 +138,263 @@ body {
 }
 
 /* ============================================
+   Ajustes de visualización — tema, tamaño y espaciado
+   ============================================
+
+   Tres atributos independientes en <html>, escritos por el script en línea del
+   layout a partir de localStorage (nunca por el servidor, para que el HTML por
+   defecto sea el tema claro y `html:not([data-tema])` pueda seguir al sistema):
+
+     data-tamano     grande | mayor          (ausente = normal)
+     data-tema       claro  | alto-contraste (ausente = según el sistema)
+     data-espaciado  amplio                  (ausente = normal)
+
+   Funciona porque `@theme inline` emite las utilidades como
+   `var(--jr-color-…)`: redefinir un token aquí cascadea a todo el sitio sin
+   tocar los componentes. */
+
+/* --- Tema de alto contraste --------------------------------------------- */
+
+/* Elección explícita del usuario. */
+html[data-tema="alto-contraste"] {
+  /* Escala primaria: los pasos claros son fondos y colapsan a blanco; los
+     oscuros, a un único azul interactivo y a negro. */
+  --jr-color-primary-50: #ffffff;
+  --jr-color-primary-100: #ffffff;
+  --jr-color-primary-200: #ffffff;
+  --jr-color-primary-300: #000000;
+  --jr-color-primary-400: #00337f;
+  --jr-color-primary-500: #001f52;
+  --jr-color-primary-600: #00337f;
+  --jr-color-primary-700: #001f52;
+  --jr-color-primary-800: #001233;
+  --jr-color-primary-900: #000000;
+
+  --jr-color-accent: #000000;
+  --jr-color-accent-light: #ffefc2;
+  --jr-color-accent-dark: #000000;
+  --jr-color-accent-sobre-oscuro: #ffe08a;
+
+  --jr-color-success: #00662b;
+  --jr-color-warning: #7a4a00;
+  --jr-color-error: #b00000;
+  --jr-color-error-dark: #8a0000;
+  --jr-color-info: #00337f;
+
+  --jr-color-text-primary: #000000;
+  --jr-color-text-secondary: #1a1a1a;
+  --jr-color-text-tertiary: #262626;
+  --jr-color-text-disabled: #595959;
+
+  --jr-color-link: #0000cc;
+  --jr-color-link-hover: #000000;
+  --jr-color-border: #000000;
+  --jr-color-border-focus: #000000;
+
+  --jr-color-surface: #ffffff;
+  --jr-color-surface-secondary: #ffffff;
+
+  /* Las sombras difusas son invisibles en alto contraste: se convierten en
+     aros sólidos, de modo que lo que solo insinuaba un límite pasa a serlo. */
+  --jr-shadow-card: 0 0 0 1px #000000;
+  --jr-shadow-card-hover: 0 0 0 2px #000000;
+  --jr-shadow-modal: 0 0 0 2px #000000;
+
+  --jr-color-velo: rgba(0, 0, 0, 0.9);
+
+  --jr-cabecera-sombra: none;
+  --jr-cabecera-borde: #000000;
+  --jr-drawer-sombra: none;
+  --jr-drawer-borde: #000000;
+
+  --jr-enlace-decoracion: underline;
+
+  --jr-background: #ffffff;
+  --jr-foreground: #000000;
+}
+
+/* Preferencia del sistema, solo mientras el usuario no haya elegido.
+   `custom` no es adorno: con un tema personalizado de Windows los navegadores
+   reportan `custom`, no `more`. `forced-colors` cubre los temas de contraste de
+   Windows en Chromium/Firefox (Safari no lo implementa; allí actúa
+   `prefers-contrast`).
+
+   OJO: esta paleta está duplicada a propósito respecto al bloque de arriba. CSS
+   no permite compartir un cuerpo de declaraciones entre un selector y una media
+   query, y la alternativa (resolver el tema en JavaScript) dejaría sin alto
+   contraste a quien navegue sin JS. Si tocas una, toca la otra. */
+@media (prefers-contrast: more),
+  (prefers-contrast: custom),
+  (forced-colors: active) {
+  html:not([data-tema]) {
+    /* Escala primaria: los pasos claros son fondos y colapsan a blanco; los
+     oscuros, a un único azul interactivo y a negro. */
+    --jr-color-primary-50: #ffffff;
+    --jr-color-primary-100: #ffffff;
+    --jr-color-primary-200: #ffffff;
+    --jr-color-primary-300: #000000;
+    --jr-color-primary-400: #00337f;
+    --jr-color-primary-500: #001f52;
+    --jr-color-primary-600: #00337f;
+    --jr-color-primary-700: #001f52;
+    --jr-color-primary-800: #001233;
+    --jr-color-primary-900: #000000;
+
+    --jr-color-accent: #000000;
+    --jr-color-accent-light: #ffefc2;
+    --jr-color-accent-dark: #000000;
+    --jr-color-accent-sobre-oscuro: #ffe08a;
+
+    --jr-color-success: #00662b;
+    --jr-color-warning: #7a4a00;
+    --jr-color-error: #b00000;
+    --jr-color-error-dark: #8a0000;
+    --jr-color-info: #00337f;
+
+    --jr-color-text-primary: #000000;
+    --jr-color-text-secondary: #1a1a1a;
+    --jr-color-text-tertiary: #262626;
+    --jr-color-text-disabled: #595959;
+
+    --jr-color-link: #0000cc;
+    --jr-color-link-hover: #000000;
+    --jr-color-border: #000000;
+    --jr-color-border-focus: #000000;
+
+    --jr-color-surface: #ffffff;
+    --jr-color-surface-secondary: #ffffff;
+
+    /* Las sombras difusas son invisibles en alto contraste: se convierten en
+     aros sólidos, de modo que lo que solo insinuaba un límite pasa a serlo. */
+    --jr-shadow-card: 0 0 0 1px #000000;
+    --jr-shadow-card-hover: 0 0 0 2px #000000;
+    --jr-shadow-modal: 0 0 0 2px #000000;
+
+    --jr-color-velo: rgba(0, 0, 0, 0.9);
+
+    --jr-cabecera-sombra: none;
+    --jr-cabecera-borde: #000000;
+    --jr-drawer-sombra: none;
+    --jr-drawer-borde: #000000;
+
+    --jr-enlace-decoracion: underline;
+
+    --jr-background: #ffffff;
+    --jr-foreground: #000000;
+  }
+}
+
+/* WCAG 1.4.1 (A): en alto contraste los enlaces de contenido se subrayan,
+   porque ningún azul puede estar a la vez a 7:1 del fondo blanco y a 3:1 del
+   texto negro (para cualquier color, ratio contra blanco × ratio contra negro
+   = 21 exactamente). La navegación se excluye: ya tiene su propio indicador. */
+html[data-tema="alto-contraste"] :is(main, footer) a {
+  text-decoration: var(--jr-enlace-decoracion);
+  text-underline-offset: 0.125em;
+}
+
+@media (prefers-contrast: more),
+  (prefers-contrast: custom),
+  (forced-colors: active) {
+  html:not([data-tema]) :is(main, footer) a {
+    text-decoration: var(--jr-enlace-decoracion);
+    text-underline-offset: 0.125em;
+  }
+}
+
+/* --- Tamaño de texto ---------------------------------------------------- */
+
+/* Todo el sistema de espaciado de Tailwind v4 deriva de `--spacing: .25rem`,
+   así que el sitio entero escala con estos porcentajes, no solo la tipografía. */
+html[data-tamano="grande"] {
+  font-size: 125%;
+}
+
+html[data-tamano="mayor"] {
+  font-size: 150%;
+}
+
+/* --- Espaciado de texto (WCAG 1.4.12 AA) -------------------------------- */
+
+/* El alcance es por elemento y no `*` a propósito: el criterio pide interlineado
+   en bloques de texto, y aplicarlo a todo descuadraría botones, badges y la
+   propia hamburguesa sin que la norma lo exija.
+
+   Estas reglas viven fuera de `@layer`, así que ganan a las utilidades de
+   Tailwind (`leading-tight`, `tracking-[-0.3px]`) sin `!important` — que es
+   justo el efecto que el criterio busca. */
+html[data-espaciado="amplio"] body {
+  letter-spacing: 0.12em;
+  word-spacing: 0.16em;
+}
+
+html[data-espaciado="amplio"]
+  :is(p, li, dd, dt, td, th, figcaption, blockquote) {
+  line-height: 1.5;
+}
+
+html[data-espaciado="amplio"] p {
+  margin-bottom: 2em;
+}
+
+/* --- Reflow (WCAG 1.4.10 AA) --------------------------------------------
+
+   Con el texto al 150 % y el espaciado amplio, palabras como "Transparencia" o
+   "interdisciplinario" superan por sí solas el ancho de su columna a 320px. Al
+   ser inseparables fijan el ancho mínimo intrínseco de su contenedor, así que
+   una tarjeta en rejilla no puede encoger y empuja scroll horizontal.
+
+   Se usa `anywhere` y no `break-word` justamente por eso: solo `anywhere`
+   reduce el tamaño mínimo intrínseco. Ninguno de los dos parte palabras que
+   quepan, de modo que la composición a tamaño normal no cambia. */
+p,
+li,
+dd,
+dt,
+h1,
+h2,
+h3,
+h4,
+figcaption,
+blockquote {
+  overflow-wrap: anywhere;
+}
+
+/* ============================================
    NavBar — Desktop & Mobile
    ============================================ */
-.navbar {
+.sitio-cabecera {
   position: sticky;
   top: 0;
   z-index: 50;
   background: var(--color-surface);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--jr-cabecera-sombra);
+  border-bottom: 1px solid var(--jr-cabecera-borde);
 }
 
-.navbar-container {
+.cabecera-container {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 8px;
   padding: 0 24px;
-  height: 64px;
+  /* `min-height` y no `height`: el logo es `h-12` (3rem) y con el texto al
+     150 % mide 72px, que desbordaba el contenedor fijo de 64px. Al estar en
+     rem, la barra crece con el ajuste de tamaño. */
+  min-height: var(--jr-navbar-alto);
+}
+
+/* Empuja el logo a la izquierda y agrupa acciones y navegación a la derecha,
+   conservando el orden del DOM (WCAG 1.3.2). */
+.cabecera-container > .navbar-brand {
+  margin-right: auto;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 /* --- Brand (Logo + Name) --- */
@@ -150,30 +418,43 @@ body {
   border-radius: 4px;
 }
 
-.navbar-logo-icon {
-  width: 36px;
-  height: 36px;
+/* --- Disparador de los ajustes de visualización --- */
+.boton-visualizacion {
+  /* Oculto mientras no se confirme que hay JavaScript: el script en línea del
+     layout marca `data-js` en <html> al ejecutarse. Sin JS el botón no haría
+     nada, y un control visible que no responde es peor que su ausencia. */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  /* WCAG 2.5.8 (AA): 44x44 en px, igual que la hamburguesa */
+  width: 44px;
+  height: 44px;
   flex-shrink: 0;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.navbar-brand-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
+html[data-js] .boton-visualizacion {
+  display: inline-flex;
 }
 
-.navbar-brand-name {
-  font-size: 15px;
-  font-weight: 700;
+.boton-visualizacion:hover {
+  background-color: var(--color-surface-secondary);
   color: var(--color-text-primary);
-  letter-spacing: -0.3px;
 }
 
-.navbar-brand-subtitle {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--color-text-tertiary);
-  letter-spacing: 0.2px;
+.boton-visualizacion:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 2px var(--color-surface);
+  background-color: var(--color-surface-secondary);
 }
 
 /* --- Desktop Navigation Links --- */
@@ -183,15 +464,9 @@ body {
   gap: 4px;
 }
 
-@media (min-width: 950px) {
-  .navbar-links-desktop {
-    display: flex;
-  }
-}
-
 .navbar-link {
   position: relative;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 500;
   color: var(--color-text-secondary);
   text-decoration: none;
@@ -204,7 +479,7 @@ body {
 }
 
 .navbar-link:hover {
-  color: var(--color-primary-500);
+  color: var(--color-primary-600);
   background-color: var(--color-primary-50);
 }
 
@@ -216,7 +491,9 @@ body {
 }
 
 .navbar-link-active {
-  color: var(--color-primary-400);
+  /* WCAG 1.4.3 (AA): primary-400 daba 3.44:1 sobre la superficie y 3.08:1
+     sobre primary-50, por debajo del 4.5 exigido a texto normal. */
+  color: var(--color-primary-700);
   font-weight: 600;
 }
 
@@ -227,7 +504,7 @@ body {
   left: 14px;
   right: 14px;
   height: 2.5px;
-  background: var(--color-primary-400);
+  background: var(--color-primary-700);
   border-radius: 2px;
 }
 
@@ -255,12 +532,6 @@ body {
   outline-offset: 3px;
   box-shadow: 0 0 0 2px var(--color-surface);
   background-color: var(--color-surface-secondary);
-}
-
-@media (min-width: 950px) {
-  .navbar-hamburger {
-    display: none;
-  }
 }
 
 /* Animated hamburger icon */
@@ -302,7 +573,7 @@ body {
 .navbar-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--jr-color-velo);
   z-index: 90;
   animation: overlayFadeIn 0.3s ease;
 }
@@ -330,18 +601,63 @@ body {
   flex-direction: column;
   transform: translateX(100%);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--jr-drawer-sombra);
+  border-left: 1px solid var(--jr-drawer-borde);
 }
 
 .navbar-drawer-open {
   transform: translateX(0);
 }
 
+/* --- Punto de corte de la navegación ------------------------------------
+
+   Una media query NUNCA escala con `html{font-size}`: la especificación obliga
+   a resolver `rem` en condiciones de media contra el tamaño inicial del root,
+   ignorando el que fijemos nosotros. Sin estos cortes escalados, con el texto
+   al 150 % y un viewport de 950–1030px los seis enlaces (que llevan
+   `white-space: nowrap`) no caben, desbordan el contenedor y aparece scroll
+   horizontal en toda la página — WCAG 1.4.10 (AA).
+
+   Cada umbral es 950px multiplicado por su factor de escala. Por debajo del
+   umbral que le toque, la navegación cae al drawer, que sí absorbe cualquier
+   tamaño. */
+
 @media (min-width: 950px) {
-  .navbar-drawer {
+  :is(html:not([data-tamano]), html[data-tamano="normal"])
+    .navbar-links-desktop {
+    display: flex;
+  }
+  :is(html:not([data-tamano]), html[data-tamano="normal"]) .navbar-hamburger {
     display: none;
   }
-  .navbar-overlay {
+  :is(html:not([data-tamano]), html[data-tamano="normal"]) .navbar-drawer,
+  :is(html:not([data-tamano]), html[data-tamano="normal"]) .navbar-overlay {
+    display: none;
+  }
+}
+
+@media (min-width: 1188px) {
+  html[data-tamano="grande"] .navbar-links-desktop {
+    display: flex;
+  }
+  html[data-tamano="grande"] .navbar-hamburger {
+    display: none;
+  }
+  html[data-tamano="grande"] .navbar-drawer,
+  html[data-tamano="grande"] .navbar-overlay {
+    display: none;
+  }
+}
+
+@media (min-width: 1425px) {
+  html[data-tamano="mayor"] .navbar-links-desktop {
+    display: flex;
+  }
+  html[data-tamano="mayor"] .navbar-hamburger {
+    display: none;
+  }
+  html[data-tamano="mayor"] .navbar-drawer,
+  html[data-tamano="mayor"] .navbar-overlay {
     display: none;
   }
 }
@@ -355,7 +671,7 @@ body {
 }
 
 .navbar-drawer-title {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--color-text-primary);
 }
@@ -364,8 +680,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  /* WCAG 2.5.8 (AA): el tamaño preferido es 44x44. Se mantiene en px a
+     propósito — el criterio se especifica en px CSS y crecer los controles
+     consumiría el ancho de la barra justo cuando más escaso es. */
+  width: 44px;
+  height: 44px;
   border: none;
   background: transparent;
   border-radius: 8px;
@@ -399,7 +718,7 @@ body {
 
 .navbar-drawer-link {
   display: block;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
   color: var(--color-text-secondary);
   text-decoration: none;
@@ -411,7 +730,7 @@ body {
 }
 
 .navbar-drawer-link:hover {
-  color: var(--color-primary-500);
+  color: var(--color-primary-600);
   background-color: var(--color-primary-50);
 }
 
@@ -423,7 +742,7 @@ body {
 }
 
 .navbar-drawer-link-active {
-  color: var(--color-primary-400);
+  color: var(--color-primary-700);
   background-color: var(--color-primary-50);
   font-weight: 600;
 }
@@ -434,7 +753,8 @@ body {
 }
 
 .navbar-drawer-footer p {
-  font-size: 12px;
+  /* 12px incumplía el mínimo de 0.875rem para texto secundario */
+  font-size: 0.875rem;
   font-weight: 400;
   color: var(--color-text-tertiary);
   line-height: 1.5;
@@ -444,10 +764,19 @@ body {
    Accessibility — Scroll margin & Motion
    ============================================ */
 
-/* Compensar navbar sticky (64px) + buffer en elementos enfocables */
+/* WCAG 2.4.11 (AA) Focus Not Obscured — la cabecera es sticky y ahora crece con
+   el ajuste de tamaño, así que la compensación no puede ser una constante.
+   `scroll-padding-top` en el contenedor de scroll es el primitivo correcto:
+   cubre fragmentos, focus(), scrollIntoView() y buscar-en-página sin depender
+   de que el destino declare nada. El `scroll-margin-top` queda como red de
+   seguridad para destinos cuyo contenedor de scroll no sea <html>. */
+html {
+  scroll-padding-top: calc(var(--jr-navbar-alto) + 1rem);
+}
+
 :target,
 :focus-visible {
-  scroll-margin-top: 80px;
+  scroll-margin-top: calc(var(--jr-navbar-alto) + 1rem);
 }
 
 /* Respetar preferencia de reducción de movimiento */
@@ -468,7 +797,7 @@ body {
 /* Tronco vertical entre niveles */
 .org-trunk {
   width: 1px;
-  height: 28px;
+  height: var(--jr-org-conector);
   background: var(--color-border);
   flex-shrink: 0;
 }
@@ -486,7 +815,7 @@ body {
 .org-comb > li {
   position: relative;
   flex: 0 0 auto;
-  padding: 28px 6px 0;
+  padding: var(--jr-org-conector) 6px 0;
 }
 
 /* Mitad izquierda (::before) y mitad derecha + caída vertical (::after) */
@@ -497,7 +826,7 @@ body {
   top: 0;
   right: 50%;
   width: 50%;
-  height: 28px;
+  height: var(--jr-org-conector);
   border-top: 1px solid var(--color-border);
 }
 
@@ -544,4 +873,56 @@ body {
   width: 1px;
   background: var(--color-border);
   transform: translateX(-50%);
+}
+
+/* ============================================
+   Modo de colores forzados (Windows High Contrast)
+   ============================================
+
+   Con `forced-colors: active` el navegador impone su propia paleta sobre
+   `color`, `background-color`, `border-color` y `outline-color`, y ELIMINA
+   `box-shadow` y `text-shadow`. Nuestra paleta de alto contraste queda inerte,
+   que es justo lo correcto: manda la elección del usuario.
+
+   Por eso este bloque no repinta nada; solo restaura lo que desaparece. Nunca
+   usar `forced-color-adjust: none` para rescatar colores propios: sería anular
+   la configuración del sistema. La única excepción legítima sería el logo.
+
+   Safari no implementa `forced-colors`; en macOS actúa `prefers-contrast`. */
+@media (forced-colors: active) {
+  /* Elementos dibujados con `background`, que se fuerza a Canvas y los vuelve
+     invisibles: barras de la hamburguesa y conectores del organigrama. */
+  .hamburger-icon span,
+  .org-trunk,
+  .org-comb--through::after {
+    background: CanvasText;
+  }
+
+  /* Indicador de página actual: debe seguir distinguiéndose de los demás. */
+  .navbar-link-active::after {
+    background: LinkText;
+  }
+
+  /* Separaciones que se apoyaban en `box-shadow`. */
+  .sitio-cabecera {
+    border-bottom: 1px solid CanvasText;
+  }
+
+  .navbar-drawer {
+    border-left: 1px solid CanvasText;
+  }
+
+  /* Sin sombra, las tarjetas dejan de leerse como objeto delimitado. */
+  .shadow-card,
+  .shadow-modal {
+    border: 1px solid CanvasText;
+  }
+
+  /* El hover de los enlaces solo cambia color y fondo, ambos forzados: sin
+     esto queda indistinguible del estado normal. */
+  .navbar-link:hover,
+  .navbar-drawer-link:hover,
+  a:hover {
+    text-decoration: underline;
+  }
 }

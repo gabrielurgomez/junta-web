@@ -81,7 +81,7 @@ export const Hero = ({
         {esInicio ? (
           <h1 className="mt-6 max-w-4xl text-4xl leading-tight font-bold text-balance text-white md:text-5xl lg:text-[4rem]">
             Calificando con Ética, Equidad y{" "}
-            <span className="text-accent">Transparencia</span>
+            <span className="text-accent-sobre-oscuro">Transparencia</span>
           </h1>
         ) : (
           <h1 className="max-w-4xl text-4xl leading-tight font-bold text-balance text-white md:text-5xl lg:text-6xl">

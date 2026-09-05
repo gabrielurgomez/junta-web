@@ -50,7 +50,7 @@ export function MisionVision() {
       <div className="mx-auto max-w-[1200px] px-4 md:px-6">
         <div className="grid gap-8 md:grid-cols-2">
           {/* Card Misión */}
-          <article className="bg-surface shadow-card flex flex-col items-start rounded-[12px] p-8 transition-shadow duration-200 hover:shadow-[rgba(0,0,0,0.1)_0px_4px_16px]">
+          <article className="bg-surface shadow-card hover:shadow-card-hover flex flex-col items-start rounded-[12px] p-8 transition-shadow duration-200">
             <div className="bg-primary-50 text-primary-400 mb-5 flex h-12 w-12 items-center justify-center rounded-full">
               <IconoMision className="h-6 w-6" />
             </div>
@@ -72,7 +72,7 @@ export function MisionVision() {
           </article>
 
           {/* Card Visión */}
-          <article className="bg-surface shadow-card flex flex-col items-start rounded-[12px] p-8 transition-shadow duration-200 hover:shadow-[rgba(0,0,0,0.1)_0px_4px_16px]">
+          <article className="bg-surface shadow-card hover:shadow-card-hover flex flex-col items-start rounded-[12px] p-8 transition-shadow duration-200">
             <div className="bg-primary-50 text-primary-400 mb-5 flex h-12 w-12 items-center justify-center rounded-full">
               <IconoVision className="h-6 w-6" />
             </div>

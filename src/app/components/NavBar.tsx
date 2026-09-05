@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
+import PanelVisualizacion from "@/app/components/PanelVisualizacion.client";
 
 const NAV_LINKS = [
   { href: "/", label: "Inicio" },
@@ -95,14 +96,28 @@ function NavBar() {
   };
 
   return (
-    <nav className="navbar" id="navbar-principal">
-      <div className="navbar-container">
+    /*
+      El <header> aporta el landmark `banner`, que antes no existía, y es quien
+      queda sticky: la barra debe poder crecer con el ajuste de tamaño de texto.
+
+      El disparador de los ajustes va DENTRO de la cabecera pero FUERA del <nav>
+      (no es navegación) y antes de los enlaces, de modo que el orden de
+      tabulación sea: saltar al contenido → ajustes → navegación. Quien necesita
+      agrandar el texto lo encuentra sin recorrer el menú.
+
+      Tampoco puede ir dentro del drawer: ese ya es un diálogo modal con su
+      propia trampa de foco, y anidar otro haría que un solo Escape cerrase los
+      dos y que el Tab devolviese el foco al drawer.
+    */
+    <header className="sitio-cabecera">
+      <div className="cabecera-container">
         {/* Logo & Entity Name */}
         <Link href="/" className="navbar-brand" aria-label="Ir al inicio">
           {/* Shield / institutional icon */}
           {/* La altura se fija por CSS: el preflight de Tailwind aplica
               `height: auto` a los <img>, así que el atributo `height` no la
-              controla y el logo se desbordaría del navbar (64px). */}
+              controla. `h-12` son 3rem, de modo que el logo escala junto al
+              resto; la cabecera usa `min-height` para acompañarlo. */}
           <Image
             src="/imagenes/logo.webp"
             alt="Logo Junta Regional"
@@ -113,46 +128,50 @@ function NavBar() {
           />
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <div className="navbar-links-desktop">
-          {NAV_LINKS.map((link) =>
-            link.esExterno ? (
-              <a key={link.href} href={link.href} className="navbar-link">
-                {link.label}
-              </a>
-            ) : (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`navbar-link ${isActive(link.href) ? "navbar-link-active" : ""}`}
-              >
-                {link.label}
-              </Link>
-            ),
-          )}
-        </div>
+        <PanelVisualizacion />
 
-        {/* Mobile Hamburger Button */}
-        <button
-          ref={triggerRef}
-          type="button"
-          className="navbar-hamburger"
-          aria-label={menuMovilAbierto ? "Cerrar menú" : "Abrir menú"}
-          aria-expanded={menuMovilAbierto}
-          aria-controls="navbar-menu-movil"
-          onClick={() => {
-            if (menuMovilAbierto) triggerRef.current?.focus();
-            setMenuMovilAbierto((prev) => !prev);
-          }}
-        >
-          <div
-            className={`hamburger-icon ${menuMovilAbierto ? "hamburger-icon-open" : ""}`}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
+        <nav className="navbar" id="navbar-principal" aria-label="Principal">
+          {/* Desktop Navigation Links */}
+          <div className="navbar-links-desktop">
+            {NAV_LINKS.map((link) =>
+              link.esExterno ? (
+                <a key={link.href} href={link.href} className="navbar-link">
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`navbar-link ${isActive(link.href) ? "navbar-link-active" : ""}`}
+                >
+                  {link.label}
+                </Link>
+              ),
+            )}
           </div>
-        </button>
+
+          {/* Mobile Hamburger Button */}
+          <button
+            ref={triggerRef}
+            type="button"
+            className="navbar-hamburger"
+            aria-label={menuMovilAbierto ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={menuMovilAbierto}
+            aria-controls="navbar-menu-movil"
+            onClick={() => {
+              if (menuMovilAbierto) triggerRef.current?.focus();
+              setMenuMovilAbierto((prev) => !prev);
+            }}
+          >
+            <div
+              className={`hamburger-icon ${menuMovilAbierto ? "hamburger-icon-open" : ""}`}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
+        </nav>
       </div>
 
       {/* Mobile Overlay */}
@@ -230,7 +249,7 @@ function NavBar() {
           <p>Junta Regional de Calificación de Invalidez de Santander</p>
         </div>
       </div>
-    </nav>
+    </header>
   );
 }
 

@@ -236,7 +236,7 @@ function IconoNuevaVentana(props: SVGProps<SVGSVGElement>) {
 function DocumentoCard({ doc }: { doc: DocumentoNormativo }) {
   return (
     <li>
-      <article className="bg-surface border-border shadow-card has-[a:focus-visible]:outline-primary-400 relative flex h-full items-start gap-4 rounded-xl border p-5 transition-shadow duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.1)] has-[a:focus-visible]:shadow-[0_4px_16px_rgba(0,0,0,0.1)] has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2">
+      <article className="bg-surface border-border shadow-card has-[a:focus-visible]:outline-primary-400 hover:shadow-card-hover relative flex h-full items-start gap-4 rounded-xl border p-5 transition-shadow duration-200 has-[a:focus-visible]:shadow-[0_4px_16px_rgba(0,0,0,0.1)] has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2">
         <span
           aria-hidden="true"
           className="bg-primary-50 text-primary-600 flex h-11 w-11 shrink-0 items-center justify-center rounded-lg"
