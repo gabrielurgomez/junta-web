@@ -925,4 +925,18 @@ html {
   a:hover {
     text-decoration: underline;
   }
+
+  /* WCAG 2.4.7 / 2.4.13 — Varios controles dibujan su foco con las utilidades
+     `ring-*` de Tailwind, que son `box-shadow`, y lo acompañan de
+     `outline: none`. En colores forzados el navegador ELIMINA el box-shadow
+     pero respeta el `outline: none`, así que esos elementos se quedarían sin
+     ningún indicador de foco (enlaces del footer, botones del modal, campos
+     del formulario de contacto).
+
+     Esta regla está fuera de `@layer`, así que gana a las utilidades de
+     Tailwind sin necesidad de `!important`. */
+  :focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
 }

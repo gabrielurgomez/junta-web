@@ -98,7 +98,7 @@ function GrupoOpciones<T extends string>({
                 {opcion.etiqueta}
               </span>
               {opcion.descripcion && (
-                <span className="text-text-secondary text-xs">
+                <span className="text-text-secondary text-sm">
                   {opcion.descripcion}
                 </span>
               )}
