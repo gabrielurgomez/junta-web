@@ -1,3 +1,4 @@
+import AvisoNuevaImagen from "@/app/components/AvisoNuevaImagen.client";
 import { Hero } from "@/app/components/Hero";
 import { MisionVision } from "@/app/components/MisionVision";
 import { QuienesSomos } from "@/app/components/QuienesSomos";
@@ -8,6 +9,7 @@ import { Deberes } from "@/app/components/Deberes";
 export default function HomePage() {
   return (
     <>
+      <AvisoNuevaImagen />
       <Hero />
       <MisionVision />
       <QuienesSomos />
