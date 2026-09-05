@@ -181,8 +181,15 @@ export function Footer() {
             <div className="space-y-4">
               <p className="text-[0.88rem] leading-normal text-white/90">
                 Si tiene alguna queja por la prestación del servicio, puede
-                dirigirla a la Dirección Territorial de Santander del Ministerio
-                del Trabajo.
+                radicarla al correo{" "}
+                <a
+                  href="mailto:diradministrativo@jrci.com.co"
+                  className="focus-visible:ring-primary-200/50 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:outline-none"
+                >
+                  diradministrativo@jrci.com.co
+                </a>{" "}
+                o dirigirla a la Dirección Territorial de Santander del
+                Ministerio del Trabajo.
               </p>
               <dl className="space-y-3">
                 <div>
