@@ -101,9 +101,11 @@ function NavBar() {
       queda sticky: la barra debe poder crecer con el ajuste de tamaño de texto.
 
       El disparador de los ajustes va DENTRO de la cabecera pero FUERA del <nav>
-      (no es navegación) y antes de los enlaces, de modo que el orden de
-      tabulación sea: saltar al contenido → ajustes → navegación. Quien necesita
-      agrandar el texto lo encuentra sin recorrer el menú.
+      (no es navegación), en el extremo derecho. Su posición en el DOM coincide
+      con la visual: colocarlo antes y moverlo con `order` dejaría el orden de
+      lectura y el de tabulación en desacuerdo con lo que se ve (WCAG 1.3.2).
+      Queda por tanto tras los enlaces en la tabulación; el skip link sigue
+      siendo lo primero, así que nadie está obligado a recorrer el menú.
 
       Tampoco puede ir dentro del drawer: ese ya es un diálogo modal con su
       propia trampa de foco, y anidar otro haría que un solo Escape cerrase los
@@ -127,8 +129,6 @@ function NavBar() {
             priority
           />
         </Link>
-
-        <PanelVisualizacion />
 
         <nav className="navbar" id="navbar-principal" aria-label="Principal">
           {/* Desktop Navigation Links */}
@@ -172,6 +172,8 @@ function NavBar() {
             </div>
           </button>
         </nav>
+
+        <PanelVisualizacion />
       </div>
 
       {/* Mobile Overlay */}
