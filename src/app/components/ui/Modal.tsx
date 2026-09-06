@@ -181,7 +181,13 @@ const Modal = ({
       <div
         ref={panelRef}
         tabIndex={-1}
-        className={`shadow-modal relative z-10 flex w-full ${maxWidth} bg-surface max-h-[90vh] flex-col rounded-2xl outline-none`}
+        /* WCAG 2.4.7 / 2.4.13 (AA): este panel recibe el foco al abrirse (ver el
+           efecto de abajo), así que debe mostrarlo. El `outline-none` que había
+           aquí lo suprimía: cuando el diálogo se abre con el teclado, Chrome
+           considera el foco programático como `:focus-visible` y habría pintado
+           el indicador. Se enfoca el panel y no el primer botón para que el
+           lector de pantalla anuncie el nombre del diálogo, no "Cerrar". */
+        className={`shadow-modal focus-visible:outline-border-focus relative z-10 flex w-full ${maxWidth} bg-surface max-h-[90vh] flex-col rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2`}
       >
         {/* Botón de cierre — siempre visible, esquina superior derecha */}
         <button

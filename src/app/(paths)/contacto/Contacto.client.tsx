@@ -182,7 +182,11 @@ const ContactoClient = () => {
       <section className="mx-auto w-full max-w-300 px-4 py-16 md:px-8 md:py-24">
         <div className="grid gap-12 lg:grid-cols-5">
           {/* Panel izquierdo — información de contacto */}
-          <div className="lg:col-span-2">
+          {/* `min-w-0`: un elemento de rejilla tiene `min-width: auto`, así que no
+              puede encogerse por debajo del ancho mínimo de su contenido. Sin esto,
+              los 300px fijos del widget de Turnstile empujaban la columna a 364px y
+              desplazaban la página entera en horizontal por debajo de ese ancho. */}
+          <div className="min-w-0 lg:col-span-2">
             <h1 className="text-text-primary text-3xl font-bold tracking-tight md:text-4xl">
               Contáctenos
             </h1>
@@ -266,7 +270,7 @@ const ContactoClient = () => {
           </div>
 
           {/* Panel derecho — formulario */}
-          <div className="lg:col-span-3">
+          <div className="min-w-0 lg:col-span-3">
             <div className="shadow-card bg-surface rounded-2xl p-8 md:p-10">
               <div role="status" aria-live="polite" aria-atomic="true">
                 {alertaExito && (
@@ -494,7 +498,7 @@ const ContactoClient = () => {
                       <button
                         type="button"
                         onClick={() => setModalPoliticaAbierto(true)}
-                        className="text-primary-600 hover:text-primary-700 focus-visible:outline-border-focus w-fit rounded-sm text-xs font-medium underline underline-offset-2 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+                        className="text-primary-600 hover:text-primary-700 focus-visible:outline-border-focus w-fit rounded-sm text-sm font-medium underline underline-offset-2 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
                       >
                         Ver Política
                       </button>
@@ -526,14 +530,23 @@ const ContactoClient = () => {
 
                 {/* Cloudflare Turnstile */}
                 {/*No se debe importar el NEXT_PUBLIC_TURNSTILE_SITE_KEY desde el .config.ts ya que obligaria a Next.js (y al bundler) a procesar todo el archivo en el contexto del navegador.*/}
-                <Turnstile
-                  ref={turnstileRef}
-                  siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ""}
-                  onSuccess={(token) => setTurnstileToken(token)}
-                  onExpire={() => setTurnstileToken(null)}
-                  onError={() => setTurnstileToken(null)}
-                  options={{ theme: "light", language: "es" }}
-                />
+                {/* WCAG 2.2 — 1.4.10 Reflow (AA): el widget mide 300px fijos,
+                    que Cloudflare controla y no escalan. Sumados al padding de
+                    la tarjeta fijaban un ancho mínimo de 364px, y por debajo de
+                    ese ancho la PÁGINA ENTERA se desplazaba en horizontal. Al
+                    aislarlo en un contenedor con scroll propio, el ancho mínimo
+                    deja de propagarse y solo el widget se desplaza si no cabe
+                    —el mismo patrón que la tabla de interconsultores—. */}
+                <div className="max-w-full overflow-x-auto">
+                  <Turnstile
+                    ref={turnstileRef}
+                    siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ""}
+                    onSuccess={(token) => setTurnstileToken(token)}
+                    onExpire={() => setTurnstileToken(null)}
+                    onError={() => setTurnstileToken(null)}
+                    options={{ theme: "light", language: "es" }}
+                  />
+                </div>
 
                 <div className="flex items-center justify-between pt-2">
                   <p className="text-text-tertiary text-xs">
