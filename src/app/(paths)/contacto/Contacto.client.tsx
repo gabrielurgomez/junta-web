@@ -535,9 +535,19 @@ const ContactoClient = () => {
                     la tarjeta fijaban un ancho mínimo de 364px, y por debajo de
                     ese ancho la PÁGINA ENTERA se desplazaba en horizontal. Al
                     aislarlo en un contenedor con scroll propio, el ancho mínimo
-                    deja de propagarse y solo el widget se desplaza si no cabe
-                    —el mismo patrón que la tabla de interconsultores—. */}
-                <div className="max-w-full overflow-x-auto">
+                    deja de propagarse y solo el widget se desplaza si no cabe.
+
+                    Es el mismo patrón que la tabla de interconsultores, así que
+                    lleva sus mismos atributos: una zona desplazable debe poder
+                    recorrerse con el teclado (WCAG 2.1.1) y anunciarse como tal,
+                    de ahí `role="region"`, `aria-label`, `tabIndex` y foco
+                    visible. */}
+                <div
+                  className="focus-visible:outline-border-focus max-w-full overflow-x-auto focus-visible:outline-2 focus-visible:outline-offset-2"
+                  role="region"
+                  aria-label="Verificación de seguridad"
+                  tabIndex={0}
+                >
                   <Turnstile
                     ref={turnstileRef}
                     siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ""}
