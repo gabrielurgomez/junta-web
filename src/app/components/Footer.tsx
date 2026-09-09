@@ -92,7 +92,7 @@ export function Footer() {
                 <dd className="mt-1 text-[0.88rem] leading-normal">
                   <a
                     href="mailto:info@jrci.com.co"
-                    className="focus-visible:ring-primary-200/50 text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:outline-none"
+                    className="wrap-anywhere text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
                     info@jrci.com.co
                   </a>
@@ -105,7 +105,7 @@ export function Footer() {
                 <dd className="mt-1 text-[0.88rem] leading-normal">
                   <a
                     href="mailto:tramitesrecursos@jrci.com.co"
-                    className="focus-visible:ring-primary-200/50 text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:outline-none"
+                    className="wrap-anywhere text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
                     tramitesrecursos@jrci.com.co
                   </a>
@@ -184,7 +184,7 @@ export function Footer() {
                 radicarla al correo{" "}
                 <a
                   href="mailto:diradministrativo@jrci.com.co"
-                  className="focus-visible:ring-primary-200/50 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:outline-none"
+                  className="wrap-anywhere underline underline-offset-2 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                   diradministrativo@jrci.com.co
                 </a>{" "}
@@ -207,7 +207,7 @@ export function Footer() {
                   <dd className="mt-0.5 text-[0.88rem] leading-normal">
                     <a
                       href="tel:+576076302250,,6831"
-                      className="focus-visible:ring-primary-200/50 text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:outline-none"
+                      className="text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                     >
                       6302250 ext. 6831
                     </a>
@@ -220,7 +220,7 @@ export function Footer() {
                   <dd className="mt-0.5 text-[0.88rem] leading-normal">
                     <a
                       href="tel:0180000112318"
-                      className="focus-visible:ring-primary-200/50 text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:outline-none"
+                      className="text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                     >
                       0180000112318
                     </a>
@@ -233,7 +233,7 @@ export function Footer() {
                   <dd className="mt-0.5 text-[0.88rem] leading-normal">
                     <a
                       href="mailto:dtsantander@mintrabajo.gov.co"
-                      className="focus-visible:ring-primary-200/50 text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:ring-3 focus-visible:outline-none"
+                      className="wrap-anywhere text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                     >
                       dtsantander@mintrabajo.gov.co
                     </a>
@@ -258,9 +258,9 @@ export function Footer() {
       </div>
 
       {/* Barra inferior */}
-      <div className="border-t border-white/10">
+      <div className="border-t border-white/40">
         <div className="mx-auto max-w-[1200px] px-4 py-6 md:px-6">
-          <p className="text-center text-[0.81rem] leading-[1.38] font-normal text-white/50">
+          <p className="text-center text-[0.81rem] leading-[1.38] font-normal text-white/70">
             Junta Regional de Calificación de Invalidez de Santander. Todos los
             derechos reservados.
           </p>

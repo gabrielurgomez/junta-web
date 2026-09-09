@@ -27,9 +27,9 @@ export function Equipo() {
           {integrantes.map((integrante) => (
             <article
               key={integrante.id}
-              className="bg-surface shadow-card flex flex-col overflow-hidden rounded-[12px] transition-shadow duration-200 hover:shadow-[rgba(0,0,0,0.1)_0px_4px_16px]"
+              className="bg-surface shadow-card hover:shadow-card-hover flex flex-col overflow-hidden rounded-[12px] transition-shadow duration-200"
             >
-              <div className="relative h-[280px] w-full">
+              <div className="relative h-70 w-full">
                 <Image
                   src={integrante.foto}
                   alt={`Fotografía de ${integrante.nombre}`}

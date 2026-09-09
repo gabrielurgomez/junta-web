@@ -38,7 +38,7 @@ export const ModalHeader = ({
   children,
   className = "",
 }: ModalSectionProps) => (
-  <div className={`border-border border-b px-6 py-4 pr-12 ${className}`}>
+  <div className={`border-border border-b px-6 py-4 pr-14 ${className}`}>
     {children}
   </div>
 );
@@ -72,7 +72,7 @@ export const ModalOkButton = ({
   <button
     type="button"
     onClick={onClose}
-    className="bg-primary-400 hover:bg-primary-500 focus-visible:ring-primary-400/30 rounded-md px-5 py-2 text-sm font-semibold tracking-wide text-white transition-all duration-200 focus-visible:ring-3 focus-visible:outline-none"
+    className="bg-primary-600 hover:bg-primary-700 focus-visible:outline-border-focus rounded-md px-5 py-2 text-sm font-semibold tracking-wide text-white transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2"
   >
     {label}
   </button>
@@ -172,7 +172,7 @@ const Modal = ({
     >
       {/* Backdrop semitransparente */}
       <div
-        className="bg-primary-900/40 absolute inset-0 backdrop-blur-[2px] transition-opacity duration-200"
+        className="bg-velo absolute inset-0 backdrop-blur-[2px] transition-opacity duration-200"
         aria-hidden="true"
         onClick={onClose}
       />
@@ -181,14 +181,20 @@ const Modal = ({
       <div
         ref={panelRef}
         tabIndex={-1}
-        className={`shadow-modal relative z-10 flex w-full ${maxWidth} max-h-[90vh] flex-col rounded-2xl bg-white outline-none`}
+        /* WCAG 2.4.7 / 2.4.13 (AA): este panel recibe el foco al abrirse (ver el
+           efecto de abajo), así que debe mostrarlo. El `outline-none` que había
+           aquí lo suprimía: cuando el diálogo se abre con el teclado, Chrome
+           considera el foco programático como `:focus-visible` y habría pintado
+           el indicador. Se enfoca el panel y no el primer botón para que el
+           lector de pantalla anuncie el nombre del diálogo, no "Cerrar". */
+        className={`shadow-modal focus-visible:outline-border-focus relative z-10 flex w-full ${maxWidth} bg-surface max-h-[90vh] flex-col rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2`}
       >
         {/* Botón de cierre — siempre visible, esquina superior derecha */}
         <button
           type="button"
           onClick={onClose}
           aria-label="Cerrar modal"
-          className="text-text-tertiary hover:text-text-primary hover:bg-surface-secondary focus-visible:ring-primary-400/30 absolute top-3 right-3 z-10 rounded-lg p-1.5 transition-colors focus-visible:ring-3 focus-visible:outline-none"
+          className="text-text-tertiary hover:text-text-primary hover:bg-surface-secondary focus-visible:outline-border-focus absolute top-3 right-3 z-10 rounded-lg p-1.5 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

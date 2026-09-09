@@ -41,6 +41,7 @@ El sistema de diseño utiliza un token system basado en variables CSS (`--color-
 - **Gold** (`#d4a017`): `--color-accent`, elementos destacados, iconos de reconocimiento
 - **Gold Light** (`#f5e6b8`): `--color-accent-light`, fondos de badges premium
 - **Gold Dark** (`#b8860b`): `--color-accent-dark`, hover sobre gold
+- **Gold sobre Oscuro** (`#f5c53d`): `--color-accent-sobre-oscuro`, dorado para texto sobre fondos oscuros (Hero). El `accent` normal solo alcanza 3.33:1 sobre el velo del Hero; este llega a 4.88:1. No usarlo sobre fondos claros.
 
 ### Semantic (Estados)
 
@@ -55,7 +56,7 @@ El sistema de diseño utiliza un token system basado en variables CSS (`--color-
 - **Near Black** (`#1a1a2e`): `--color-text-primary`, texto principal — profesional
 - **Dark Gray** (`#374151`): `--color-text-secondary`, texto secundario, descripciones
 - **Medium Gray** (`#6b7280`): `--color-text-tertiary`, labels, placeholders
-- **Light Gray** (`#9ca3af`): `--color-text-disabled`, estados deshabilitados
+- **Gray** (`#595959`): `--color-text-disabled`, estados deshabilitados y placeholders. Fue `#9ca3af`, que daba 2.54:1 sobre blanco; un placeholder es texto y debe cumplir 4.5:1 (WCAG 1.4.3). Este da 7.00:1.
 
 ### Interactive
 
@@ -64,12 +65,25 @@ El sistema de diseño utiliza un token system basado en variables CSS (`--color-
 - **Border** (`#e5e7eb`): `--color-border`, bordes de tarjetas y divisores
 - **Border Focus** (`#348ceb`): `--color-border-focus`, borde en estado focus
 
+### Tema de alto contraste
+
+El sitio tiene un segundo tema, que el usuario activa desde el panel de ajustes de visualización o que se aplica solo cuando el sistema operativo lo pide (`prefers-contrast`). Se define redefiniendo los mismos tokens `--jr-*` bajo `html[data-tema="alto-contraste"]` en `globals.css`, así que **ningún componente necesita saber qué tema está activo**.
+
+Reglas al añadir o cambiar un componente:
+
+- **Todo el color debe salir de un token.** Un `#hex` o un `bg-white` cableado no cambia de tema. La excepción aceptada es `text-white` cuando su fondo es `bg-primary-900`, porque el par se mantiene correcto en ambos temas (14.9:1 y 21:1).
+- **No apoyar un límite solo en la sombra.** En alto contraste `--shadow-card` pasa a ser un aro sólido de 1px; si una tarjeta lleva su sombra cableada en una clase arbitraria, será la única sin borde.
+- **Los pasos claros de la escala primaria colapsan a blanco.** Una píldora `bg-primary-50` desaparece sobre fondo blanco: necesita `border border-border`.
+- **En alto contraste los enlaces de contenido van subrayados.** Es obligatorio y no decorativo: ningún color puede estar a la vez a 7:1 del fondo blanco y a 3:1 del texto negro, así que la distinción no puede ser cromática (WCAG 1.4.1, técnica G183).
+- **Objetivo de contraste: AAA (7:1) para texto**, no solo el 4.5:1 del resto del sitio.
+
 ### Surface & Shadows
 
 - **Pure White** (`#ffffff`): `--color-surface`, fondo de página y tarjetas
 - **Light Gray** (`#f9fafb`): `--color-surface-secondary`, fondos alternos de secciones
 - **Card Shadow** (`rgba(0,0,0,0.03) 0px 0px 0px 1px, rgba(0,0,0,0.05) 0px 2px 8px, rgba(0,0,0,0.08) 0px 4px 12px`): Elevación profesional de tres capas
-- **Hover Shadow** (`rgba(0,0,0,0.1) 0px 4px 16px`): Elevación hover
+- **Hover Shadow** (`rgba(0,0,0,0.1) 0px 4px 16px`): `--shadow-card-hover`, elevación hover
+- **Velo** (`rgba(0,0,0,0.4)`): `--color-velo`, fondo del drawer y de los diálogos modales. Un solo token para ambos: antes eran dos valores distintos para el mismo propósito.
 
 ## 3. Typography Rules
 
@@ -143,7 +157,7 @@ El sistema de diseño utiliza un token system basado en variables CSS (`--color-
 ### Inputs
 
 - Text: `#1a1a2e`
-- Placeholder: `#9ca3af`
+- Placeholder: `#595959`
 - Border: `1px solid #e5e7eb`
 - Focus: `border-color: #348ceb` + `0 0 0 3px rgba(52, 140, 235, 0.15)` ring
 - Radius: 6px

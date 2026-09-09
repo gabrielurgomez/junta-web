@@ -93,11 +93,27 @@ En [`email.utils.ts`](../src/app/libs/utils/email.utils.ts):
 
 ## 4. Superficie de ataque reducida
 
-- [x] **Sin `dangerouslySetInnerHTML`, sin `eval()`, sin manipulación de `innerHTML`.** Verificado por búsqueda en todo `src/`: cero ocurrencias. Todo el contenido se renderiza vía JSX, con el escape automático de React.
+- [x] **Sin `eval()` y sin manipulación de `innerHTML`.** Todo el contenido se renderiza vía JSX, con el escape automático de React.
+- [x] **Un único `dangerouslySetInnerHTML`, auditado.** Está en [`(paths)/layout.tsx`](<../src/app/(paths)/layout.tsx>) y monta el script de preferencias de visualización en el `<head>`. Ver §4.1.
 - [x] **Sin base de datos y sin autenticación** — no hay inyección SQL, no hay sesiones que secuestrar, no hay credenciales de usuario que filtrar.
 - [x] **Todos los enlaces externos con `rel="noopener noreferrer"`.** Verificado: los 2 enlaces con `target="_blank"` del sitio ([`CanalesPago.client.tsx`](../src/app/components/CanalesPago.client.tsx), [`Normatividad.tsx`](../src/app/components/Normatividad.tsx)) lo tienen. Previene el ataque de _tabnabbing_ vía `window.opener`.
 - [x] **Documentos PDF hospedados localmente** en `public/documentos/`, no enlazados a dominios de terceros.
 - [x] **Todas las páginas son estáticas.** Al prerenderizarse en build, ninguna ruta ejecuta lógica de servidor por petición; lo único dinámico es la Server Action de contacto.
+
+### 4.1 Excepción: el script de preferencias de visualización
+
+El panel de ajustes de visualización (tamaño de texto, contraste y espaciado) necesita aplicar la preferencia guardada **antes del primer pintado**; si no, quien tiene baja visión ve la página en tamaño normal y luego un salto. Eso obliga a un script síncrono en el `<head>`, que en React solo puede inyectarse con `dangerouslySetInnerHTML`. Es el patrón que documenta el propio Next.js en `node_modules/next/dist/docs/01-app/02-guides/preventing-flash-before-hydration.md` (§Themes).
+
+Por qué el riesgo es aceptable:
+
+- **No se interpola nada dinámico.** `SCRIPT_VISUALIZACION` se arma en [`visualizacion.utils.ts`](../src/app/libs/utils/visualizacion.utils.ts) con una plantilla que interpola una sola cosa: la constante `CLAVE_VISUALIZACION`, un literal del propio módulo resuelto en build. Nada del usuario, de la URL ni de la red entra en esa cadena, y no hay ningún valor de tiempo de ejecución.
+- **Lo que lee está validado.** El script lee una clave de `localStorage` y valida cada valor contra una lista blanca cerrada (`grande`/`mayor`, `claro`/`alto-contraste`, `amplio`) antes de escribirlo. Un valor corrupto se descarta.
+- **Los sinks son cerrados.** Solo hace `setAttribute` sobre nombres de atributo fijos del elemento `<html>`. No escribe HTML, no toca `innerHTML` y no hace peticiones.
+
+Restricciones si se toca:
+
+- **Depende de `'unsafe-inline'` en `script-src`** (§1.1). Si esa deuda se salda con nonces, este script necesita el nonce o **dejará de aplicarse en silencio**: no falla de forma visible, simplemente vuelve el parpadeo y se pierde el ajuste del usuario.
+- **No introducir interpolación.** En el momento en que la cadena deje de ser estática, esta excepción deja de ser válida y hay que reevaluarla.
 
 ---
 

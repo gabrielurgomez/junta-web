@@ -74,7 +74,7 @@ export function Organigrama() {
       <div className="mx-auto max-w-[1200px] px-4 md:px-6">
         {/* Encabezado */}
         <div className="mb-12 flex flex-col items-center text-center">
-          <span className="bg-primary-50 text-primary-700 mb-4 inline-flex rounded-full px-3 py-1 text-[0.75rem] font-medium tracking-[0.3px]">
+          <span className="bg-primary-50 text-primary-700 border-border mb-4 inline-flex rounded-full border px-3 py-1 text-[0.75rem] font-medium tracking-[0.3px]">
             Estructura organizacional
           </span>
           <h2 className="text-text-primary text-[1.50rem] leading-[1.33] font-bold tracking-[-0.3px]">
@@ -116,7 +116,7 @@ export function Organigrama() {
               {/* ── Rama: Dirección Administrativa y Financiera ── */}
               <li>
                 <div className="flex flex-col items-center">
-                  <NodeCard variant="direccion" className="max-w-[240px]">
+                  <NodeCard variant="direccion" className="max-w-60">
                     Director Administrativo y Financiero
                   </NodeCard>
 
@@ -125,19 +125,13 @@ export function Organigrama() {
                   <span className="org-trunk" aria-hidden="true" />
                   <ul className="org-comb org-comb--through">
                     <li>
-                      <NodeCard
-                        variant="revisor"
-                        className="min-h-[72px] w-[160px]"
-                      >
+                      <NodeCard variant="revisor" className="min-h-18 w-40">
                         Revisor Fiscal
                       </NodeCard>
                     </li>
                     {asesoria.map((cargo) => (
                       <li key={cargo}>
-                        <NodeCard
-                          variant="apoyo"
-                          className="min-h-[72px] w-[160px]"
-                        >
+                        <NodeCard variant="apoyo" className="min-h-18 w-40">
                           {cargo}
                         </NodeCard>
                       </li>
@@ -151,7 +145,7 @@ export function Organigrama() {
                       <li key={cargo.join("-")}>
                         <NodeCard
                           variant="apoyo"
-                          className="min-h-[104px] w-[132px] leading-[1.3] break-words"
+                          className="min-h-26 w-33 leading-[1.3] break-words"
                         >
                           {lineas(cargo)}
                         </NodeCard>
@@ -164,7 +158,7 @@ export function Organigrama() {
               {/* ── Rama: Integrantes (Sala de decisión) ── */}
               <li>
                 <div className="flex flex-col items-center">
-                  <NodeCard variant="direccion" className="max-w-[160px]">
+                  <NodeCard variant="direccion" className="max-w-40">
                     Integrantes
                   </NodeCard>
 
@@ -172,7 +166,7 @@ export function Organigrama() {
                   <ul className="org-comb">
                     {integrantes.map((cargo) => (
                       <li key={cargo}>
-                        <NodeCard variant="integrante" className="w-[112px]">
+                        <NodeCard variant="integrante" className="w-28">
                           {cargo}
                         </NodeCard>
                       </li>

@@ -67,7 +67,7 @@ export function PerspectivaEstrategica() {
           {pilares.map((pilar) => (
             <article
               key={pilar.numero}
-              className="bg-surface shadow-card flex flex-col items-start rounded-[12px] p-8 transition-shadow duration-200 hover:shadow-[rgba(0,0,0,0.1)_0px_4px_16px]"
+              className="bg-surface shadow-card hover:shadow-card-hover flex flex-col items-start rounded-[12px] p-8 transition-shadow duration-200"
             >
               <h3 className="sr-only">Pilar {pilar.numero}</h3>
               <span

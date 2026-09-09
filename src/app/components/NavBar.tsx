@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
+import PanelVisualizacion from "@/app/components/PanelVisualizacion.client";
 
 const NAV_LINKS = [
   { href: "/", label: "Inicio" },
@@ -95,14 +96,30 @@ function NavBar() {
   };
 
   return (
-    <nav className="navbar" id="navbar-principal">
-      <div className="navbar-container">
+    /*
+      El <header> aporta el landmark `banner`, que antes no existía, y es quien
+      queda sticky: la barra debe poder crecer con el ajuste de tamaño de texto.
+
+      El disparador de los ajustes va DENTRO de la cabecera pero FUERA del <nav>
+      (no es navegación), en el extremo derecho. Su posición en el DOM coincide
+      con la visual: colocarlo antes y moverlo con `order` dejaría el orden de
+      lectura y el de tabulación en desacuerdo con lo que se ve (WCAG 1.3.2).
+      Queda por tanto tras los enlaces en la tabulación; el skip link sigue
+      siendo lo primero, así que nadie está obligado a recorrer el menú.
+
+      Tampoco puede ir dentro del drawer: ese ya es un diálogo modal con su
+      propia trampa de foco, y anidar otro haría que un solo Escape cerrase los
+      dos y que el Tab devolviese el foco al drawer.
+    */
+    <header className="sitio-cabecera">
+      <div className="cabecera-container">
         {/* Logo & Entity Name */}
         <Link href="/" className="navbar-brand" aria-label="Ir al inicio">
           {/* Shield / institutional icon */}
           {/* La altura se fija por CSS: el preflight de Tailwind aplica
               `height: auto` a los <img>, así que el atributo `height` no la
-              controla y el logo se desbordaría del navbar (64px). */}
+              controla. `h-12` son 3rem, de modo que el logo escala junto al
+              resto; la cabecera usa `min-height` para acompañarlo. */}
           <Image
             src="/imagenes/logo.webp"
             alt="Logo Junta Regional"
@@ -113,24 +130,28 @@ function NavBar() {
           />
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <div className="navbar-links-desktop">
-          {NAV_LINKS.map((link) =>
-            link.esExterno ? (
-              <a key={link.href} href={link.href} className="navbar-link">
-                {link.label}
-              </a>
-            ) : (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`navbar-link ${isActive(link.href) ? "navbar-link-active" : ""}`}
-              >
-                {link.label}
-              </Link>
-            ),
-          )}
-        </div>
+        <nav className="navbar" id="navbar-principal" aria-label="Principal">
+          {/* Desktop Navigation Links */}
+          <div className="navbar-links-desktop">
+            {NAV_LINKS.map((link) =>
+              link.esExterno ? (
+                <a key={link.href} href={link.href} className="navbar-link">
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`navbar-link ${isActive(link.href) ? "navbar-link-active" : ""}`}
+                >
+                  {link.label}
+                </Link>
+              ),
+            )}
+          </div>
+        </nav>
+
+        <PanelVisualizacion />
 
         {/* Mobile Hamburger Button */}
         <button
@@ -230,7 +251,7 @@ function NavBar() {
           <p>Junta Regional de Calificación de Invalidez de Santander</p>
         </div>
       </div>
-    </nav>
+    </header>
   );
 }
 

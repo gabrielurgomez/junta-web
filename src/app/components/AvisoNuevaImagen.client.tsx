@@ -97,7 +97,7 @@ const AvisoNuevaImagen = () => {
           su logo y estrenó este sitio web.
         </p>
 
-        <div className="border-primary-200 bg-primary-50 rounded-xl border p-4 sm:p-5">
+        <div className="border-border bg-primary-50 rounded-xl border p-4 sm:p-5">
           <p className="text-primary-700 text-sm leading-relaxed font-medium sm:text-base">
             Seguimos siendo la misma entidad: nuestros servicios, dirección,
             teléfonos y correos de contacto no cambian.
