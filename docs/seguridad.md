@@ -106,7 +106,7 @@ El panel de ajustes de visualización (tamaño de texto, contraste y espaciado) 
 
 Por qué el riesgo es aceptable:
 
-- **No hay interpolación.** `SCRIPT_VISUALIZACION` es una constante de compilación en [`visualizacion.utils.ts`](../src/app/libs/utils/visualizacion.utils.ts). Nada del usuario, de la URL ni de la red entra en esa cadena.
+- **No se interpola nada dinámico.** `SCRIPT_VISUALIZACION` se arma en [`visualizacion.utils.ts`](../src/app/libs/utils/visualizacion.utils.ts) con una plantilla que interpola una sola cosa: la constante `CLAVE_VISUALIZACION`, un literal del propio módulo resuelto en build. Nada del usuario, de la URL ni de la red entra en esa cadena, y no hay ningún valor de tiempo de ejecución.
 - **Lo que lee está validado.** El script lee una clave de `localStorage` y valida cada valor contra una lista blanca cerrada (`grande`/`mayor`, `claro`/`alto-contraste`, `amplio`) antes de escribirlo. Un valor corrupto se descarta.
 - **Los sinks son cerrados.** Solo hace `setAttribute` sobre nombres de atributo fijos del elemento `<html>`. No escribe HTML, no toca `innerHTML` y no hace peticiones.
 
