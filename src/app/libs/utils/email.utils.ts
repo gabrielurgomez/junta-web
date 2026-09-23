@@ -97,7 +97,7 @@ export async function sendContactFormBrevoTemplateEmail(
     });
 
     const raw = await res.text();
-    type BrevoSmtpJson = { messageId?: string; message?: string };
+    type BrevoSmtpJson = { messageId?: string; code?: string; message?: string };
     let parsed: BrevoSmtpJson | null = null;
     try {
       parsed = raw ? (JSON.parse(raw) as BrevoSmtpJson) : null;
@@ -108,12 +108,10 @@ export async function sendContactFormBrevoTemplateEmail(
     if (!res.ok) {
       const detail =
         parsed?.message ?? (raw ? raw.slice(0, 200) : `HTTP ${res.status}`);
-      if (process.env.NODE_ENV === "development") {
-        logger({
-          level: "error",
-          message: `[Brevo] sendTransacEmail failed: ${res.status} ${detail}`,
-        });
-      }
+      logger({
+        level: "error",
+        message: `[Brevo] sendTransacEmail failed: ${res.status} ${parsed?.code ?? ""} ${detail}`,
+      });
       return {
         ok: false,
         error:
@@ -123,9 +121,10 @@ export async function sendContactFormBrevoTemplateEmail(
 
     return { ok: true, messageId: parsed?.messageId };
   } catch (e) {
-    if (process.env.NODE_ENV === "development") {
-      console.error("[Brevo] sendTransacEmail exception:", e);
-    }
+    logger({
+      level: "error",
+      message: `[Brevo] sendTransacEmail exception: ${e instanceof Error ? e.message : String(e)}`,
+    });
     return {
       ok: false,
       error: "No se pudo enviar el mensaje en este momento. Intente más tarde.",
