@@ -390,8 +390,8 @@ blockquote {
   gap: 8px;
   padding-left: max(24px, calc((100% - 1200px) / 2 + 24px));
   padding-right: 20px;
-  /* `min-height` y no `height`: el logo es `h-12` (3rem) y con el texto al
-     150 % mide 72px, que desbordaba el contenedor fijo de 64px. Al estar en
+  /* `min-height` y no `height`: el logo es `h-14` (3.5rem) y con el texto al
+     150 % mide 84px, que desbordaría un contenedor fijo de 64px. Al estar en
      rem, la barra crece con el ajuste de tamaño. */
   min-height: var(--jr-navbar-alto);
 }

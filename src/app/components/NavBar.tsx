@@ -118,14 +118,14 @@ function NavBar() {
           {/* Shield / institutional icon */}
           {/* La altura se fija por CSS: el preflight de Tailwind aplica
               `height: auto` a los <img>, así que el atributo `height` no la
-              controla. `h-12` son 3rem, de modo que el logo escala junto al
+              controla. `h-14` son 3.5rem, de modo que el logo escala junto al
               resto; la cabecera usa `min-height` para acompañarlo. */}
           <Image
             src="/imagenes/logo.webp"
             alt="Logo Junta Regional"
-            width={73}
-            height={48}
-            className="h-12 w-auto object-contain"
+            width={85}
+            height={56}
+            className="h-14 w-auto object-contain"
             priority
           />
         </Link>
