@@ -1,7 +1,6 @@
 import AvisoNuevaImagen from "@/app/components/AvisoNuevaImagen.client";
 import { Hero } from "@/app/components/Hero";
-import { MisionVision } from "@/app/components/MisionVision";
-import { QuienesSomos } from "@/app/components/QuienesSomos";
+import { MisionQuienesSomos } from "@/app/components/MisionQuienesSomos";
 import { PerspectivaEstrategica } from "@/app/components/PerspectivaEstrategica";
 import { Derechos } from "@/app/components/Derechos";
 import { Deberes } from "@/app/components/Deberes";
@@ -11,8 +10,7 @@ export default function HomePage() {
     <>
       <AvisoNuevaImagen />
       <Hero />
-      <MisionVision />
-      <QuienesSomos />
+      <MisionQuienesSomos />
       <PerspectivaEstrategica />
       <Derechos />
       <Deberes />
