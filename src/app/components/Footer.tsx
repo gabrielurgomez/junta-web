@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { SVGProps } from "react";
 
 function IconoCorreo(props: SVGProps<SVGSVGElement>) {
@@ -250,7 +251,14 @@ export function Footer() {
               </dl>
               <p className="pt-2 text-[0.88rem] leading-normal text-white/90">
                 O en nuestro buzón de sugerencias ubicado en la entidad o en
-                esta página web en la pestaña Atención al usuario.
+                esta página web en la pestaña{" "}
+                <Link
+                  href="/contacto"
+                  className="text-white/90 underline underline-offset-2 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  Contacto
+                </Link>
+                .
               </p>
             </div>
           </div>
