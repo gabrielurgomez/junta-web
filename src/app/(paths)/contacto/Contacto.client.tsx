@@ -5,6 +5,7 @@ import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { enviarFormularioContacto } from "./contacto.actions";
 import PoliticaTratamientoDatos from "@/app/components/PoliticaTratamientoDatos";
 import { emailEsValido } from "@/app/libs/utils/strings.utils";
+import { HORARIO_ATENCION } from "@/app/libs/constants/general.constant";
 
 type EstadoEnvio = "enviando" | "error" | null;
 
@@ -264,7 +265,11 @@ const ContactoClient = () => {
                   </svg>
                 }
                 label="Horario de atención"
-                value="Lunes a viernes, 8:00 a.m. – 12:00 m. y 2:00 p.m. – 6:00 p.m."
+                value={HORARIO_ATENCION.map(({ dias, horas }) => (
+                  <span key={dias} className="block">
+                    {dias}: {horas}
+                  </span>
+                ))}
               />
             </div>
           </div>
@@ -633,7 +638,7 @@ const ContactInfoItem = ({
 }: {
   icon: React.ReactNode;
   label: string;
-  value: string;
+  value: React.ReactNode;
 }) => (
   <div className="flex items-start gap-4">
     <div className="bg-primary-50 text-primary-600 border-border flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border">

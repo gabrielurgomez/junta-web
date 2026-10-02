@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { SVGProps } from "react";
+import { HORARIO_ATENCION } from "@/app/libs/constants/general.constant";
 
 function IconoCorreo(props: SVGProps<SVGSVGElement>) {
   return (
@@ -124,22 +125,16 @@ export function Footer() {
               </h2>
             </div>
             <dl className="space-y-4">
-              <div>
-                <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
-                  Lunes a viernes
-                </dt>
-                <dd className="mt-1 text-[0.88rem] leading-normal text-white/90">
-                  7:00 a.m. a 12:00 p.m. y de 1:00 p.m. a 4:00 p.m.
-                </dd>
-              </div>
-              <div>
-                <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
-                  Sábados
-                </dt>
-                <dd className="mt-1 text-[0.88rem] leading-normal text-white/90">
-                  8:00 a.m. a 12:00 m.
-                </dd>
-              </div>
+              {HORARIO_ATENCION.map(({ dias, horas }) => (
+                <div key={dias}>
+                  <dt className="text-[0.81rem] leading-[1.38] font-medium text-white/60">
+                    {dias}
+                  </dt>
+                  <dd className="mt-1 text-[0.88rem] leading-normal text-white/90">
+                    {horas}
+                  </dd>
+                </div>
+              ))}
             </dl>
           </div>
 
